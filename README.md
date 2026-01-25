@@ -1,16 +1,89 @@
-# React + Vite
+# SAT Prep - Monorepo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack SAT preparation application with a React frontend and Django backend.
 
-Currently, two official plugins are available:
+## Project Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
+sat_prep/
+├── packages/
+│   ├── frontend/          # React + Vite + Tailwind CSS
+│   │   ├── src/
+│   │   ├── public/
+│   │   ├── package.json
+│   │   └── vite.config.js
+│   └── backend/           # Django REST API
+│       ├── accounts/      # User authentication
+│       ├── questions/     # SAT questions
+│       ├── sat_prep/      # Django project settings
+│       ├── manage.py
+│       └── requirements.txt
+├── package.json           # Root workspace config
+├── Makefile              # Development commands
+└── README.md
+```
 
-## React Compiler
+## Quick Start
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Prerequisites
 
-## Expanding the ESLint configuration
+- Node.js >= 18
+- Python >= 3.10
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Installation
+
+```bash
+# Install all dependencies
+make install
+
+# Or install separately
+make install-frontend
+make install-backend
+```
+
+### Development
+
+```bash
+# Run frontend (http://localhost:5173)
+make dev-frontend
+
+# Run backend (http://localhost:8000)
+make dev-backend
+```
+
+### Using npm workspaces
+
+```bash
+# Install dependencies
+npm install
+
+# Run frontend
+npm run dev:frontend
+
+# Build frontend
+npm run build
+```
+
+### Backend Commands
+
+```bash
+# Run migrations
+make migrate
+
+# Create new migrations
+make makemigrations
+```
+
+## Tech Stack
+
+### Frontend
+- React 19
+- Vite 7
+- Tailwind CSS 4
+- Framer Motion
+
+### Backend
+- Django 5
+- Django REST Framework
+- django-allauth (OAuth)
+- dj-rest-auth

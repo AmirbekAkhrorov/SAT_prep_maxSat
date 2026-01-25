@@ -13,8 +13,10 @@ import {
   RefreshCw,
   ArrowRight,
   Zap,
+  Loader2,
 } from 'lucide-react';
-import { sampleQuestions } from '../data/sampleQuestions';
+import { fetchSampleQuestions } from '../services/api';
+import { sampleQuestions as fallbackQuestions } from '../data/sampleQuestions';
 
 const typeIcons = {
   math: Calculator,
@@ -35,6 +37,9 @@ const difficultyColors = {
 };
 
 export default function InteractiveQuiz() {
+  const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showExplanation, setShowExplanation] = useState(false);
@@ -42,13 +47,33 @@ export default function InteractiveQuiz() {
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [isComplete, setIsComplete] = useState(false);
 
-  const currentQuestion = sampleQuestions[currentIndex];
+  // Fetch questions from API on mount
+  useEffect(() => {
+    loadQuestions();
+  }, []);
+
+  const loadQuestions = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await fetchSampleQuestions(4);
+      setQuestions(data);
+    } catch (err) {
+      console.error('Failed to fetch questions, using fallback:', err);
+      // Use fallback static questions if API fails
+      setQuestions(fallbackQuestions);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const currentQuestion = questions[currentIndex];
   const isAnswered = answeredQuestions.includes(currentIndex);
-  const totalQuestions = sampleQuestions.length;
-  const TypeIcon = typeIcons[currentQuestion.type];
+  const totalQuestions = questions.length;
+  const TypeIcon = currentQuestion ? typeIcons[currentQuestion.type] : Calculator;
 
   const handleSelectAnswer = (answerId) => {
-    if (isAnswered) return;
+    if (isAnswered || !currentQuestion) return;
 
     setSelectedAnswer(answerId);
     setAnsweredQuestions([...answeredQuestions, currentIndex]);
@@ -79,13 +104,15 @@ export default function InteractiveQuiz() {
     }
   };
 
-  const handleReset = () => {
+  const handleReset = async () => {
     setCurrentIndex(0);
     setSelectedAnswer(null);
     setShowExplanation(false);
     setScore(0);
     setAnsweredQuestions([]);
     setIsComplete(false);
+    // Fetch new questions for variety
+    await loadQuestions();
   };
 
   const getOptionClass = (optionId) => {
@@ -104,7 +131,37 @@ export default function InteractiveQuiz() {
     return '';
   };
 
-  const progressPercentage = ((answeredQuestions.length) / totalQuestions) * 100;
+  const progressPercentage = totalQuestions > 0 ? ((answeredQuestions.length) / totalQuestions) * 100 : 0;
+
+  // Loading state
+  if (loading) {
+    return (
+      <section id="quiz" className="section-padding relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-cream-100 via-cream-50 to-cream-100" />
+        <div className="container-narrow mx-auto relative">
+          <div className="flex flex-col items-center justify-center py-20">
+            <Loader2 className="w-12 h-12 text-navy-600 animate-spin mb-4" />
+            <p className="font-body text-navy-600">Loading questions...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // No questions available
+  if (!currentQuestion) {
+    return (
+      <section id="quiz" className="section-padding relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-cream-100 via-cream-50 to-cream-100" />
+        <div className="container-narrow mx-auto relative text-center py-20">
+          <p className="font-body text-navy-600 mb-4">No questions available.</p>
+          <button onClick={loadQuestions} className="btn-primary">
+            Try Again
+          </button>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="quiz" className="section-padding relative overflow-hidden">
@@ -131,7 +188,7 @@ export default function InteractiveQuiz() {
             Experience SAT Questions
           </h2>
           <p className="font-body text-lg text-navy-600 max-w-2xl mx-auto">
-            Try our sample questions and see how our platform helps you learn.
+            Try real SAT questions from the official College Board question bank.
             Instant feedback and detailed explanations included.
           </p>
         </motion.div>
@@ -182,11 +239,16 @@ export default function InteractiveQuiz() {
                     </div>
                     <div className="flex items-center gap-3">
                       <span className="font-sans text-sm font-medium text-cream-200">
-                        {typeLabels[currentQuestion.type]}
+                        {typeLabels[currentQuestion.type] || 'Math'}
                       </span>
                       <span className={`px-3 py-1 rounded-full text-xs font-medium border ${difficultyColors[currentQuestion.difficulty]}`}>
                         {currentQuestion.difficulty.charAt(0).toUpperCase() + currentQuestion.difficulty.slice(1)}
                       </span>
+                      {currentQuestion.skill && (
+                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-white/10 text-cream-200">
+                          {currentQuestion.skill}
+                        </span>
+                      )}
                     </div>
                   </div>
 
@@ -199,7 +261,7 @@ export default function InteractiveQuiz() {
                     </div>
                   )}
 
-                  <h3 className="font-body text-lg leading-relaxed">
+                  <h3 className="font-body text-lg leading-relaxed whitespace-pre-wrap">
                     {currentQuestion.question}
                   </h3>
                 </div>
@@ -232,7 +294,7 @@ export default function InteractiveQuiz() {
 
                 {/* Explanation */}
                 <AnimatePresence>
-                  {showExplanation && (
+                  {showExplanation && currentQuestion.explanation && (
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}

@@ -1,0 +1,682 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "format": "Digital SAT 2024",
+    "created_at": "2025-01-07",
+    "total_questions": 30,
+    "sections": ["reading_writing", "math"]
+  },
+  "sections": {
+    "reading_writing": {
+      "description": "SAT Reading and Writing Section",
+      "total_time_minutes": 64,
+      "total_questions": 54,
+      "modules": 2,
+      "questions_per_module": 27,
+      "domains": [
+        "information_and_ideas",
+        "craft_and_structure",
+        "expression_of_ideas",
+        "standard_english_conventions"
+      ],
+      "questions": [
+        {
+          "id": "rw_001",
+          "domain": "information_and_ideas",
+          "skill": "central_ideas_and_details",
+          "difficulty": "easy",
+          "passage": "Marine biologists have long studied the migration patterns of humpback whales. Recent satellite tracking data reveals that these mammals travel up to 5,000 miles between their summer feeding grounds in polar waters and their winter breeding areas in tropical seas. This annual journey, one of the longest of any mammal, demonstrates remarkable navigational abilities that scientists are still working to understand.",
+          "question": "According to the passage, what do scientists find remarkable about humpback whale migration?",
+          "choices": {
+            "A": "The whales' ability to survive in both polar and tropical waters",
+            "B": "The distance the whales travel and their navigational skills",
+            "C": "The speed at which humpback whales complete their migration",
+            "D": "The whales' preference for breeding in tropical regions"
+          },
+          "correct_answer": "B",
+          "explanation": "The passage explicitly states that the journey is 'one of the longest of any mammal' and mentions 'remarkable navigational abilities,' making B the correct answer."
+        },
+        {
+          "id": "rw_002",
+          "domain": "information_and_ideas",
+          "skill": "command_of_evidence_textual",
+          "difficulty": "medium",
+          "passage": "In her 2019 study, archaeologist Dr. Sarah Chen challenged the prevailing view that ancient Mesopotamian cities developed primarily around religious temples. Her excavations at Tell Brak revealed extensive commercial districts predating the earliest known temple structures by several centuries, suggesting that trade networks may have been the primary catalyst for urban development in the region.",
+          "question": "Which choice best describes the function of the underlined portion in the overall structure of the passage?",
+          "choices": {
+            "A": "It introduces a theory that the rest of the passage will support with evidence.",
+            "B": "It presents a finding that contradicts a widely accepted historical interpretation.",
+            "C": "It summarizes the methodology Dr. Chen used in her archaeological research.",
+            "D": "It explains why previous archaeologists focused primarily on temple structures."
+          },
+          "correct_answer": "B",
+          "explanation": "The passage presents Dr. Chen's research as challenging 'the prevailing view,' indicating her findings contradict accepted interpretation."
+        },
+        {
+          "id": "rw_003",
+          "domain": "information_and_ideas",
+          "skill": "command_of_evidence_quantitative",
+          "difficulty": "hard",
+          "passage": "Researchers analyzed the relationship between urban green spaces and mental health outcomes across 50 metropolitan areas.",
+          "supplementary_content": {
+            "type": "table",
+            "title": "Urban Green Space and Mental Health Indicators",
+            "data": [
+              {"city_category": "High green space (>30%)", "depression_rate": "8.2%", "anxiety_rate": "11.4%", "sample_size": 15},
+              {"city_category": "Medium green space (15-30%)", "depression_rate": "12.7%", "anxiety_rate": "16.8%", "sample_size": 20},
+              {"city_category": "Low green space (<15%)", "depression_rate": "17.3%", "anxiety_rate": "22.1%", "sample_size": 15}
+            ]
+          },
+          "question": "Based on the passage and the table, which statement is best supported by the data?",
+          "choices": {
+            "A": "Cities with more than 30% green space have depression rates approximately half those of cities with less than 15% green space.",
+            "B": "Anxiety rates decrease by exactly 5% for each 15% increase in urban green space.",
+            "C": "The relationship between green space and mental health is strongest for anxiety disorders.",
+            "D": "Medium green space cities show mental health outcomes closer to low green space cities than to high green space cities."
+          },
+          "correct_answer": "A",
+          "explanation": "High green space cities have 8.2% depression rate, while low green space cities have 17.3%. 8.2 is approximately half of 17.3 (actually 47.4%), making A the best supported statement."
+        },
+        {
+          "id": "rw_004",
+          "domain": "information_and_ideas",
+          "skill": "inferences",
+          "difficulty": "medium",
+          "passage": "The axolotl, a salamander native to Mexico's Lake Xochimilco, possesses an extraordinary ability to regenerate lost limbs, organs, and even portions of its brain and spinal cord. Unlike most amphibians, axolotls exhibit neoteny—they retain juvenile features throughout their lives and never undergo metamorphosis into a terrestrial adult form. Scientists hypothesize that this perpetual juvenile state may be connected to their regenerative capabilities, as younger organisms typically show greater healing potential.",
+          "question": "Based on the passage, it can most reasonably be inferred that",
+          "choices": {
+            "A": "all salamanders that exhibit neoteny possess regenerative abilities",
+            "B": "the axolotl's regenerative abilities may diminish if it were to undergo metamorphosis",
+            "C": "Lake Xochimilco provides unique environmental conditions necessary for regeneration",
+            "D": "scientists have successfully induced metamorphosis in axolotls under laboratory conditions"
+          },
+          "correct_answer": "B",
+          "explanation": "The passage suggests a connection between the juvenile state (neoteny) and regenerative capabilities, implying that metamorphosis might reduce these abilities."
+        },
+        {
+          "id": "rw_005",
+          "domain": "craft_and_structure",
+          "skill": "words_in_context",
+          "difficulty": "easy",
+          "passage": "The architect's plans for the new community center were met with considerable skepticism from the town council. Several members questioned whether the innovative design, which featured cantilevered sections and an asymmetrical facade, would harmonize with the historic buildings surrounding the proposed site.",
+          "question": "As used in the passage, 'harmonize' most nearly means",
+          "choices": {
+            "A": "create musical sounds",
+            "B": "blend aesthetically",
+            "C": "function efficiently",
+            "D": "compete successfully"
+          },
+          "correct_answer": "B",
+          "explanation": "In the context of architectural design and 'historic buildings,' harmonize means to blend or fit together aesthetically."
+        },
+        {
+          "id": "rw_006",
+          "domain": "craft_and_structure",
+          "skill": "words_in_context",
+          "difficulty": "medium",
+          "passage": "Following the merger, the company underwent a comprehensive restructuring. Management implemented sweeping changes to the organizational hierarchy, consolidated redundant departments, and instituted new protocols designed to streamline operations. The transformation was so thorough that longtime employees struggled to navigate the reconfigured corporate landscape.",
+          "question": "As used in the passage, 'landscape' most nearly means",
+          "choices": {
+            "A": "natural scenery",
+            "B": "artistic representation",
+            "C": "organizational environment",
+            "D": "geographical territory"
+          },
+          "correct_answer": "C",
+          "explanation": "In this business context, 'landscape' metaphorically refers to the organizational structure and environment of the company."
+        },
+        {
+          "id": "rw_007",
+          "domain": "craft_and_structure",
+          "skill": "text_structure_and_purpose",
+          "difficulty": "medium",
+          "passage": "Text 1:\nHistorian James Morton argues that the Industrial Revolution's impact on family structure has been overstated. He points to census data showing that multi-generational households remained common in manufacturing towns well into the 1890s.\n\nText 2:\nSociologist Elena Ruiz contends that examining household composition alone provides an incomplete picture. Her research demonstrates that even when relatives lived nearby, industrialization fundamentally altered the nature of familial relationships by reorganizing daily life around factory schedules rather than agricultural rhythms.",
+          "question": "Based on the texts, how would Ruiz most likely respond to Morton's argument?",
+          "choices": {
+            "A": "By arguing that census data from the 1890s is unreliable",
+            "B": "By suggesting that manufacturing towns were atypical of broader trends",
+            "C": "By contending that household structure is not the only measure of family change",
+            "D": "By claiming that multi-generational households were actually more common before industrialization"
+          },
+          "correct_answer": "C",
+          "explanation": "Ruiz explicitly states that 'household composition alone provides an incomplete picture' and focuses on changes in 'the nature of familial relationships' rather than living arrangements."
+        },
+        {
+          "id": "rw_008",
+          "domain": "craft_and_structure",
+          "skill": "cross_text_connections",
+          "difficulty": "hard",
+          "passage": "Text 1:\nLiterary critic Harold Bloom maintained that great literature must engage with and transcend its predecessors. Writers who fail to grapple with the 'anxiety of influence' from canonical works, Bloom argued, produce derivative and ultimately forgettable prose.\n\nText 2:\nContemporary novelist Chimamanda Ngozi Adichie has questioned whether Bloom's framework adequately accounts for writers from traditions historically excluded from the Western canon. For such authors, she suggests, the creative challenge lies not in transcending established masters but in recovering and amplifying marginalized voices.",
+          "question": "Which choice best describes the relationship between the two texts?",
+          "choices": {
+            "A": "Text 2 provides evidence that supports the theory presented in Text 1.",
+            "B": "Text 2 offers an alternative perspective that challenges the universality of Text 1's claims.",
+            "C": "Text 2 applies the framework from Text 1 to a specific literary movement.",
+            "D": "Text 2 presents research that definitively disproves the argument in Text 1."
+          },
+          "correct_answer": "B",
+          "explanation": "Adichie questions whether Bloom's framework 'adequately accounts for' certain writers, offering an alternative view of creative influence for marginalized traditions."
+        },
+        {
+          "id": "rw_009",
+          "domain": "expression_of_ideas",
+          "skill": "rhetorical_synthesis",
+          "difficulty": "medium",
+          "passage": "A student is writing a research paper about the decline of bee populations. The student wants to emphasize the economic consequences of this decline for the agricultural industry.",
+          "notes": [
+            "Bees pollinate approximately 75% of fruits, nuts, and vegetables grown in the United States.",
+            "The economic value of bee pollination to U.S. agriculture is estimated at $15 billion annually.",
+            "Colony collapse disorder has reduced managed honeybee populations by nearly 40% since 2006.",
+            "Some farmers have resorted to hand-pollination, which costs approximately $2,000 per acre."
+          ],
+          "question": "Which choice most effectively uses relevant information from the notes to accomplish the student's goal?",
+          "choices": {
+            "A": "Colony collapse disorder, which has affected bee populations since 2006, poses significant challenges for environmental conservation efforts.",
+            "B": "With bee pollination contributing $15 billion annually to U.S. agriculture and some farmers now paying $2,000 per acre for hand-pollination, the decline in bee populations threatens the economic viability of American farms.",
+            "C": "Bees pollinate most of the fruits, nuts, and vegetables grown in the United States, making them essential to the country's food supply.",
+            "D": "Since 2006, managed honeybee populations have declined by nearly 40%, a trend that scientists attribute to colony collapse disorder."
+          },
+          "correct_answer": "B",
+          "explanation": "Option B specifically addresses economic consequences by citing the $15 billion value and the $2,000 per acre alternative cost, directly accomplishing the stated goal."
+        },
+        {
+          "id": "rw_010",
+          "domain": "expression_of_ideas",
+          "skill": "transitions",
+          "difficulty": "easy",
+          "passage": "The human trafficking___ has been transformed by social media platforms. Traffickers now use these digital tools to recruit victims, often targeting vulnerable individuals through seemingly friendly initial contact. _______ law enforcement agencies have developed specialized units to monitor online activity and identify trafficking networks.",
+          "question": "Which choice completes the text with the most logical transition?",
+          "choices": {
+            "A": "For example,",
+            "B": "In response,",
+            "C": "Similarly,",
+            "D": "Nevertheless,"
+          },
+          "correct_answer": "B",
+          "explanation": "'In response' indicates that law enforcement's actions are a reaction to the problem described in the first two sentences."
+        },
+        {
+          "id": "rw_011",
+          "domain": "expression_of_ideas",
+          "skill": "transitions",
+          "difficulty": "medium",
+          "passage": "Recent studies have shown that mindfulness meditation can reduce symptoms of anxiety and depression. Participants who practiced meditation for just 10 minutes daily reported significant improvements in mood and stress levels. _______ the long-term neurological effects of meditation remain poorly understood, and some researchers caution against viewing it as a replacement for traditional therapeutic interventions.",
+          "question": "Which choice completes the text with the most logical transition?",
+          "choices": {
+            "A": "In addition,",
+            "B": "However,",
+            "C": "Therefore,",
+            "D": "Specifically,"
+          },
+          "correct_answer": "B",
+          "explanation": "'However' signals a contrast between the positive findings and the limitations/cautions that follow."
+        },
+        {
+          "id": "rw_012",
+          "domain": "standard_english_conventions",
+          "skill": "boundaries",
+          "difficulty": "easy",
+          "passage": "The discovery of high concentrations of phosphine gas in Venus's atmosphere generated excitement among _______ the presence of this compound, typically produced by biological processes on Earth, suggested the possibility of microbial life in the planet's acidic clouds.",
+          "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+          "choices": {
+            "A": "astrobiologists,",
+            "B": "astrobiologists:",
+            "C": "astrobiologists;",
+            "D": "astrobiologists"
+          },
+          "correct_answer": "C",
+          "explanation": "A semicolon is needed because what follows is an independent clause that explains why there was excitement. A colon could work if introducing a list or direct explanation, but the semicolon better connects two related independent clauses."
+        },
+        {
+          "id": "rw_013",
+          "domain": "standard_english_conventions",
+          "skill": "form_structure_sense",
+          "difficulty": "medium",
+          "passage": "Neither the project manager nor her assistants _______ able to locate the original design specifications, which had been filed before the office moved to its new location.",
+          "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+          "choices": {
+            "A": "was",
+            "B": "were",
+            "C": "is",
+            "D": "has been"
+          },
+          "correct_answer": "B",
+          "explanation": "With 'neither...nor,' the verb agrees with the noun closest to it ('assistants,' which is plural), so 'were' is correct. The past tense also matches 'had been filed.'"
+        },
+        {
+          "id": "rw_014",
+          "domain": "standard_english_conventions",
+          "skill": "form_structure_sense",
+          "difficulty": "hard",
+          "passage": "The committee, along with several outside consultants who had been hired specifically for the project, _______ recommended significant changes to the company's cybersecurity protocols after discovering multiple vulnerabilities in the existing system.",
+          "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+          "choices": {
+            "A": "have",
+            "B": "has",
+            "C": "are",
+            "D": "were"
+          },
+          "correct_answer": "B",
+          "explanation": "The subject is 'committee' (singular), and the phrase 'along with several outside consultants' is a parenthetical addition that doesn't change the number of the subject. Therefore, 'has' is correct."
+        },
+        {
+          "id": "rw_015",
+          "domain": "standard_english_conventions",
+          "skill": "boundaries",
+          "difficulty": "medium",
+          "passage": "Dr. Maya Patel's research on coral reef ecosystems has yielded important insights into marine _______ her most recent study documented how certain coral species adapt to rising ocean temperatures by altering their symbiotic relationships with algae.",
+          "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+          "choices": {
+            "A": "biodiversity, and",
+            "B": "biodiversity;",
+            "C": "biodiversity",
+            "D": "biodiversity,"
+          },
+          "correct_answer": "B",
+          "explanation": "A semicolon is appropriate here to separate two independent clauses that are closely related in meaning."
+        }
+      ]
+    },
+    "math": {
+      "description": "SAT Math Section",
+      "total_time_minutes": 70,
+      "total_questions": 44,
+      "modules": 2,
+      "questions_per_module": 22,
+      "calculator_allowed": true,
+      "categories": [
+        "algebra",
+        "advanced_math",
+        "problem_solving_data_analysis",
+        "geometry_trigonometry"
+      ],
+      "questions": [
+        {
+          "id": "math_001",
+          "category": "algebra",
+          "skill": "linear_equations_one_variable",
+          "difficulty": "easy",
+          "question": "If 3x + 7 = 22, what is the value of x?",
+          "choices": {
+            "A": "3",
+            "B": "5",
+            "C": "7",
+            "D": "15"
+          },
+          "correct_answer": "B",
+          "explanation": "3x + 7 = 22 → 3x = 15 → x = 5",
+          "is_grid_in": false
+        },
+        {
+          "id": "math_002",
+          "category": "algebra",
+          "skill": "linear_equations_two_variables",
+          "difficulty": "medium",
+          "question": "The equation y = 3x + 12 represents the total cost y, in dollars, of renting a bicycle for x hours. What does the number 12 represent in this equation?",
+          "choices": {
+            "A": "The cost per hour of renting the bicycle",
+            "B": "The initial rental fee",
+            "C": "The maximum number of hours the bicycle can be rented",
+            "D": "The total cost for 4 hours of rental"
+          },
+          "correct_answer": "B",
+          "explanation": "In the slope-intercept form y = mx + b, the constant term (12) represents the y-intercept, which in this context is the initial fee charged regardless of hours rented."
+        },
+        {
+          "id": "math_003",
+          "category": "algebra",
+          "skill": "systems_of_equations",
+          "difficulty": "medium",
+          "question": "A farmer sells apples and oranges at a roadside stand. On Monday, the farmer sold 25 apples and 15 oranges for $32.50. On Tuesday, the farmer sold 20 apples and 25 oranges for $35.00. What is the price of one apple?",
+          "choices": {
+            "A": "$0.75",
+            "B": "$0.80",
+            "C": "$0.90",
+            "D": "$1.00"
+          },
+          "correct_answer": "C",
+          "explanation": "Let a = price of apple, o = price of orange. System: 25a + 15o = 32.50 and 20a + 25o = 35.00. Solving: multiply first equation by 5 and second by 3 to eliminate o: 125a + 75o = 162.50 and 60a + 75o = 105.00. Subtracting: 65a = 57.50, so a = $0.90"
+        },
+        {
+          "id": "math_004",
+          "category": "algebra",
+          "skill": "linear_inequalities",
+          "difficulty": "easy",
+          "question": "A moving company charges a flat fee of $150 plus $40 per hour. A customer has a budget of no more than $350 for the move. Which inequality represents the number of hours h the customer can hire the moving company?",
+          "choices": {
+            "A": "150 + 40h ≤ 350",
+            "B": "150 + 40h ≥ 350",
+            "C": "40h - 150 ≤ 350",
+            "D": "150h + 40 ≤ 350"
+          },
+          "correct_answer": "A",
+          "explanation": "Total cost = flat fee + hourly rate × hours = 150 + 40h. This must be ≤ 350 (no more than the budget)."
+        },
+        {
+          "id": "math_005",
+          "category": "algebra",
+          "skill": "linear_functions",
+          "difficulty": "hard",
+          "question": "The function f is defined by f(x) = 2x + 5. The function g is defined by g(x) = f(x - 3). Which of the following defines g?",
+          "choices": {
+            "A": "g(x) = 2x + 2",
+            "B": "g(x) = 2x - 1",
+            "C": "g(x) = 2x + 8",
+            "D": "g(x) = 2x + 11"
+          },
+          "correct_answer": "B",
+          "explanation": "g(x) = f(x - 3) = 2(x - 3) + 5 = 2x - 6 + 5 = 2x - 1"
+        },
+        {
+          "id": "math_006",
+          "category": "advanced_math",
+          "skill": "equivalent_expressions",
+          "difficulty": "medium",
+          "question": "Which expression is equivalent to (3x² - 5x + 2) - (x² - 3x - 4)?",
+          "choices": {
+            "A": "2x² - 8x + 6",
+            "B": "2x² - 2x + 6",
+            "C": "2x² - 2x - 2",
+            "D": "4x² - 8x - 2"
+          },
+          "correct_answer": "B",
+          "explanation": "(3x² - 5x + 2) - (x² - 3x - 4) = 3x² - 5x + 2 - x² + 3x + 4 = 2x² - 2x + 6"
+        },
+        {
+          "id": "math_007",
+          "category": "advanced_math",
+          "skill": "quadratic_equations",
+          "difficulty": "medium",
+          "question": "What are the solutions to the equation x² - 6x + 8 = 0?",
+          "choices": {
+            "A": "x = 2 and x = 4",
+            "B": "x = -2 and x = -4",
+            "C": "x = 2 and x = -4",
+            "D": "x = -2 and x = 4"
+          },
+          "correct_answer": "A",
+          "explanation": "Factor: x² - 6x + 8 = (x - 2)(x - 4) = 0. Therefore x = 2 or x = 4."
+        },
+        {
+          "id": "math_008",
+          "category": "advanced_math",
+          "skill": "quadratic_functions",
+          "difficulty": "hard",
+          "question": "The function f(x) = -2(x - 3)² + 18 models the height, in feet, of a ball x seconds after it is thrown. What is the maximum height reached by the ball?",
+          "choices": {
+            "A": "3 feet",
+            "B": "8 feet",
+            "C": "18 feet",
+            "D": "36 feet"
+          },
+          "correct_answer": "C",
+          "explanation": "The function is in vertex form f(x) = a(x - h)² + k, where (h, k) is the vertex. Since a = -2 < 0, the parabola opens downward and the maximum is at the vertex. The maximum height is k = 18 feet."
+        },
+        {
+          "id": "math_009",
+          "category": "advanced_math",
+          "skill": "polynomial_functions",
+          "difficulty": "hard",
+          "question": "If p(x) = x³ - 4x² + x + 6 and p(2) = 0, which of the following must be a factor of p(x)?",
+          "choices": {
+            "A": "(x + 2)",
+            "B": "(x - 2)",
+            "C": "(x + 3)",
+            "D": "(x - 3)"
+          },
+          "correct_answer": "B",
+          "explanation": "By the Factor Theorem, if p(c) = 0, then (x - c) is a factor of p(x). Since p(2) = 0, (x - 2) is a factor."
+        },
+        {
+          "id": "math_010",
+          "category": "advanced_math",
+          "skill": "exponential_functions",
+          "difficulty": "medium",
+          "question": "A population of bacteria doubles every 3 hours. If the initial population is 500 bacteria, which function P(t) models the population after t hours?",
+          "choices": {
+            "A": "P(t) = 500(2)^t",
+            "B": "P(t) = 500(2)^(t/3)",
+            "C": "P(t) = 500(2)^(3t)",
+            "D": "P(t) = 500 + 2t"
+          },
+          "correct_answer": "B",
+          "explanation": "For exponential growth with doubling time of 3 hours: P(t) = P₀(2)^(t/T) where T is the doubling time. So P(t) = 500(2)^(t/3)."
+        },
+        {
+          "id": "math_011",
+          "category": "problem_solving_data_analysis",
+          "skill": "ratios_rates_proportions",
+          "difficulty": "easy",
+          "question": "A recipe calls for 2 cups of flour to make 24 cookies. How many cups of flour are needed to make 60 cookies?",
+          "choices": {
+            "A": "4 cups",
+            "B": "5 cups",
+            "C": "6 cups",
+            "D": "7 cups"
+          },
+          "correct_answer": "B",
+          "explanation": "Set up proportion: 2/24 = x/60. Cross multiply: 24x = 120, so x = 5 cups."
+        },
+        {
+          "id": "math_012",
+          "category": "problem_solving_data_analysis",
+          "skill": "percentages",
+          "difficulty": "medium",
+          "question": "A store increases the price of a jacket by 20%, then later decreases the new price by 20%. If the original price was $80, what is the final price?",
+          "choices": {
+            "A": "$76.80",
+            "B": "$80.00",
+            "C": "$83.20",
+            "D": "$96.00"
+          },
+          "correct_answer": "A",
+          "explanation": "After 20% increase: $80 × 1.20 = $96. After 20% decrease: $96 × 0.80 = $76.80. Note: increasing then decreasing by the same percentage doesn't return to the original price."
+        },
+        {
+          "id": "math_013",
+          "category": "problem_solving_data_analysis",
+          "skill": "one_variable_data",
+          "difficulty": "medium",
+          "supplementary_content": {
+            "type": "data_set",
+            "description": "Test scores for 9 students",
+            "values": [72, 78, 82, 85, 85, 88, 90, 92, 98]
+          },
+          "question": "The data above shows test scores for 9 students. What is the median score?",
+          "choices": {
+            "A": "82",
+            "B": "85",
+            "C": "86",
+            "D": "88"
+          },
+          "correct_answer": "B",
+          "explanation": "The data is already sorted. With 9 values, the median is the 5th value (middle). The 5th value is 85."
+        },
+        {
+          "id": "math_014",
+          "category": "problem_solving_data_analysis",
+          "skill": "two_variable_data",
+          "difficulty": "hard",
+          "supplementary_content": {
+            "type": "scatter_plot_description",
+            "description": "A scatter plot shows the relationship between hours studied (x-axis) and test scores (y-axis). The line of best fit has the equation y = 8x + 52."
+          },
+          "question": "Based on the line of best fit y = 8x + 52, what is the predicted test score for a student who studies for 5 hours?",
+          "choices": {
+            "A": "90",
+            "B": "92",
+            "C": "96",
+            "D": "100"
+          },
+          "correct_answer": "B",
+          "explanation": "Substitute x = 5 into y = 8x + 52: y = 8(5) + 52 = 40 + 52 = 92."
+        },
+        {
+          "id": "math_015",
+          "category": "problem_solving_data_analysis",
+          "skill": "probability",
+          "difficulty": "medium",
+          "question": "A bag contains 4 red marbles, 6 blue marbles, and 5 green marbles. If one marble is selected at random, what is the probability that it is NOT blue?",
+          "choices": {
+            "A": "2/5",
+            "B": "3/5",
+            "C": "2/3",
+            "D": "9/15"
+          },
+          "correct_answer": "B",
+          "explanation": "Total marbles = 4 + 6 + 5 = 15. Not blue = 4 + 5 = 9. Probability = 9/15 = 3/5."
+        },
+        {
+          "id": "math_016",
+          "category": "geometry_trigonometry",
+          "skill": "area_and_volume",
+          "difficulty": "easy",
+          "question": "A rectangular garden has a length of 12 feet and a width of 8 feet. What is the area of the garden in square feet?",
+          "choices": {
+            "A": "40",
+            "B": "80",
+            "C": "96",
+            "D": "192"
+          },
+          "correct_answer": "C",
+          "explanation": "Area of rectangle = length × width = 12 × 8 = 96 square feet."
+        },
+        {
+          "id": "math_017",
+          "category": "geometry_trigonometry",
+          "skill": "lines_angles_triangles",
+          "difficulty": "medium",
+          "question": "In triangle ABC, angle A measures 45° and angle B measures 65°. What is the measure of angle C?",
+          "choices": {
+            "A": "60°",
+            "B": "70°",
+            "C": "80°",
+            "D": "110°"
+          },
+          "correct_answer": "B",
+          "explanation": "The sum of angles in a triangle is 180°. Angle C = 180° - 45° - 65° = 70°."
+        },
+        {
+          "id": "math_018",
+          "category": "geometry_trigonometry",
+          "skill": "right_triangles_trigonometry",
+          "difficulty": "hard",
+          "question": "In a right triangle, one leg has length 5 and the hypotenuse has length 13. What is the length of the other leg?",
+          "choices": {
+            "A": "8",
+            "B": "10",
+            "C": "12",
+            "D": "√144"
+          },
+          "correct_answer": "C",
+          "explanation": "Using the Pythagorean theorem: a² + b² = c². So 5² + b² = 13². Therefore 25 + b² = 169, b² = 144, b = 12. (Note: C and D are equivalent, but C is the simplified form.)"
+        },
+        {
+          "id": "math_019",
+          "category": "geometry_trigonometry",
+          "skill": "circles",
+          "difficulty": "medium",
+          "question": "A circle has a radius of 6 cm. What is the circumference of the circle?",
+          "choices": {
+            "A": "6π cm",
+            "B": "12π cm",
+            "C": "36π cm",
+            "D": "144π cm"
+          },
+          "correct_answer": "B",
+          "explanation": "Circumference = 2πr = 2π(6) = 12π cm."
+        },
+        {
+          "id": "math_020",
+          "category": "geometry_trigonometry",
+          "skill": "circles",
+          "difficulty": "hard",
+          "question": "The equation (x - 3)² + (y + 2)² = 25 represents a circle in the xy-plane. What are the coordinates of the center of the circle?",
+          "choices": {
+            "A": "(3, -2)",
+            "B": "(-3, 2)",
+            "C": "(3, 2)",
+            "D": "(-3, -2)"
+          },
+          "correct_answer": "A",
+          "explanation": "The standard form of a circle is (x - h)² + (y - k)² = r², where (h, k) is the center. Here, h = 3 and k = -2 (note: y + 2 = y - (-2)), so the center is (3, -2)."
+        },
+        {
+          "id": "math_021",
+          "category": "algebra",
+          "skill": "linear_equations_one_variable",
+          "difficulty": "medium",
+          "question": "If 2(x + 5) - 3 = 4x - 7, what is the value of x?",
+          "choices": {
+            "A": "-7",
+            "B": "2",
+            "C": "7",
+            "D": "14"
+          },
+          "correct_answer": "C",
+          "explanation": "2(x + 5) - 3 = 4x - 7 → 2x + 10 - 3 = 4x - 7 → 2x + 7 = 4x - 7 → 14 = 2x → x = 7"
+        },
+        {
+          "id": "math_022",
+          "category": "advanced_math",
+          "skill": "nonlinear_equations",
+          "difficulty": "hard",
+          "question": "What is the sum of the solutions to the equation |2x - 6| = 10?",
+          "choices": {
+            "A": "-2",
+            "B": "0",
+            "C": "6",
+            "D": "8"
+          },
+          "correct_answer": "C",
+          "explanation": "|2x - 6| = 10 gives two equations: 2x - 6 = 10 or 2x - 6 = -10. Solving: x = 8 or x = -2. Sum = 8 + (-2) = 6."
+        },
+        {
+          "id": "math_023",
+          "category": "problem_solving_data_analysis",
+          "skill": "inference_from_sample",
+          "difficulty": "hard",
+          "question": "A researcher surveys 400 randomly selected voters in a city and finds that 52% support a proposed policy. If the margin of error is ±4%, which of the following is a plausible range for the percentage of all voters in the city who support the policy?",
+          "choices": {
+            "A": "48% to 56%",
+            "B": "50% to 54%",
+            "C": "52% to 56%",
+            "D": "46% to 58%"
+          },
+          "correct_answer": "A",
+          "explanation": "With 52% support and ±4% margin of error, the confidence interval is 52% - 4% to 52% + 4%, which is 48% to 56%."
+        },
+        {
+          "id": "math_024",
+          "category": "geometry_trigonometry",
+          "skill": "right_triangles_trigonometry",
+          "difficulty": "hard",
+          "question": "In right triangle DEF, angle E is the right angle, DE = 8, and EF = 15. What is the value of sin(D)?",
+          "choices": {
+            "A": "8/17",
+            "B": "15/17",
+            "C": "8/15",
+            "D": "15/8"
+          },
+          "correct_answer": "B",
+          "explanation": "First find DF (hypotenuse): DF² = 8² + 15² = 64 + 225 = 289, so DF = 17. sin(D) = opposite/hypotenuse = EF/DF = 15/17."
+        },
+        {
+          "id": "math_025",
+          "category": "advanced_math",
+          "skill": "function_notation",
+          "difficulty": "medium",
+          "question": "If f(x) = x² - 4x + 3, what is f(5)?",
+          "choices": {
+            "A": "8",
+            "B": "10",
+            "C": "12",
+            "D": "18"
+          },
+          "correct_answer": "A",
+          "explanation": "f(5) = (5)² - 4(5) + 3 = 25 - 20 + 3 = 8"
+        }
+      ]
+    }
+  }
+}
