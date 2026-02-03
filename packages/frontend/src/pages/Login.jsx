@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { GraduationCap, Mail, Lock, AlertCircle } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import ThemeToggle from '../components/ThemeToggle';
 
 const GOOGLE_CLIENT_ID = '21555557010-1v1skvapn1o9ldhu25tv7t3f5q74dtpm.apps.googleusercontent.com';
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -57,8 +60,7 @@ export default function Login() {
         throw new Error(data.error || 'Google login failed');
       }
 
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
+      login(data.user, data.token);
       navigate('/cabinet');
     } catch (err) {
       setError(err.message);
@@ -109,8 +111,7 @@ export default function Login() {
         throw new Error(data.error || 'Invalid email or password');
       }
 
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
+      login(data.user, data.token);
       navigate('/cabinet');
     } catch (err) {
       setError(err.message);
@@ -120,25 +121,28 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-cream-100 flex">
+    <div className="min-h-screen bg-cream-100 dark:bg-navy-950 flex">
       {/* Left Side - Form */}
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 mb-8">
-            <div className="w-11 h-11 bg-navy-900 rounded-xl flex items-center justify-center">
-              <GraduationCap className="w-6 h-6 text-gold-400" />
-            </div>
-            <span className="font-display text-xl font-semibold text-navy-900">
-              SAT<span className="text-gold-600">Prep</span>
-            </span>
-          </Link>
+          {/* Logo and Theme Toggle */}
+          <div className="flex items-center justify-between mb-8">
+            <Link to="/" className="flex items-center gap-3">
+              <div className="w-11 h-11 bg-navy-900 dark:bg-navy-800 rounded-xl flex items-center justify-center">
+                <GraduationCap className="w-6 h-6 text-gold-400" />
+              </div>
+              <span className="font-display text-xl font-semibold text-navy-900 dark:text-cream-100">
+                SAT<span className="text-gold-600 dark:text-gold-400">Prep</span>
+              </span>
+            </Link>
+            <ThemeToggle />
+          </div>
 
-          <h1 className="text-3xl font-bold text-navy-900 mb-2">Welcome back</h1>
-          <p className="text-navy-600 mb-8">Sign in to continue your SAT preparation journey</p>
+          <h1 className="text-3xl font-bold text-navy-900 dark:text-cream-100 mb-2">Welcome back</h1>
+          <p className="text-navy-600 dark:text-cream-300 mb-8">Sign in to continue your SAT preparation journey</p>
 
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-center gap-3 text-red-700">
+            <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl flex items-center gap-3 text-red-700 dark:text-red-300">
               <AlertCircle className="w-5 h-5 flex-shrink-0" />
               <p>{error}</p>
             </div>
@@ -149,7 +153,7 @@ export default function Login() {
             type="button"
             onClick={handleGoogleLogin}
             disabled={loading}
-            className="w-full mb-6 py-3 px-4 bg-white border border-cream-300 rounded-xl font-medium text-navy-800 hover:bg-cream-50 transition-colors flex items-center justify-center gap-3 disabled:opacity-50"
+            className="w-full mb-6 py-3 px-4 bg-white dark:bg-navy-800 border border-cream-300 dark:border-navy-700 rounded-xl font-medium text-navy-800 dark:text-cream-200 hover:bg-cream-50 dark:hover:bg-navy-700 transition-colors flex items-center justify-center gap-3 disabled:opacity-50"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
@@ -175,17 +179,17 @@ export default function Login() {
           {/* Divider */}
           <div className="relative mb-6">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-cream-300" />
+              <div className="w-full border-t border-cream-300 dark:border-navy-700" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-cream-100 text-navy-500">or continue with email</span>
+              <span className="px-4 bg-cream-100 dark:bg-navy-950 text-navy-500 dark:text-navy-400">or continue with email</span>
             </div>
           </div>
 
           {/* Email/Password Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-navy-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-navy-700 dark:text-cream-300 mb-2">
                 Email address
               </label>
               <div className="relative">
@@ -195,7 +199,7 @@ export default function Login() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 bg-white border border-cream-300 rounded-xl text-navy-900 placeholder-navy-400 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-all"
+                  className="w-full pl-12 pr-4 py-3 bg-white dark:bg-navy-800 border border-cream-300 dark:border-navy-700 rounded-xl text-navy-900 dark:text-cream-100 placeholder-navy-400 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-all"
                   placeholder="you@example.com"
                   required
                 />
@@ -204,7 +208,7 @@ export default function Login() {
 
             <div>
               <div className="flex items-center justify-between mb-2">
-                <label htmlFor="password" className="block text-sm font-medium text-navy-700">
+                <label htmlFor="password" className="block text-sm font-medium text-navy-700 dark:text-cream-300">
                   Password
                 </label>
               </div>
@@ -215,7 +219,7 @@ export default function Login() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 bg-white border border-cream-300 rounded-xl text-navy-900 placeholder-navy-400 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-all"
+                  className="w-full pl-12 pr-4 py-3 bg-white dark:bg-navy-800 border border-cream-300 dark:border-navy-700 rounded-xl text-navy-900 dark:text-cream-100 placeholder-navy-400 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-all"
                   placeholder="Enter your password"
                   required
                 />
@@ -231,9 +235,9 @@ export default function Login() {
             </button>
           </form>
 
-          <p className="mt-8 text-center text-navy-600">
+          <p className="mt-8 text-center text-navy-600 dark:text-cream-300">
             Don't have an account?{' '}
-            <Link to="/register" className="text-gold-600 hover:text-gold-700 font-medium">
+            <Link to="/register" className="text-gold-600 dark:text-gold-400 hover:text-gold-700 dark:hover:text-gold-300 font-medium">
               Start free trial
             </Link>
           </p>

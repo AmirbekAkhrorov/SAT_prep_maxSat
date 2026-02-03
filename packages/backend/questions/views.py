@@ -1,18 +1,58 @@
 from django.db.models import Count
+from django.utils import timezone
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Question, QuestionAttempt, UserNote
+from .models import Question, QuestionAttempt, Skill, TestSession, TestSessionQuestion, UserNote, UserStats
 from .serializers import (
+    LeaderboardEntrySerializer,
     QuestionAttemptSerializer,
     QuestionCreateSerializer,
     QuestionDetailSerializer,
     QuestionListSerializer,
+    SkillSerializer,
+    TestSessionListSerializer,
+    TestSessionResultSerializer,
+    TestSessionSerializer,
     UserNoteSerializer,
+    UserStatsSerializer,
 )
+
+
+class SkillViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    ViewSet for SAT Math skills.
+
+    Provides endpoints for:
+    - GET /api/skills/ - List all skills
+    - GET /api/skills/{id}/ - Get skill detail
+    - GET /api/skills/by_domain/ - Get skills grouped by domain
+    """
+
+    queryset = Skill.objects.all()
+    serializer_class = SkillSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        queryset = Skill.objects.all()
+        domain = self.request.query_params.get("domain")
+        if domain:
+            queryset = queryset.filter(domain=domain)
+        return queryset
+
+    @action(detail=False, methods=["get"])
+    def by_domain(self, request):
+        """Get skills grouped by domain."""
+        skills = Skill.objects.all()
+        grouped = {}
+        for skill in skills:
+            if skill.domain not in grouped:
+                grouped[skill.domain] = []
+            grouped[skill.domain].append(SkillSerializer(skill).data)
+        return Response(grouped)
 
 
 class QuestionViewSet(viewsets.ModelViewSet):
@@ -58,7 +98,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
         # Filter by skill
         skill = self.request.query_params.get("skill")
         if skill:
-            queryset = queryset.filter(skill__icontains=skill)
+            queryset = queryset.filter(skill_name__icontains=skill)
 
         # Filter by difficulty
         difficulty = self.request.query_params.get("difficulty")
@@ -98,7 +138,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
             "by_test": dict(queryset.values_list("test").annotate(count=Count("id"))),
             "by_domain": dict(queryset.values_list("domain").annotate(count=Count("id"))),
             "by_difficulty": dict(queryset.values_list("difficulty").annotate(count=Count("id"))),
-            "skills": list(queryset.values_list("skill", flat=True).distinct()),
+            "skills": list(queryset.values_list("skill_name", flat=True).distinct()),
         }
 
         return Response(stats)
@@ -266,3 +306,409 @@ class CheckAnswerView(APIView):
                 "explanation": question.explanation,
             }
         )
+
+
+class TestSessionViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet for timed test sessions.
+
+    Endpoints:
+    - POST /api/tests/start/ - Start a new test session
+    - GET /api/tests/{id}/ - Get session details (for resume)
+    - GET /api/tests/current/ - Check for in-progress session
+    - POST /api/tests/{id}/answer/ - Save an answer
+    - POST /api/tests/{id}/flag/ - Toggle flag on a question
+    - POST /api/tests/{id}/submit/ - Submit test and get results
+    - GET /api/tests/history/ - List past test sessions
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    # Test type configurations
+    TEST_CONFIGS = {
+        "mini": {"questions": 5, "time_seconds": 10 * 60},  # 10 minutes
+        "section": {"questions": 20, "time_seconds": 35 * 60},  # 35 minutes
+        "full": {"questions": 55, "time_seconds": 120 * 60},  # 120 minutes
+    }
+
+    def get_queryset(self):
+        return TestSession.objects.filter(user=self.request.user)
+
+    def get_serializer_class(self):
+        if self.action == "history":
+            return TestSessionListSerializer
+        if self.action == "submit" or (self.action == "retrieve" and self.get_object().status != "in_progress"):
+            return TestSessionResultSerializer
+        return TestSessionSerializer
+
+    def retrieve(self, request, *args, **kwargs):
+        """Get session details - includes questions for resume capability."""
+        session = self.get_object()
+        if session.status == "in_progress":
+            serializer = TestSessionSerializer(session)
+        else:
+            serializer = TestSessionResultSerializer(session)
+        return Response(serializer.data)
+
+    @action(detail=False, methods=["post"])
+    def start(self, request):
+        """Start a new test session."""
+        test_type = request.data.get("test_type", "mini")
+
+        if test_type not in self.TEST_CONFIGS:
+            return Response(
+                {"error": f"Invalid test_type. Must be one of: {', '.join(self.TEST_CONFIGS.keys())}"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # Check if user has an in-progress session
+        existing_session = TestSession.objects.filter(user=request.user, status="in_progress").first()
+        if existing_session:
+            # Check if time has expired
+            if existing_session.time_remaining_seconds <= 0:
+                existing_session.status = "timed_out"
+                existing_session.completed_at = timezone.now()
+                existing_session.save()
+            else:
+                serializer = TestSessionSerializer(existing_session)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
+        config = self.TEST_CONFIGS[test_type]
+
+        # Get random questions
+        questions = list(Question.objects.order_by("?")[: config["questions"]])
+
+        if len(questions) < config["questions"]:
+            return Response(
+                {"error": f"Not enough questions available. Need {config['questions']}, found {len(questions)}"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # Create test session
+        session = TestSession.objects.create(
+            user=request.user,
+            test_type=test_type,
+            time_limit_seconds=config["time_seconds"],
+            total_questions=config["questions"],
+        )
+
+        # Create session questions
+        for order, question in enumerate(questions, start=1):
+            TestSessionQuestion.objects.create(session=session, question=question, order=order)
+
+        serializer = TestSessionSerializer(session)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    @action(detail=False, methods=["get"])
+    def current(self, request):
+        """Check for an in-progress session."""
+        session = TestSession.objects.filter(user=request.user, status="in_progress").first()
+
+        if not session:
+            return Response({"has_session": False})
+
+        # Check if time has expired
+        if session.time_remaining_seconds <= 0:
+            session.status = "timed_out"
+            session.completed_at = timezone.now()
+            session.save()
+            return Response({"has_session": False})
+
+        serializer = TestSessionSerializer(session)
+        return Response({"has_session": True, "session": serializer.data})
+
+    @action(detail=True, methods=["post"])
+    def answer(self, request, pk=None):
+        """Save an answer for a question."""
+        session = self.get_object()
+
+        if session.status != "in_progress":
+            return Response({"error": "Cannot modify a completed test"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Check if time has expired
+        if session.time_remaining_seconds <= 0:
+            session.status = "timed_out"
+            session.completed_at = timezone.now()
+            session.save()
+            return Response({"error": "Test time has expired"}, status=status.HTTP_400_BAD_REQUEST)
+
+        question_order = request.data.get("question_order")
+        answer = request.data.get("answer")
+
+        if question_order is None:
+            return Response({"error": "question_order is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            session_question = session.session_questions.get(order=question_order)
+        except TestSessionQuestion.DoesNotExist:
+            return Response({"error": "Question not found in this session"}, status=status.HTTP_404_NOT_FOUND)
+
+        session_question.user_answer = answer
+        session_question.save()
+
+        return Response({"success": True, "question_order": question_order, "answer": answer})
+
+    @action(detail=True, methods=["post"])
+    def flag(self, request, pk=None):
+        """Toggle flag on a question."""
+        session = self.get_object()
+
+        if session.status != "in_progress":
+            return Response({"error": "Cannot modify a completed test"}, status=status.HTTP_400_BAD_REQUEST)
+
+        question_order = request.data.get("question_order")
+
+        if question_order is None:
+            return Response({"error": "question_order is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            session_question = session.session_questions.get(order=question_order)
+        except TestSessionQuestion.DoesNotExist:
+            return Response({"error": "Question not found in this session"}, status=status.HTTP_404_NOT_FOUND)
+
+        session_question.is_flagged = not session_question.is_flagged
+        session_question.save()
+
+        return Response({"success": True, "question_order": question_order, "is_flagged": session_question.is_flagged})
+
+    @action(detail=True, methods=["post"])
+    def submit(self, request, pk=None):
+        """Submit the test and calculate score."""
+        session = self.get_object()
+
+        if session.status != "in_progress":
+            return Response({"error": "Test has already been submitted"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Process all answers from request (in case of final submission with pending answers)
+        answers = request.data.get("answers", {})
+        for order_str, answer in answers.items():
+            try:
+                session_question = session.session_questions.get(order=int(order_str))
+                session_question.user_answer = answer
+                session_question.save()
+            except (TestSessionQuestion.DoesNotExist, ValueError):
+                pass
+
+        # Calculate score and points
+        correct_count = 0
+        total_points = 0
+
+        # Points per difficulty
+        DIFFICULTY_POINTS = {"easy": 10, "medium": 20, "hard": 30}
+
+        for sq in session.session_questions.all():
+            if sq.user_answer:
+                correct_answer = sq.question.correct_answer.strip().upper()
+                user_answer = sq.user_answer.strip().upper()
+
+                if correct_answer in ["A", "B", "C", "D"]:
+                    sq.is_correct = user_answer == correct_answer
+                else:
+                    try:
+                        sq.is_correct = float(sq.user_answer) == float(correct_answer)
+                    except ValueError:
+                        sq.is_correct = sq.user_answer == sq.question.correct_answer
+                sq.save()
+
+                if sq.is_correct:
+                    correct_count += 1
+                    # Add points based on difficulty
+                    total_points += DIFFICULTY_POINTS.get(sq.question.difficulty, 10)
+            else:
+                sq.is_correct = False
+                sq.save()
+
+        # Calculate bonuses
+        score_percentage = round((correct_count / session.total_questions) * 100, 2) if session.total_questions > 0 else 0
+
+        # Completion bonus
+        completion_bonus = 50
+
+        # Accuracy bonus
+        accuracy_bonus = 0
+        if score_percentage == 100:
+            accuracy_bonus = 50
+        elif score_percentage >= 90:
+            accuracy_bonus = 30
+        elif score_percentage >= 80:
+            accuracy_bonus = 15
+
+        # Speed bonus (up to 20% extra for finishing with time remaining)
+        speed_bonus = 0
+        time_used = (timezone.now() - session.started_at).total_seconds()
+        time_remaining_ratio = max(0, (session.time_limit_seconds - time_used) / session.time_limit_seconds)
+        if time_remaining_ratio > 0:
+            speed_bonus = int(total_points * 0.2 * time_remaining_ratio)
+
+        # Total points for this test
+        total_points += completion_bonus + accuracy_bonus + speed_bonus
+
+        # Update session
+        session.status = "completed"
+        session.completed_at = timezone.now()
+        session.correct_count = correct_count
+        session.score_percentage = score_percentage
+        session.points_earned = total_points
+        session.save()
+
+        # Update user stats
+        user_stats = UserStats.get_or_create_for_user(request.user)
+        user_stats.add_points(total_points)
+        user_stats.tests_completed += 1
+        user_stats.questions_answered += session.total_questions
+        user_stats.correct_answers += correct_count
+        user_stats.save()
+
+        serializer = TestSessionResultSerializer(session)
+        return Response(serializer.data)
+
+    @action(detail=False, methods=["get"])
+    def history(self, request):
+        """Get user's test history."""
+        sessions = self.get_queryset().exclude(status="in_progress").order_by("-started_at")
+        serializer = TestSessionListSerializer(sessions, many=True)
+        return Response(serializer.data)
+
+
+class LeaderboardViewSet(viewsets.ViewSet):
+    """
+    ViewSet for leaderboard and user stats.
+
+    Endpoints:
+    - GET /api/leaderboard/ - Get global leaderboard (all-time)
+    - GET /api/leaderboard/weekly/ - Get weekly leaderboard
+    - GET /api/leaderboard/me/ - Get current user's stats
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    def list(self, request):
+        """Get global leaderboard (top 50 by total points)."""
+        # Get top users
+        top_users = UserStats.objects.select_related("user").order_by("-total_points")[:50]
+
+        # Build positions dict
+        positions = {stats.user_id: idx + 1 for idx, stats in enumerate(top_users)}
+
+        # Get current user's stats and position
+        user_stats = UserStats.get_or_create_for_user(request.user)
+        user_position = UserStats.objects.filter(total_points__gt=user_stats.total_points).count() + 1
+
+        serializer = LeaderboardEntrySerializer(top_users, many=True, context={"positions": positions})
+
+        return Response({
+            "leaderboard": serializer.data,
+            "user_position": user_position,
+            "user_stats": UserStatsSerializer(user_stats).data,
+            "total_users": UserStats.objects.count(),
+        })
+
+    @action(detail=False, methods=["get"])
+    def weekly(self, request):
+        """Get weekly leaderboard (top 50 by weekly points)."""
+        from datetime import date, timedelta
+
+        # Calculate current week start (Monday)
+        today = date.today()
+        week_start = today - timedelta(days=today.weekday())
+
+        # Get top users this week
+        top_users = (
+            UserStats.objects.select_related("user")
+            .filter(week_start=week_start, weekly_points__gt=0)
+            .order_by("-weekly_points")[:50]
+        )
+
+        # Build positions dict
+        positions = {stats.user_id: idx + 1 for idx, stats in enumerate(top_users)}
+
+        # Get current user's stats
+        user_stats = UserStats.get_or_create_for_user(request.user)
+        user_stats.reset_weekly_if_needed()
+        user_stats.save()
+
+        # User's weekly position
+        user_weekly_position = (
+            UserStats.objects.filter(week_start=week_start, weekly_points__gt=user_stats.weekly_points).count() + 1
+        )
+
+        serializer = LeaderboardEntrySerializer(top_users, many=True, context={"positions": positions})
+
+        return Response({
+            "leaderboard": serializer.data,
+            "user_position": user_weekly_position,
+            "user_stats": UserStatsSerializer(user_stats).data,
+            "week_start": week_start.isoformat(),
+        })
+
+    @action(detail=False, methods=["get"])
+    def monthly(self, request):
+        """Get monthly leaderboard (top 50 by monthly points)."""
+        from datetime import date
+
+        # Calculate current month start
+        today = date.today()
+        month_start = today.replace(day=1)
+
+        # Get top users this month
+        top_users = (
+            UserStats.objects.select_related("user")
+            .filter(month_start=month_start, monthly_points__gt=0)
+            .order_by("-monthly_points")[:50]
+        )
+
+        # Build positions dict
+        positions = {stats.user_id: idx + 1 for idx, stats in enumerate(top_users)}
+
+        # Get current user's stats
+        user_stats = UserStats.get_or_create_for_user(request.user)
+        user_stats.reset_monthly_if_needed()
+        user_stats.save()
+
+        # User's monthly position
+        user_monthly_position = (
+            UserStats.objects.filter(month_start=month_start, monthly_points__gt=user_stats.monthly_points).count() + 1
+        )
+
+        serializer = LeaderboardEntrySerializer(top_users, many=True, context={"positions": positions})
+
+        return Response({
+            "leaderboard": serializer.data,
+            "user_position": user_monthly_position,
+            "user_stats": UserStatsSerializer(user_stats).data,
+            "month_start": month_start.isoformat(),
+        })
+
+    @action(detail=False, methods=["get"])
+    def me(self, request):
+        """Get current user's stats."""
+        user_stats = UserStats.get_or_create_for_user(request.user)
+        user_stats.reset_weekly_if_needed()
+        user_stats.reset_monthly_if_needed()
+        user_stats.save()
+
+        # Calculate user's global position
+        global_position = UserStats.objects.filter(total_points__gt=user_stats.total_points).count() + 1
+
+        # Calculate user's weekly position
+        from datetime import date, timedelta
+        today = date.today()
+        week_start = today - timedelta(days=today.weekday())
+        weekly_position = (
+            UserStats.objects.filter(week_start=week_start, weekly_points__gt=user_stats.weekly_points).count() + 1
+        )
+
+        # Calculate user's monthly position
+        month_start = today.replace(day=1)
+        monthly_position = (
+            UserStats.objects.filter(month_start=month_start, monthly_points__gt=user_stats.monthly_points).count() + 1
+        )
+
+        serializer = UserStatsSerializer(user_stats)
+        return Response({
+            "stats": serializer.data,
+            "global_position": global_position,
+            "weekly_position": weekly_position,
+            "monthly_position": monthly_position,
+            "total_users": UserStats.objects.count(),
+        })

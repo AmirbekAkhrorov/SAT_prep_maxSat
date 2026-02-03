@@ -43,24 +43,20 @@ export default function Hero() {
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Gradient orbs */}
-        <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-gradient-to-br from-gold-200/40 to-transparent rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-navy-200/20 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-gradient-to-br from-gold-200/40 dark:from-gold-500/20 to-transparent rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-navy-200/20 dark:from-navy-500/20 to-transparent rounded-full blur-3xl" />
 
-        {/* Decorative shapes */}
-        <motion.div
-          animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-32 right-20 w-20 h-20 border-2 border-gold-300/50 rounded-2xl"
+        {/* Decorative shapes - using CSS animations for better performance */}
+        <div
+          className="absolute top-32 right-20 w-20 h-20 border-2 border-gold-300/50 dark:border-gold-400/30 rounded-2xl animate-float-slow"
         />
-        <motion.div
-          animate={{ y: [0, 15, 0], rotate: [0, -3, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-          className="absolute top-60 right-40 w-12 h-12 bg-gold-400/20 rounded-full"
+        <div
+          className="absolute top-60 right-40 w-12 h-12 bg-gold-400/20 dark:bg-gold-400/10 rounded-full animate-float-medium"
+          style={{ animationDelay: '1s' }}
         />
-        <motion.div
-          animate={{ y: [0, -15, 0] }}
-          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-          className="absolute bottom-40 right-32 w-16 h-16 border-2 border-navy-300/30 rounded-full"
+        <div
+          className="absolute bottom-40 right-32 w-16 h-16 border-2 border-navy-300/30 dark:border-navy-400/30 rounded-full animate-float-fast"
+          style={{ animationDelay: '0.5s' }}
         />
 
         {/* Grid pattern */}
@@ -82,10 +78,10 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gold-100 border border-gold-300 rounded-full mb-8"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gold-100 dark:bg-gold-900/30 border border-gold-300 dark:border-gold-700 rounded-full mb-8"
             >
-              <Sparkles className="w-4 h-4 text-gold-600" />
-              <span className="font-sans text-sm font-medium text-gold-700">
+              <Sparkles className="w-4 h-4 text-gold-600 dark:text-gold-400" />
+              <span className="font-sans text-sm font-medium text-gold-700 dark:text-gold-400">
                 AI-Powered SAT Preparation
               </span>
             </motion.div>
@@ -94,7 +90,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-display text-display-lg md:text-display-xl text-navy-900 mb-6"
+              className="font-display text-display-lg md:text-display-xl text-navy-900 dark:text-cream-100 mb-6"
             >
               Master the SAT.
               <br />
@@ -104,7 +100,7 @@ export default function Hero() {
                   initial={{ width: 0 }}
                   animate={{ width: '100%' }}
                   transition={{ duration: 0.8, delay: 0.8 }}
-                  className="absolute bottom-2 left-0 h-4 bg-gold-300/50 -z-0"
+                  className="absolute bottom-2 left-0 h-4 bg-gold-300/50 dark:bg-gold-500/30 -z-0"
                 />
               </span>
             </motion.h1>
@@ -113,7 +109,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="font-body text-xl text-navy-600 leading-relaxed mb-10"
+              className="font-body text-xl text-navy-600 dark:text-cream-300 leading-relaxed mb-10"
             >
               Personalized practice tests, adaptive learning powered by AI, and
               detailed analytics to help you achieve your dream score. Join thousands
@@ -144,14 +140,14 @@ export default function Hero() {
             >
               {stats.map((stat, index) => (
                 <div key={stat.label} className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-navy-900 rounded-xl flex items-center justify-center">
+                  <div className="w-12 h-12 bg-navy-900 dark:bg-navy-800 rounded-xl flex items-center justify-center">
                     <stat.icon className="w-5 h-5 text-gold-400" />
                   </div>
                   <div>
-                    <div className="font-display text-2xl font-bold text-navy-900">
+                    <div className="font-display text-2xl font-bold text-navy-900 dark:text-cream-100">
                       <AnimatedCounter end={stat.value} suffix={stat.suffix} duration={2 + index * 0.3} />
                     </div>
-                    <div className="font-sans text-sm text-navy-500">{stat.label}</div>
+                    <div className="font-sans text-sm text-navy-500 dark:text-navy-400">{stat.label}</div>
                   </div>
                 </div>
               ))}
@@ -167,13 +163,13 @@ export default function Hero() {
           >
             <div className="relative">
               {/* Main card */}
-              <div className="bg-white rounded-3xl shadow-card-hover p-8 border border-cream-200">
+              <div className="bg-white dark:bg-navy-900 rounded-3xl shadow-card-hover p-8 border border-cream-200 dark:border-navy-700">
                 <div className="flex items-center justify-between mb-8">
                   <div>
-                    <p className="font-sans text-sm text-navy-500 mb-1">Your Practice Score</p>
+                    <p className="font-sans text-sm text-navy-500 dark:text-navy-400 mb-1">Your Practice Score</p>
                     <div className="flex items-baseline gap-2">
-                      <span className="font-display text-5xl font-bold text-navy-900">1520</span>
-                      <span className="font-sans text-sm text-sage-600 font-medium">+180 pts</span>
+                      <span className="font-display text-5xl font-bold text-navy-900 dark:text-cream-100">1520</span>
+                      <span className="font-sans text-sm text-sage-600 dark:text-sage-400 font-medium">+180 pts</span>
                     </div>
                   </div>
                   <div className="w-16 h-16 bg-gradient-to-br from-gold-400 to-gold-500 rounded-2xl flex items-center justify-center shadow-gold">
@@ -185,10 +181,10 @@ export default function Hero() {
                 <div className="space-y-4">
                   <div>
                     <div className="flex justify-between font-sans text-sm mb-2">
-                      <span className="text-navy-600">Reading & Writing</span>
-                      <span className="font-semibold text-navy-900">760</span>
+                      <span className="text-navy-600 dark:text-cream-300">Reading & Writing</span>
+                      <span className="font-semibold text-navy-900 dark:text-cream-100">760</span>
                     </div>
-                    <div className="h-2 bg-cream-200 rounded-full overflow-hidden">
+                    <div className="h-2 bg-cream-200 dark:bg-navy-700 rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: '95%' }}
@@ -199,10 +195,10 @@ export default function Hero() {
                   </div>
                   <div>
                     <div className="flex justify-between font-sans text-sm mb-2">
-                      <span className="text-navy-600">Math</span>
-                      <span className="font-semibold text-navy-900">760</span>
+                      <span className="text-navy-600 dark:text-cream-300">Math</span>
+                      <span className="font-semibold text-navy-900 dark:text-cream-100">760</span>
                     </div>
-                    <div className="h-2 bg-cream-200 rounded-full overflow-hidden">
+                    <div className="h-2 bg-cream-200 dark:bg-navy-700 rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: '95%' }}
@@ -214,8 +210,8 @@ export default function Hero() {
                 </div>
 
                 {/* Weekly progress mini chart */}
-                <div className="mt-8 pt-6 border-t border-cream-200">
-                  <p className="font-sans text-sm text-navy-500 mb-4">Weekly Progress</p>
+                <div className="mt-8 pt-6 border-t border-cream-200 dark:border-navy-700">
+                  <p className="font-sans text-sm text-navy-500 dark:text-navy-400 mb-4">Weekly Progress</p>
                   <div className="flex items-end gap-2 h-20">
                     {[40, 55, 45, 70, 65, 85, 95].map((height, i) => (
                       <motion.div
@@ -224,14 +220,14 @@ export default function Hero() {
                         animate={{ height: `${height}%` }}
                         transition={{ duration: 0.5, delay: 1.2 + i * 0.1 }}
                         className={`flex-1 rounded-t-lg ${
-                          i === 6 ? 'bg-gold-500' : 'bg-navy-200'
+                          i === 6 ? 'bg-gold-500' : 'bg-navy-200 dark:bg-navy-700'
                         }`}
                       />
                     ))}
                   </div>
                   <div className="flex justify-between mt-2">
                     {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, i) => (
-                      <span key={i} className="flex-1 text-center font-sans text-xs text-navy-400">
+                      <span key={i} className="flex-1 text-center font-sans text-xs text-navy-400 dark:text-navy-500">
                         {day}
                       </span>
                     ))}
@@ -239,30 +235,27 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Floating badges */}
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-6 -right-6 bg-sage-500 text-white px-4 py-2 rounded-full font-sans text-sm font-semibold shadow-lg"
+              {/* Floating badges - using CSS animations for better performance */}
+              <div
+                className="absolute -top-6 -right-6 bg-sage-500 text-white px-4 py-2 rounded-full font-sans text-sm font-semibold shadow-lg animate-float-badge"
               >
                 98th Percentile
-              </motion.div>
+              </div>
 
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                className="absolute -bottom-4 -left-4 bg-white px-4 py-3 rounded-xl shadow-card border border-cream-200"
+              <div
+                className="absolute -bottom-4 -left-4 bg-white dark:bg-navy-800 px-4 py-3 rounded-xl shadow-card border border-cream-200 dark:border-navy-700 animate-float-badge-reverse"
+                style={{ animationDelay: '0.5s' }}
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gold-100 rounded-lg flex items-center justify-center">
-                    <Sparkles className="w-5 h-5 text-gold-600" />
+                  <div className="w-10 h-10 bg-gold-100 dark:bg-gold-900/30 rounded-lg flex items-center justify-center">
+                    <Sparkles className="w-5 h-5 text-gold-600 dark:text-gold-400" />
                   </div>
                   <div>
-                    <p className="font-sans text-xs text-navy-500">Streak</p>
-                    <p className="font-display text-lg font-bold text-navy-900">21 Days</p>
+                    <p className="font-sans text-xs text-navy-500 dark:text-navy-400">Streak</p>
+                    <p className="font-display text-lg font-bold text-navy-900 dark:text-cream-100">21 Days</p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         </div>

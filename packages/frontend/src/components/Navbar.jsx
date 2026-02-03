@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, GraduationCap, User, LogOut } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
   { name: 'Features', href: '#features' },
@@ -13,9 +15,9 @@ const navLinks = [
 export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user, logout } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,19 +25,11 @@ export default function Navbar() {
     };
     window.addEventListener('scroll', handleScroll);
 
-    // Check for logged in user
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    setUser(null);
+    logout();
     navigate('/');
   };
 
@@ -53,7 +47,7 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-cream-100/95 backdrop-blur-md shadow-card'
+            ? 'bg-cream-100/95 dark:bg-navy-900/95 backdrop-blur-md shadow-card'
             : 'bg-transparent'
         }`}
       >
@@ -67,8 +61,8 @@ export default function Navbar() {
                 </div>
                 <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-gold-500 rounded-full border-2 border-cream-100" />
               </div>
-              <span className="font-display text-xl font-semibold text-navy-900">
-                SAT<span className="text-gold-600">Prep</span>
+              <span className="font-display text-xl font-semibold text-navy-900 dark:text-cream-100">
+                SAT<span className="text-gold-600 dark:text-gold-400">Prep</span>
               </span>
             </Link>
 
@@ -78,7 +72,7 @@ export default function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="relative font-sans text-sm font-medium text-navy-700 hover:text-navy-900 transition-colors duration-200 group"
+                  className="relative font-sans text-sm font-medium text-navy-700 dark:text-cream-300 hover:text-navy-900 dark:hover:text-cream-100 transition-colors duration-200 group"
                 >
                   {link.name}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300" />
@@ -88,21 +82,26 @@ export default function Navbar() {
 
             {/* CTA Buttons */}
             <div className="hidden md:flex items-center gap-4">
+              <ThemeToggle />
               {user ? (
                 // Logged in state
                 <div className="flex items-center gap-4">
                   <Link
                     to="/cabinet"
-                    className="flex items-center gap-2 text-navy-700 hover:text-navy-900 transition-colors"
+                    className="px-4 py-2 bg-gold-500 text-navy-900 rounded-lg font-sans text-sm font-medium hover:bg-gold-400 transition-colors"
                   >
-                    <User className="w-4 h-4" />
-                    <span className="font-sans text-sm font-medium">{user.username}</span>
+                    Go to Dashboard
                   </Link>
+                  <div className="flex items-center gap-2 text-navy-700 dark:text-cream-300">
+                    <User className="w-4 h-4" />
+                    <span className="font-sans text-sm font-medium">{user.username || user.email}</span>
+                  </div>
                   <button
                     onClick={handleLogout}
-                    className="flex items-center gap-2 text-navy-700 hover:text-red-600 transition-colors"
+                    className="p-2 text-navy-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    title="Log out"
                   >
-                    <LogOut className="w-4 h-4" />
+                    <LogOut className="w-5 h-5" />
                   </button>
                 </div>
               ) : (
@@ -110,7 +109,7 @@ export default function Navbar() {
                 <>
                   <Link
                     to="/login"
-                    className="font-sans text-sm font-medium text-navy-700 hover:text-navy-900 transition-colors"
+                    className="font-sans text-sm font-medium text-navy-700 dark:text-cream-300 hover:text-navy-900 dark:hover:text-cream-100 transition-colors"
                   >
                     Sign In
                   </Link>
@@ -124,7 +123,7 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-navy-900 hover:bg-cream-200 rounded-lg transition-colors"
+              className="md:hidden p-2 text-navy-900 dark:text-cream-100 hover:bg-cream-200 dark:hover:bg-navy-700 rounded-lg transition-colors"
             >
               {isMobileMenuOpen ? (
                 <X className="w-6 h-6" />
@@ -147,7 +146,7 @@ export default function Navbar() {
             className="fixed inset-0 z-40 md:hidden"
           >
             <div
-              className="absolute inset-0 bg-navy-900/20 backdrop-blur-sm"
+              className="absolute inset-0 bg-navy-900/20 dark:bg-black/40 backdrop-blur-sm"
               onClick={() => setIsMobileMenuOpen(false)}
             />
             <motion.div
@@ -155,9 +154,14 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute top-20 right-0 w-full max-w-sm bg-cream-50 shadow-card-hover border-l border-cream-200"
+              className="absolute top-20 right-0 w-full max-w-sm bg-cream-50 dark:bg-navy-800 shadow-card-hover border-l border-cream-200 dark:border-navy-700"
             >
               <div className="p-6 space-y-6">
+                {/* Theme Toggle in Mobile Menu */}
+                <div className="flex items-center justify-between pb-4 border-b border-cream-200 dark:border-navy-700">
+                  <span className="font-sans text-sm text-navy-600 dark:text-cream-300">Theme</span>
+                  <ThemeToggle />
+                </div>
                 {navLinks.map((link, index) => (
                   <motion.a
                     key={link.name}
@@ -166,22 +170,25 @@ export default function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block font-sans text-lg font-medium text-navy-800 hover:text-gold-600 transition-colors"
+                    className="block font-sans text-lg font-medium text-navy-800 dark:text-cream-100 hover:text-gold-600 dark:hover:text-gold-400 transition-colors"
                   >
                     {link.name}
                   </motion.a>
                 ))}
-                <div className="pt-6 border-t border-cream-200 space-y-4">
+                <div className="pt-6 border-t border-cream-200 dark:border-navy-700 space-y-4">
                   {user ? (
                     <>
                       <Link
                         to="/cabinet"
-                        className="w-full btn-secondary !py-3 flex items-center justify-center gap-2"
+                        className="w-full btn-primary !py-3 flex items-center justify-center gap-2"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
-                        <User className="w-4 h-4" />
-                        {user.username}
+                        Go to Dashboard
                       </Link>
+                      <div className="flex items-center justify-center gap-2 text-navy-700 dark:text-cream-300 py-2">
+                        <User className="w-4 h-4" />
+                        <span className="font-sans text-sm font-medium">{user.username || user.email}</span>
+                      </div>
                       <button
                         onClick={() => {
                           handleLogout();
