@@ -16,21 +16,21 @@ export default function QuestionCard({
   const [showNoteEditor, setShowNoteEditor] = useState(false);
   const [noteContent, setNoteContent] = useState(userNote?.content || '');
   const [isSavingNote, setIsSavingNote] = useState(false);
+  // Two dynamic faces: either can hold any language (null = English)
+  const [faceALang, setFaceALang] = useState(null); // starts as English
+  const [faceBLang, setFaceBLang] = useState(null);
   const [rotationDeg, setRotationDeg] = useState(0); // always increments by 180
-  const [backFaceLang, setBackFaceLang] = useState(null); // language rendered on back face
   const [showLangMenu, setShowLangMenu] = useState(false);
   const isAnimatingRef = useRef(false);
-  const flipRef = useRef(null);
   const dropdownRef = useRef(null);
 
   const availableLangs = getAvailableLanguages(question.question_id);
   const canTranslate = availableLangs.length > 0;
 
-  // At even multiples of 360° → front face (English) visible
-  // At odd multiples of 180° → back face (translation) visible
-  const isShowingBack = (rotationDeg / 180) % 2 === 1;
-  const activeLang = isShowingBack ? backFaceLang : null;
-  const isFlipped = isShowingBack;
+  // Face A visible at 0°, 360°, 720°… Face B visible at 180°, 540°, 900°…
+  const showingFaceB = (rotationDeg / 180) % 2 === 1;
+  const activeLang = showingFaceB ? faceBLang : faceALang;
+  const isFlipped = activeLang !== null;
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -46,58 +46,32 @@ export default function QuestionCard({
 
   // Reset when question changes
   useEffect(() => {
+    setFaceALang(null);
+    setFaceBLang(null);
     setRotationDeg(0);
-    setBackFaceLang(null);
     setShowLangMenu(false);
     isAnimatingRef.current = false;
   }, [question.question_id]);
 
-  const flipOnce = () => {
-    setRotationDeg((prev) => prev + 180);
-  };
-
   const handleSelectLang = (lang) => {
     setShowLangMenu(false);
-    if (isAnimatingRef.current) return; // block clicks during animation
+    if (isAnimatingRef.current) return;
 
     const targetLang = lang === 'en' ? null : lang;
     if (activeLang === targetLang) return;
 
     isAnimatingRef.current = true;
 
-    if (!isShowingBack && targetLang !== null) {
-      // English → translation: load back face, then flip forward
-      setBackFaceLang(targetLang);
+    // Load target language onto the HIDDEN face, then flip once
+    const setHiddenFace = showingFaceB ? setFaceALang : setFaceBLang;
+    setHiddenFace(targetLang);
+
+    requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          flipOnce();
-          setTimeout(() => { isAnimatingRef.current = false; }, 420);
-        });
+        setRotationDeg((prev) => prev + 180);
+        setTimeout(() => { isAnimatingRef.current = false; }, 420);
       });
-    } else if (isShowingBack && targetLang === null) {
-      // Translation → English: just flip forward (lands on front face)
-      flipOnce();
-      setTimeout(() => { isAnimatingRef.current = false; }, 420);
-    } else {
-      // Translation → different translation: single rotation
-      // 1. Disable transition instantly
-      // 2. Snap back to front-facing (no visible movement)
-      // 3. Swap back face to new language
-      // 4. Re-enable transition and flip once
-      const el = flipRef.current;
-      if (el) {
-        el.style.transition = 'none';
-        setRotationDeg((prev) => prev - 180); // snap to front (no animation)
-      }
-      requestAnimationFrame(() => {
-        setBackFaceLang(targetLang);
-        requestAnimationFrame(() => {
-          if (el) el.style.transition = '';
-          flipOnce();
-          setTimeout(() => { isAnimatingRef.current = false; }, 420);
-        });
-      });
-    }
+    });
   };
 
   const handleSubmit = () => {
@@ -158,11 +132,18 @@ export default function QuestionCard({
     );
   }
 
-  // Build translated question + choices for the back face
-  const translationData = backFaceLang ? getTranslation(question.question_id, backFaceLang) : null;
-  const translatedQuestion = translationData ? { ...question, ...translationData } : null;
-  const translatedChoices = translatedQuestion ? getChoicesFor(translatedQuestion) : [];
-  const uiStr = backFaceLang ? UI_STRINGS[backFaceLang] : null;
+  // Build question data for a given language (null = English)
+  const buildFaceData = (lang) => {
+    if (!lang) return { q: question, qChoices: choices, lang: null };
+    const data = getTranslation(question.question_id, lang);
+    if (!data) return { q: question, qChoices: choices, lang: null };
+    const q = { ...question, ...data };
+    return { q, qChoices: getChoicesFor(q), lang };
+  };
+
+  const faceAData = buildFaceData(faceALang);
+  const faceBData = buildFaceData(faceBLang);
+
   // Current language being viewed (for dropdown button label)
   const currentLangKey = activeLang || 'en';
   const currentLangMeta = LANGUAGES[currentLangKey];
@@ -171,14 +152,11 @@ export default function QuestionCard({
   const allLangs = ['en', ...availableLangs];
   const dropdownLangs = allLangs.filter(l => l !== currentLangKey);
 
-  // Helper: get localized UI string with English fallback
-  const t = (key, englishDefault) => {
-    if (uiStr && uiStr[key]) return uiStr[key];
-    return englishDefault;
-  };
-
-  // Helper to render a question face (reused for front & back)
-  const renderQuestionContent = (q, qChoices, lang) => (
+  // Helper to render a question face (reused for both faces)
+  const renderQuestionContent = (q, qChoices, lang) => {
+    const uiStr = lang ? UI_STRINGS[lang] : null;
+    const t = (key, fallback) => uiStr?.[key] || fallback;
+    return (
     <div className="p-6">
       <div className="mb-6">
         <p className="text-navy-900 dark:text-cream-100 text-lg leading-relaxed font-medium">
@@ -333,6 +311,48 @@ export default function QuestionCard({
       )}
     </div>
   );
+  };
+
+  // Helper to render a face card wrapper (header + banner + content)
+  const renderFace = (faceData) => {
+    const { q, qChoices, lang } = faceData;
+    const langInfo = lang ? LANGUAGES[lang] : null;
+    return (
+      <>
+        {langInfo && (
+          <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 border-b border-blue-200 dark:border-blue-800">
+            <span className="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400">
+              {langInfo.flag} {langInfo.banner}
+            </span>
+          </div>
+        )}
+        <div className="flex items-center justify-between p-4 border-b border-cream-200 dark:border-navy-700">
+          <div className="flex items-center gap-3">
+            <span className={`px-3 py-1 rounded-full text-xs font-medium border ${difficultyColor[question.difficulty]}`}>
+              {question.difficulty}
+            </span>
+            <span className="text-sm text-navy-500 dark:text-navy-400">{question.domain}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            {userProgress?.is_mastered && (
+              <div className="flex items-center gap-1 text-gold-600">
+                <Star className="w-4 h-4 fill-gold-600" />
+                <span className="text-xs font-medium">Mastered</span>
+              </div>
+            )}
+            <button onClick={() => setShowNoteEditor(!showNoteEditor)}
+              className={`p-2 rounded-lg transition-colors ${showNoteEditor
+                ? 'bg-gold-100 dark:bg-gold-900/30 text-gold-600 dark:text-gold-400'
+                : 'text-navy-400 hover:text-gold-600 dark:hover:text-gold-400 hover:bg-cream-100 dark:hover:bg-navy-800'
+              }`} title="Add note">
+              <Edit2 className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+        {renderQuestionContent(q, qChoices, lang)}
+      </>
+    );
+  };
 
   return (
     <div>
@@ -378,7 +398,6 @@ export default function QuestionCard({
       {/* 3D flip container */}
       <div style={{ perspective: '1200px' }}>
         <div
-          ref={flipRef}
           style={{
             transformStyle: 'preserve-3d',
             transform: `rotateY(${rotationDeg}deg)`,
@@ -387,85 +406,29 @@ export default function QuestionCard({
             willChange: 'transform',
           }}
         >
-          {/* ── FRONT FACE (English) ── */}
+          {/* ── FACE A ── */}
           <div
             style={{ backfaceVisibility: 'hidden', willChange: 'transform' }}
             className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden"
           >
-            {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-cream-200 dark:border-navy-700">
-              <div className="flex items-center gap-3">
-                <span className={`px-3 py-1 rounded-full text-xs font-medium border ${difficultyColor[question.difficulty]}`}>
-                  {question.difficulty}
-                </span>
-                <span className="text-sm text-navy-500 dark:text-navy-400">{question.domain}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                {userProgress?.is_mastered && (
-                  <div className="flex items-center gap-1 text-gold-600">
-                    <Star className="w-4 h-4 fill-gold-600" />
-                    <span className="text-xs font-medium">Mastered</span>
-                  </div>
-                )}
-                <button onClick={() => setShowNoteEditor(!showNoteEditor)}
-                  className={`p-2 rounded-lg transition-colors ${showNoteEditor
-                    ? 'bg-gold-100 dark:bg-gold-900/30 text-gold-600 dark:text-gold-400'
-                    : 'text-navy-400 hover:text-gold-600 dark:hover:text-gold-400 hover:bg-cream-100 dark:hover:bg-navy-800'
-                  }`} title="Add note">
-                  <Edit2 className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-            {renderQuestionContent(question, choices, null)}
+            {renderFace(faceAData)}
           </div>
 
-          {/* ── BACK FACE (Translated) ── */}
-          {translatedQuestion && backFaceLang && (
-            <div
-              style={{
-                backfaceVisibility: 'hidden',
-                transform: 'rotateY(180deg)',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                willChange: 'transform',
-              }}
-              className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden"
-            >
-              {/* Language banner */}
-              <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 border-b border-blue-200 dark:border-blue-800">
-                <span className="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400">
-                  {LANGUAGES[backFaceLang].flag} {LANGUAGES[backFaceLang].banner}
-                </span>
-              </div>
-              {/* Header */}
-              <div className="flex items-center justify-between p-4 border-b border-cream-200 dark:border-navy-700">
-                <div className="flex items-center gap-3">
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium border ${difficultyColor[question.difficulty]}`}>
-                    {question.difficulty}
-                  </span>
-                  <span className="text-sm text-navy-500 dark:text-navy-400">{question.domain}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  {userProgress?.is_mastered && (
-                    <div className="flex items-center gap-1 text-gold-600">
-                      <Star className="w-4 h-4 fill-gold-600" />
-                      <span className="text-xs font-medium">Mastered</span>
-                    </div>
-                  )}
-                  <button onClick={() => setShowNoteEditor(!showNoteEditor)}
-                    className={`p-2 rounded-lg transition-colors ${showNoteEditor
-                      ? 'bg-gold-100 dark:bg-gold-900/30 text-gold-600 dark:text-gold-400'
-                      : 'text-navy-400 hover:text-gold-600 dark:hover:text-gold-400 hover:bg-cream-100 dark:hover:bg-navy-800'
-                    }`} title="Add note">
-                    <Edit2 className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-              {renderQuestionContent(translatedQuestion, translatedChoices, backFaceLang)}
-            </div>
-          )}
+          {/* ── FACE B ── */}
+          <div
+            style={{
+              backfaceVisibility: 'hidden',
+              transform: 'rotateY(180deg)',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              willChange: 'transform',
+            }}
+            className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden"
+          >
+            {renderFace(faceBData)}
+          </div>
         </div>
       </div>
     </div>
