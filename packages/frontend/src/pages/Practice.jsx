@@ -15,6 +15,7 @@ import {
   X,
 } from 'lucide-react';
 import QuestionCard from '../components/QuestionCard';
+import FloatingCalculator from '../components/FloatingCalculator';
 import ThemeToggle from '../components/ThemeToggle';
 import { useAuth } from '../context/AuthContext';
 
@@ -458,6 +459,7 @@ export default function Practice() {
             </motion.div>
           </AnimatePresence>
         </main>
+        <FloatingCalculator />
       </div>
     );
   }

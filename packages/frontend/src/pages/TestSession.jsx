@@ -12,6 +12,7 @@ import TestTimer from '../components/TestTimer';
 import TestQuestionCard from '../components/TestQuestionCard';
 import QuestionNavigator from '../components/QuestionNavigator';
 import ThemeToggle from '../components/ThemeToggle';
+import FloatingCalculator from '../components/FloatingCalculator';
 
 export default function TestSession() {
   const navigate = useNavigate();
@@ -453,6 +454,7 @@ export default function TestSession() {
           </motion.div>
         )}
       </AnimatePresence>
+      <FloatingCalculator />
     </div>
   );
 }
