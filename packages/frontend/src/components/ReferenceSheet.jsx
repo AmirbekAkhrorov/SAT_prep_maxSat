@@ -259,20 +259,20 @@ export default function ReferenceSheet({ isOpen, onClose }) {
         {/* Scrollable content */}
         <div className="flex-1 overflow-y-auto bg-white dark:bg-navy-900 p-2">
           {sectionContent}
-
-          {/* Invisible overlay to prevent content from stealing pointer events during drag/resize */}
-          {isInteracting && (
-            <div
-              className="absolute inset-0"
-              style={{
-                cursor:
-                  interactionType.current === 'drag'
-                    ? 'grabbing'
-                    : 'nwse-resize',
-              }}
-            />
-          )}
         </div>
+
+        {/* Invisible overlay to prevent content from stealing pointer events during drag/resize */}
+        {isInteracting && (
+          <div
+            className="absolute inset-0"
+            style={{
+              cursor:
+                interactionType.current === 'drag'
+                  ? 'grabbing'
+                  : 'nwse-resize',
+            }}
+          />
+        )}
 
         {/* Resize handle (bottom-right corner) */}
         <div

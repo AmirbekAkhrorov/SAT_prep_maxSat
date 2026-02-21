@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { X, Minus, GripHorizontal } from 'lucide-react';
+import { X, GripHorizontal } from 'lucide-react';
 import useFloatingPanel from '../hooks/useFloatingPanel';
 
 const DESMOS_URLS = {
@@ -172,20 +172,11 @@ export default function FloatingCalculator({ isOpen, onClose }) {
                 Scientific
               </button>
             </div>
-            {/* Minimize */}
-            <button
-              onClick={onClose}
-              onPointerDown={(e) => e.stopPropagation()}
-              className="ml-1 p-1 rounded hover:bg-navy-700 transition-colors text-cream-200 hover:text-cream-50"
-              aria-label="Minimize calculator"
-            >
-              <Minus className="w-4 h-4" />
-            </button>
             {/* Close */}
             <button
               onClick={onClose}
               onPointerDown={(e) => e.stopPropagation()}
-              className="p-1 rounded hover:bg-red-600 transition-colors text-cream-200 hover:text-cream-50"
+              className="ml-1 p-1 rounded hover:bg-red-600 transition-colors text-cream-200 hover:text-cream-50"
               aria-label="Close calculator"
             >
               <X className="w-4 h-4" />

@@ -32,8 +32,9 @@ function saveToolsState(isCalculatorOpen, isReferenceOpen) {
 
 export default function ToolsSpeedDial() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isCalculatorOpen, setIsCalculatorOpen] = useState(() => loadToolsState().isCalculatorOpen);
-  const [isReferenceOpen, setIsReferenceOpen] = useState(() => loadToolsState().isReferenceOpen);
+  const [initialState] = useState(loadToolsState);
+  const [isCalculatorOpen, setIsCalculatorOpen] = useState(initialState.isCalculatorOpen);
+  const [isReferenceOpen, setIsReferenceOpen] = useState(initialState.isReferenceOpen);
   const containerRef = useRef(null);
 
   // Persist tool panel states
