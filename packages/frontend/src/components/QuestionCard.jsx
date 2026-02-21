@@ -105,25 +105,18 @@ export default function QuestionCard({
   })).filter(c => c.text);
 
   return (
-    <div
-      className="transition-transform duration-500"
-      style={{
-        perspective: '1200px',
-      }}
-    >
-      <div
-        className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden transition-transform duration-500"
-        style={{
-          transformStyle: 'preserve-3d',
-          transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-        }}
-      >
-        <div style={{ backfaceVisibility: 'hidden', transform: isFlipped ? 'rotateY(180deg)' : 'none' }}>
+    <div className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden">
 
       {/* Language indicator when flipped */}
       {isFlipped && (
-        <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-1.5 flex items-center gap-2 border-b border-blue-200 dark:border-blue-800">
+        <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-1.5 flex items-center justify-between border-b border-blue-200 dark:border-blue-800">
           <span className="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400">🇺🇿 O'zbek tilida</span>
+          <button
+            onClick={() => setIsFlipped(false)}
+            className="text-xs font-sans font-medium text-blue-500 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+          >
+            ← English
+          </button>
         </div>
       )}
 
@@ -174,7 +167,7 @@ export default function QuestionCard({
 
       <div className="p-6">
         {/* Question Text */}
-        <div className="mb-6">
+        <div className="mb-6" key={isFlipped ? 'uz' : 'en'} style={{ animation: 'fadeIn 0.3s ease-out' }}>
           <p className="text-navy-900 dark:text-cream-100 text-lg leading-relaxed font-medium">
             {displayQuestion.question_text}
           </p>
@@ -359,8 +352,6 @@ export default function QuestionCard({
             <p className="text-navy-700 dark:text-cream-300 text-sm italic">"{userNote.content}"</p>
           </div>
         )}
-      </div>
-        </div>
       </div>
     </div>
   );
