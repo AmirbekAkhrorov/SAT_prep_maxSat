@@ -438,6 +438,21 @@ export default function QuestionCard({
                   </span>
                   <span className="text-sm text-navy-500 dark:text-navy-400">{question.domain}</span>
                 </div>
+                <div className="flex items-center gap-2">
+                  {userProgress?.is_mastered && (
+                    <div className="flex items-center gap-1 text-gold-600">
+                      <Star className="w-4 h-4 fill-gold-600" />
+                      <span className="text-xs font-medium">Mastered</span>
+                    </div>
+                  )}
+                  <button onClick={() => setShowNoteEditor(!showNoteEditor)}
+                    className={`p-2 rounded-lg transition-colors ${showNoteEditor
+                      ? 'bg-gold-100 dark:bg-gold-900/30 text-gold-600 dark:text-gold-400'
+                      : 'text-navy-400 hover:text-gold-600 dark:hover:text-gold-400 hover:bg-cream-100 dark:hover:bg-navy-800'
+                    }`} title="Add note">
+                    <Edit2 className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
               {renderQuestionContent(translatedQuestion, translatedChoices, backFaceLang)}
             </div>
