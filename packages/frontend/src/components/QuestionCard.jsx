@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { CheckCircle, XCircle, Star, Edit2, Save, X, Languages } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { CheckCircle, XCircle, Star, Edit2, Save, X, Languages, ChevronDown } from 'lucide-react';
 import { MathVisualization } from './visualizations';
-import { getTranslation, hasTranslation } from '../data/translations';
+import { getTranslation, getAvailableLanguages, LANGUAGES, UI_STRINGS } from '../data/translations';
 
 export default function QuestionCard({
   question,
@@ -16,10 +16,51 @@ export default function QuestionCard({
   const [showNoteEditor, setShowNoteEditor] = useState(false);
   const [noteContent, setNoteContent] = useState(userNote?.content || '');
   const [isSavingNote, setIsSavingNote] = useState(false);
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [activeLang, setActiveLang] = useState(null); // null = English, 'uz' | 'ru'
+  const [showLangMenu, setShowLangMenu] = useState(false);
+  const dropdownRef = useRef(null);
 
-  const translation = getTranslation(question.question_id);
-  const canFlip = hasTranslation(question.question_id);
+  const availableLangs = getAvailableLanguages(question.question_id);
+  const canTranslate = availableLangs.length > 0;
+  const isFlipped = activeLang !== null;
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    if (!showLangMenu) return;
+    function handleClick(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setShowLangMenu(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [showLangMenu]);
+
+  // Reset language when question changes
+  useEffect(() => {
+    setActiveLang(null);
+    setShowLangMenu(false);
+  }, [question.question_id]);
+
+  const handleSelectLang = (lang) => {
+    setShowLangMenu(false);
+    if (activeLang === lang) {
+      // Same language selected again → flip back to English
+      setActiveLang(null);
+    } else {
+      // If already flipped to a different language, flip back first then flip to new
+      if (activeLang !== null) {
+        setActiveLang(null);
+        setTimeout(() => setActiveLang(lang), 350);
+      } else {
+        setActiveLang(lang);
+      }
+    }
+  };
+
+  const handleBackToEnglish = () => {
+    setActiveLang(null);
+  };
 
   const handleSubmit = () => {
     if (selectedAnswer) {
@@ -47,23 +88,20 @@ export default function QuestionCard({
   };
 
   // Get choices - support both formats (choice_a or options array)
-  const getChoice = (letter) => {
-    // Try individual choice fields first
-    if (question[`choice_${letter.toLowerCase()}`]) {
-      return question[`choice_${letter.toLowerCase()}`];
-    }
-    // Fall back to options array
-    if (question.options) {
-      const opt = question.options.find(o => o.id === letter);
-      return opt ? opt.text : '';
-    }
-    return '';
+  const getChoicesFor = (q) => {
+    return ['A', 'B', 'C', 'D'].map(letter => {
+      if (q[`choice_${letter.toLowerCase()}`]) {
+        return { id: letter, text: q[`choice_${letter.toLowerCase()}`] };
+      }
+      if (q.options) {
+        const opt = q.options.find(o => o.id === letter);
+        return opt ? { id: letter, text: opt.text } : { id: letter, text: '' };
+      }
+      return { id: letter, text: '' };
+    }).filter(c => c.text);
   };
 
-  const choices = ['A', 'B', 'C', 'D'].map(letter => ({
-    id: letter,
-    text: getChoice(letter)
-  })).filter(c => c.text);
+  const choices = getChoicesFor(question);
 
   // Check if this is a grid-in question (no choices, numeric answer)
   const isGridIn = choices.length === 0 && question.correct_answer && /^\d/.test(question.correct_answer);
@@ -82,25 +120,21 @@ export default function QuestionCard({
     );
   }
 
-  // Build translated question object
-  const uzQuestion = translation ? { ...question, ...translation } : null;
+  // Build translated question + choices for the active language
+  const translationData = activeLang ? getTranslation(question.question_id, activeLang) : null;
+  const translatedQuestion = translationData ? { ...question, ...translationData } : null;
+  const translatedChoices = translatedQuestion ? getChoicesFor(translatedQuestion) : [];
+  const uiStr = activeLang ? UI_STRINGS[activeLang] : null;
+  const langMeta = activeLang ? LANGUAGES[activeLang] : null;
 
-  // Translated choices
-  const getUzChoice = (letter) => {
-    if (!uzQuestion) return '';
-    if (uzQuestion[`choice_${letter.toLowerCase()}`]) return uzQuestion[`choice_${letter.toLowerCase()}`];
-    if (uzQuestion.options) {
-      const opt = uzQuestion.options.find(o => o.id === letter);
-      return opt ? opt.text : '';
-    }
-    return '';
+  // Helper: get localized UI string with English fallback
+  const t = (key, englishDefault) => {
+    if (uiStr && uiStr[key]) return uiStr[key];
+    return englishDefault;
   };
-  const uzChoices = uzQuestion
-    ? ['A', 'B', 'C', 'D'].map(letter => ({ id: letter, text: getUzChoice(letter) })).filter(c => c.text)
-    : [];
 
   // Helper to render a question face (reused for front & back)
-  const renderQuestionContent = (q, qChoices, isUzbek) => (
+  const renderQuestionContent = (q, qChoices, lang) => (
     <div className="p-6">
       <div className="mb-6">
         <p className="text-navy-900 dark:text-cream-100 text-lg leading-relaxed font-medium">
@@ -109,7 +143,7 @@ export default function QuestionCard({
         <p className="text-sm text-navy-500 dark:text-navy-400 mt-2">{question.skill}</p>
         {isGridIn && (
           <p className="text-sm text-navy-400 dark:text-navy-500 mt-1 italic">
-            {isUzbek ? 'Javobingizni quyida kiriting' : 'Enter your numeric answer below'}
+            {lang ? t('enterAnswer', 'Enter your numeric answer below') : 'Enter your numeric answer below'}
           </p>
         )}
       </div>
@@ -127,7 +161,7 @@ export default function QuestionCard({
             value={selectedAnswer || ''}
             onChange={(e) => onSelectAnswer(e.target.value)}
             disabled={showFeedback}
-            placeholder={isUzbek ? 'Javobingizni kiriting...' : 'Enter your answer...'}
+            placeholder={lang ? t('placeholder', 'Enter your answer...') : 'Enter your answer...'}
             className={`w-full p-4 text-lg rounded-xl border-2 transition-all ${
               showFeedback
                 ? selectedAnswer === question.correct_answer
@@ -138,7 +172,7 @@ export default function QuestionCard({
           />
           {showFeedback && selectedAnswer !== question.correct_answer && (
             <p className="text-navy-600 dark:text-cream-300 mt-2">
-              {isUzbek ? "To'g'ri javob" : 'Correct answer'}: <strong>{question.correct_answer}</strong>
+              {lang ? t('correctAnswer', 'Correct answer') : 'Correct answer'}: <strong>{question.correct_answer}</strong>
             </p>
           )}
         </div>
@@ -191,15 +225,15 @@ export default function QuestionCard({
               <>
                 <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
                 <span className="font-semibold text-green-800 dark:text-green-300">
-                  {isUzbek ? "To'g'ri!" : 'Correct!'}
+                  {lang ? t('correct', 'Correct!') : 'Correct!'}
                 </span>
               </>
             ) : (
               <>
                 <XCircle className="w-5 h-5 text-red-600 dark:text-red-400" />
                 <span className="font-semibold text-red-800 dark:text-red-300">
-                  {isUzbek
-                    ? `Noto'g'ri. To'g'ri javob: ${question.correct_answer}`
+                  {lang
+                    ? `${t('incorrect', 'Incorrect. The correct answer is')}: ${question.correct_answer}`
                     : `Incorrect. The correct answer is ${question.correct_answer}`}
                 </span>
               </>
@@ -215,12 +249,12 @@ export default function QuestionCard({
         {!showFeedback ? (
           <button onClick={handleSubmit} disabled={!selectedAnswer}
             className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed">
-            {isUzbek ? 'Javobni tekshirish' : 'Check Answer'}
+            {lang ? t('checkAnswer', 'Check Answer') : 'Check Answer'}
           </button>
         ) : (
           <button onClick={() => { onSelectAnswer(null); onAnswer(question.question_id, null, true); }}
             className="btn-primary flex-1">
-            {isUzbek ? 'Keyingi savol' : 'Next Question'}
+            {lang ? t('nextQuestion', 'Next Question') : 'Next Question'}
           </button>
         )}
       </div>
@@ -258,20 +292,61 @@ export default function QuestionCard({
 
   return (
     <div>
-      {/* Flip button — OUTSIDE the flipping card so it's always clickable */}
-      {canFlip && (
-        <div className="flex justify-end mb-2">
-          <button
-            onClick={() => setIsFlipped(!isFlipped)}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-sans font-medium transition-all ${
-              isFlipped
-                ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
-                : 'bg-cream-100 dark:bg-navy-800 text-navy-500 dark:text-cream-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600'
-            }`}
-          >
-            <Languages className="w-4 h-4" />
-            {isFlipped ? '← English' : "O'zbekcha 🇺🇿"}
-          </button>
+      {/* Translate dropdown — OUTSIDE the flipping card so it's always clickable */}
+      {canTranslate && (
+        <div className="flex justify-end mb-2 gap-2">
+          {/* "Back to English" button — shown when flipped */}
+          {isFlipped && (
+            <button
+              onClick={handleBackToEnglish}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-sans font-medium transition-all bg-cream-100 dark:bg-navy-800 text-navy-600 dark:text-cream-300 hover:bg-cream-200 dark:hover:bg-navy-700"
+            >
+              ← English
+            </button>
+          )}
+
+          {/* Translate dropdown */}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setShowLangMenu(!showLangMenu)}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-sans font-medium transition-all ${
+                isFlipped
+                  ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
+                  : 'bg-cream-100 dark:bg-navy-800 text-navy-500 dark:text-cream-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600'
+              }`}
+            >
+              <Languages className="w-4 h-4" />
+              {isFlipped && langMeta ? `${langMeta.flag} ${langMeta.label}` : 'Translate'}
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showLangMenu ? 'rotate-180' : ''}`} />
+            </button>
+
+            {/* Dropdown menu */}
+            {showLangMenu && (
+              <div className="absolute right-0 mt-1.5 w-48 bg-white dark:bg-navy-800 rounded-xl shadow-lg border border-cream-200 dark:border-navy-700 overflow-hidden z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                {availableLangs.map((lang) => {
+                  const meta = LANGUAGES[lang];
+                  const isActive = activeLang === lang;
+                  return (
+                    <button
+                      key={lang}
+                      onClick={() => handleSelectLang(lang)}
+                      className={`w-full flex items-center gap-3 px-4 py-3 text-left text-sm font-sans transition-colors ${
+                        isActive
+                          ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
+                          : 'text-navy-700 dark:text-cream-200 hover:bg-cream-50 dark:hover:bg-navy-700'
+                      }`}
+                    >
+                      <span className="text-lg">{meta.flag}</span>
+                      <span className="font-medium">{meta.label}</span>
+                      {isActive && (
+                        <span className="ml-auto text-blue-500 text-xs">✓</span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
       )}
 
@@ -314,11 +389,11 @@ export default function QuestionCard({
                 </button>
               </div>
             </div>
-            {renderQuestionContent(question, choices, false)}
+            {renderQuestionContent(question, choices, null)}
           </div>
 
-          {/* ── BACK FACE (Uzbek) ── */}
-          {uzQuestion && (
+          {/* ── BACK FACE (Translated) ── */}
+          {translatedQuestion && langMeta && (
             <div
               style={{
                 backfaceVisibility: 'hidden',
@@ -330,9 +405,11 @@ export default function QuestionCard({
               }}
               className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden"
             >
-              {/* Uzbek banner */}
+              {/* Language banner */}
               <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 border-b border-blue-200 dark:border-blue-800">
-                <span className="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400">🇺🇿 O'zbek tilida</span>
+                <span className="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400">
+                  {langMeta.flag} {langMeta.banner}
+                </span>
               </div>
               {/* Header */}
               <div className="flex items-center justify-between p-4 border-b border-cream-200 dark:border-navy-700">
@@ -343,7 +420,7 @@ export default function QuestionCard({
                   <span className="text-sm text-navy-500 dark:text-navy-400">{question.domain}</span>
                 </div>
               </div>
-              {renderQuestionContent(uzQuestion, uzChoices, true)}
+              {renderQuestionContent(translatedQuestion, translatedChoices, activeLang)}
             </div>
           )}
         </div>
