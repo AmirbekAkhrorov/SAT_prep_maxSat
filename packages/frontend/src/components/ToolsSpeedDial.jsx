@@ -66,14 +66,15 @@ export default function ToolsSpeedDial() {
 
   const fanOutTransition = (index) => ({
     type: 'spring',
-    stiffness: 300,
-    damping: 20,
-    delay: index * 0.05,
+    stiffness: 500,
+    damping: 30,
+    mass: 0.8,
+    delay: index * 0.03,
   });
 
-  const fanOutInitial = { opacity: 0, scale: 0.3, y: 20 };
+  const fanOutInitial = { opacity: 0, scale: 0.5, y: 10 };
   const fanOutAnimate = { opacity: 1, scale: 1, y: 0 };
-  const fanOutExit = { opacity: 0, scale: 0.3, y: 20 };
+  const fanOutExit = { opacity: 0, scale: 0.5, y: 10, transition: { duration: 0.12 } };
 
   return (
     <>
@@ -131,7 +132,7 @@ export default function ToolsSpeedDial() {
         <motion.button
           onClick={() => setIsMenuOpen((prev) => !prev)}
           animate={{ rotate: isMenuOpen ? 45 : 0 }}
-          transition={{ type: 'spring' }}
+          transition={{ type: 'spring', stiffness: 500, damping: 28 }}
           className="w-14 h-14 rounded-full shadow-lg bg-navy-900 text-cream-50 dark:bg-gold-500 dark:text-navy-900 hover:scale-110 active:scale-95 transition-transform flex items-center justify-center"
         >
           {isMenuOpen ? <X className="w-6 h-6" /> : <Wrench className="w-6 h-6" />}
