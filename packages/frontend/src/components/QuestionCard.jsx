@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { CheckCircle, XCircle, Star, Edit2, Save, X } from 'lucide-react';
+import { CheckCircle, XCircle, Star, Edit2, Save, X, Languages } from 'lucide-react';
 import { MathVisualization } from './visualizations';
+import { getTranslation, hasTranslation } from '../data/translations';
 
 export default function QuestionCard({
   question,
@@ -15,6 +16,10 @@ export default function QuestionCard({
   const [showNoteEditor, setShowNoteEditor] = useState(false);
   const [noteContent, setNoteContent] = useState(userNote?.content || '');
   const [isSavingNote, setIsSavingNote] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const translation = getTranslation(question.question_id);
+  const canFlip = hasTranslation(question.question_id);
 
   const handleSubmit = () => {
     if (selectedAnswer) {
@@ -77,8 +82,51 @@ export default function QuestionCard({
     );
   }
 
+  // Resolve displayed question — use translation when flipped
+  const displayQuestion = isFlipped && translation
+    ? { ...question, ...translation }
+    : question;
+
+  // Recalculate choices for the displayed question
+  const getDisplayChoice = (letter) => {
+    if (displayQuestion[`choice_${letter.toLowerCase()}`]) {
+      return displayQuestion[`choice_${letter.toLowerCase()}`];
+    }
+    if (displayQuestion.options) {
+      const opt = displayQuestion.options.find(o => o.id === letter);
+      return opt ? opt.text : '';
+    }
+    return '';
+  };
+
+  const displayChoices = ['A', 'B', 'C', 'D'].map(letter => ({
+    id: letter,
+    text: getDisplayChoice(letter)
+  })).filter(c => c.text);
+
   return (
-    <div className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden">
+    <div
+      className="transition-transform duration-500"
+      style={{
+        perspective: '1200px',
+      }}
+    >
+      <div
+        className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden transition-transform duration-500"
+        style={{
+          transformStyle: 'preserve-3d',
+          transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+        }}
+      >
+        <div style={{ backfaceVisibility: 'hidden', transform: isFlipped ? 'rotateY(180deg)' : 'none' }}>
+
+      {/* Language indicator when flipped */}
+      {isFlipped && (
+        <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-1.5 flex items-center gap-2 border-b border-blue-200 dark:border-blue-800">
+          <span className="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400">🇺🇿 O'zbek tilida</span>
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-cream-200 dark:border-navy-700">
         <div className="flex items-center gap-3">
@@ -95,6 +143,20 @@ export default function QuestionCard({
               <Star className="w-4 h-4 fill-gold-600" />
               <span className="text-xs font-medium">Mastered</span>
             </div>
+          )}
+          {canFlip && (
+            <button
+              onClick={() => setIsFlipped(!isFlipped)}
+              className={`p-2 rounded-lg transition-all ${
+                isFlipped
+                  ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
+                  : 'text-navy-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-cream-100 dark:hover:bg-navy-800'
+              }`}
+              title={isFlipped ? 'Inglizchaga qaytish' : "O'zbekchada ko'rish"}
+            >
+              <Languages className="w-4 h-4" />
+              <span className="sr-only">{isFlipped ? 'Switch to English' : 'O\'zbekchada ko\'rish'}</span>
+            </button>
           )}
           <button
             onClick={() => setShowNoteEditor(!showNoteEditor)}
@@ -114,7 +176,7 @@ export default function QuestionCard({
         {/* Question Text */}
         <div className="mb-6">
           <p className="text-navy-900 dark:text-cream-100 text-lg leading-relaxed font-medium">
-            {question.question_text}
+            {displayQuestion.question_text}
           </p>
           <p className="text-sm text-navy-500 dark:text-navy-400 mt-2">{question.skill}</p>
           {isGridIn && (
@@ -157,7 +219,7 @@ export default function QuestionCard({
         ) : (
         /* Multiple Choice Answers */
         <div className="space-y-3 mb-6">
-          {choices.map((choice) => {
+          {displayChoices.map((choice) => {
             const isSelected = selectedAnswer === choice.id;
             const isCorrect = showFeedback && choice.id === question.correct_answer;
             const isWrong = showFeedback && isSelected && choice.id !== question.correct_answer;
@@ -223,9 +285,9 @@ export default function QuestionCard({
                 </>
               )}
             </div>
-            {question.explanation && (
+            {displayQuestion.explanation && (
               <p className="text-navy-700 dark:text-cream-300 text-sm leading-relaxed">
-                {question.explanation}
+                {displayQuestion.explanation}
               </p>
             )}
           </div>
@@ -297,6 +359,8 @@ export default function QuestionCard({
             <p className="text-navy-700 dark:text-cream-300 text-sm italic">"{userNote.content}"</p>
           </div>
         )}
+      </div>
+        </div>
       </div>
     </div>
   );
