@@ -44,22 +44,16 @@ export default function QuestionCard({
 
   const handleSelectLang = (lang) => {
     setShowLangMenu(false);
-    if (activeLang === lang) {
-      // Same language selected again → flip back to English
-      setActiveLang(null);
-    } else {
-      // If already flipped to a different language, flip back first then flip to new
-      if (activeLang !== null) {
-        setActiveLang(null);
-        setTimeout(() => setActiveLang(lang), 350);
-      } else {
-        setActiveLang(lang);
-      }
-    }
-  };
+    const targetLang = lang === 'en' ? null : lang;
+    if (activeLang === targetLang) return; // already viewing this language
 
-  const handleBackToEnglish = () => {
-    setActiveLang(null);
+    // If switching between two non-English languages, flip back first then flip to new
+    if (activeLang !== null && targetLang !== null) {
+      setActiveLang(null);
+      setTimeout(() => setActiveLang(targetLang), 350);
+    } else {
+      setActiveLang(targetLang);
+    }
   };
 
   const handleSubmit = () => {
@@ -125,7 +119,13 @@ export default function QuestionCard({
   const translatedQuestion = translationData ? { ...question, ...translationData } : null;
   const translatedChoices = translatedQuestion ? getChoicesFor(translatedQuestion) : [];
   const uiStr = activeLang ? UI_STRINGS[activeLang] : null;
-  const langMeta = activeLang ? LANGUAGES[activeLang] : null;
+  // Current language being viewed (for dropdown button label)
+  const currentLangKey = activeLang || 'en';
+  const currentLangMeta = LANGUAGES[currentLangKey];
+
+  // Dropdown shows all languages EXCEPT the one currently being viewed
+  const allLangs = ['en', ...availableLangs];
+  const dropdownLangs = allLangs.filter(l => l !== currentLangKey);
 
   // Helper: get localized UI string with English fallback
   const t = (key, englishDefault) => {
@@ -294,18 +294,7 @@ export default function QuestionCard({
     <div>
       {/* Translate dropdown — OUTSIDE the flipping card so it's always clickable */}
       {canTranslate && (
-        <div className="flex justify-end mb-2 gap-2">
-          {/* "Back to English" button — shown when flipped */}
-          {isFlipped && (
-            <button
-              onClick={handleBackToEnglish}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-sans font-medium transition-all bg-cream-100 dark:bg-navy-800 text-navy-600 dark:text-cream-300 hover:bg-cream-200 dark:hover:bg-navy-700"
-            >
-              ← English
-            </button>
-          )}
-
-          {/* Translate dropdown */}
+        <div className="flex justify-end mb-2">
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setShowLangMenu(!showLangMenu)}
@@ -316,31 +305,23 @@ export default function QuestionCard({
               }`}
             >
               <Languages className="w-4 h-4" />
-              {isFlipped && langMeta ? `${langMeta.flag} ${langMeta.label}` : 'Translate'}
+              {currentLangMeta.flag} {currentLangMeta.label}
               <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showLangMenu ? 'rotate-180' : ''}`} />
             </button>
 
-            {/* Dropdown menu */}
+            {/* Dropdown menu — shows all languages EXCEPT the current one */}
             {showLangMenu && (
               <div className="absolute right-0 mt-1.5 w-48 bg-white dark:bg-navy-800 rounded-xl shadow-lg border border-cream-200 dark:border-navy-700 overflow-hidden z-50 animate-in fade-in slide-in-from-top-1 duration-150">
-                {availableLangs.map((lang) => {
+                {dropdownLangs.map((lang) => {
                   const meta = LANGUAGES[lang];
-                  const isActive = activeLang === lang;
                   return (
                     <button
                       key={lang}
                       onClick={() => handleSelectLang(lang)}
-                      className={`w-full flex items-center gap-3 px-4 py-3 text-left text-sm font-sans transition-colors ${
-                        isActive
-                          ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
-                          : 'text-navy-700 dark:text-cream-200 hover:bg-cream-50 dark:hover:bg-navy-700'
-                      }`}
+                      className="w-full flex items-center gap-3 px-4 py-3 text-left text-sm font-sans transition-colors text-navy-700 dark:text-cream-200 hover:bg-cream-50 dark:hover:bg-navy-700"
                     >
                       <span className="text-lg">{meta.flag}</span>
                       <span className="font-medium">{meta.label}</span>
-                      {isActive && (
-                        <span className="ml-auto text-blue-500 text-xs">✓</span>
-                      )}
                     </button>
                   );
                 })}
@@ -393,7 +374,7 @@ export default function QuestionCard({
           </div>
 
           {/* ── BACK FACE (Translated) ── */}
-          {translatedQuestion && langMeta && (
+          {translatedQuestion && activeLang && (
             <div
               style={{
                 backfaceVisibility: 'hidden',
@@ -408,7 +389,7 @@ export default function QuestionCard({
               {/* Language banner */}
               <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 border-b border-blue-200 dark:border-blue-800">
                 <span className="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400">
-                  {langMeta.flag} {langMeta.banner}
+                  {LANGUAGES[activeLang].flag} {LANGUAGES[activeLang].banner}
                 </span>
               </div>
               {/* Header */}

@@ -26,8 +26,9 @@ const TRANSLATIONS = {
   },
 };
 
-/** Language display metadata */
+/** Language display metadata (including English) */
 export const LANGUAGES = {
+  en: { label: 'English', flag: '🇺🇸', banner: 'In English' },
   uz: { label: "O'zbekcha", flag: '🇺🇿', banner: "O'zbek tilida" },
   ru: { label: 'Русский', flag: '🇷🇺', banner: 'На русском языке' },
 };
