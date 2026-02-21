@@ -16,14 +16,20 @@ export default function QuestionCard({
   const [showNoteEditor, setShowNoteEditor] = useState(false);
   const [noteContent, setNoteContent] = useState(userNote?.content || '');
   const [isSavingNote, setIsSavingNote] = useState(false);
-  const [activeLang, setActiveLang] = useState(null); // null = English, 'uz' | 'ru'
-  const [pendingLang, setPendingLang] = useState(null); // for rendering back face before flip
+  const [rotationDeg, setRotationDeg] = useState(0); // always increments by 180
+  const [backFaceLang, setBackFaceLang] = useState(null); // language rendered on back face
   const [showLangMenu, setShowLangMenu] = useState(false);
+  const isAnimatingRef = useRef(false);
   const dropdownRef = useRef(null);
 
   const availableLangs = getAvailableLanguages(question.question_id);
   const canTranslate = availableLangs.length > 0;
-  const isFlipped = activeLang !== null;
+
+  // At even multiples of 360° → front face (English) visible
+  // At odd multiples of 180° → back face (translation) visible
+  const isShowingBack = (rotationDeg / 180) % 2 === 1;
+  const activeLang = isShowingBack ? backFaceLang : null;
+  const isFlipped = isShowingBack;
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -37,46 +43,52 @@ export default function QuestionCard({
     return () => document.removeEventListener('mousedown', handleClick);
   }, [showLangMenu]);
 
-  // Reset language when question changes
+  // Reset when question changes
   useEffect(() => {
-    setActiveLang(null);
-    setPendingLang(null);
+    setRotationDeg(0);
+    setBackFaceLang(null);
     setShowLangMenu(false);
+    isAnimatingRef.current = false;
   }, [question.question_id]);
 
-  // The language actually used to render the back face (stays set while animating)
-  const backLang = pendingLang || activeLang;
+  const flipOnce = () => {
+    setRotationDeg((prev) => prev + 180);
+  };
 
   const handleSelectLang = (lang) => {
     setShowLangMenu(false);
+    if (isAnimatingRef.current) return; // block clicks during animation
+
     const targetLang = lang === 'en' ? null : lang;
     if (activeLang === targetLang) return;
 
-    if (targetLang === null) {
-      // Going back to English — just flip back
-      setActiveLang(null);
-    } else if (activeLang === null) {
-      // From English to a translation — pre-render back face, then flip
-      setPendingLang(targetLang);
-      // requestAnimationFrame ensures DOM paints the back face before we trigger the CSS transition
+    isAnimatingRef.current = true;
+
+    if (!isShowingBack && targetLang !== null) {
+      // English → translation: load back face, then flip forward
+      setBackFaceLang(targetLang);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          setActiveLang(targetLang);
-          setPendingLang(null);
+          flipOnce();
+          setTimeout(() => { isAnimatingRef.current = false; }, 420);
         });
       });
+    } else if (isShowingBack && targetLang === null) {
+      // Translation → English: just flip forward (lands on front face)
+      flipOnce();
+      setTimeout(() => { isAnimatingRef.current = false; }, 420);
     } else {
-      // Switching between two translations — flip back, swap content, flip forward
-      setActiveLang(null);
+      // Translation → different translation: flip to English, swap back face, flip again
+      flipOnce();
       setTimeout(() => {
-        setPendingLang(targetLang);
+        setBackFaceLang(targetLang);
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            setActiveLang(targetLang);
-            setPendingLang(null);
+            flipOnce();
+            setTimeout(() => { isAnimatingRef.current = false; }, 420);
           });
         });
-      }, 450); // wait for flip-back to complete (400ms transition + buffer)
+      }, 450);
     }
   };
 
@@ -138,11 +150,11 @@ export default function QuestionCard({
     );
   }
 
-  // Build translated question + choices using backLang (pre-renders before flip starts)
-  const translationData = backLang ? getTranslation(question.question_id, backLang) : null;
+  // Build translated question + choices for the back face
+  const translationData = backFaceLang ? getTranslation(question.question_id, backFaceLang) : null;
   const translatedQuestion = translationData ? { ...question, ...translationData } : null;
   const translatedChoices = translatedQuestion ? getChoicesFor(translatedQuestion) : [];
-  const uiStr = backLang ? UI_STRINGS[backLang] : null;
+  const uiStr = backFaceLang ? UI_STRINGS[backFaceLang] : null;
   // Current language being viewed (for dropdown button label)
   const currentLangKey = activeLang || 'en';
   const currentLangMeta = LANGUAGES[currentLangKey];
@@ -360,7 +372,7 @@ export default function QuestionCard({
         <div
           style={{
             transformStyle: 'preserve-3d',
-            transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+            transform: `rotateY(${rotationDeg}deg)`,
             transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
             position: 'relative',
             willChange: 'transform',
@@ -399,7 +411,7 @@ export default function QuestionCard({
           </div>
 
           {/* ── BACK FACE (Translated) ── */}
-          {translatedQuestion && backLang && (
+          {translatedQuestion && backFaceLang && (
             <div
               style={{
                 backfaceVisibility: 'hidden',
@@ -415,7 +427,7 @@ export default function QuestionCard({
               {/* Language banner */}
               <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 border-b border-blue-200 dark:border-blue-800">
                 <span className="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400">
-                  {LANGUAGES[backLang].flag} {LANGUAGES[backLang].banner}
+                  {LANGUAGES[backFaceLang].flag} {LANGUAGES[backFaceLang].banner}
                 </span>
               </div>
               {/* Header */}
@@ -427,7 +439,7 @@ export default function QuestionCard({
                   <span className="text-sm text-navy-500 dark:text-navy-400">{question.domain}</span>
                 </div>
               </div>
-              {renderQuestionContent(translatedQuestion, translatedChoices, backLang)}
+              {renderQuestionContent(translatedQuestion, translatedChoices, backFaceLang)}
             </div>
           )}
         </div>
