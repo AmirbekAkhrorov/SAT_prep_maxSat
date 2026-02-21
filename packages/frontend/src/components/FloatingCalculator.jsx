@@ -1,194 +1,50 @@
-import { useState, useEffect, useRef } from 'react';
-import { Calculator, X, Minus, GripHorizontal } from 'lucide-react';
-
-const STORAGE_KEY = 'sat-prep-calculator-state';
+import { useState, useEffect } from 'react';
+import { X, Minus, GripHorizontal } from 'lucide-react';
+import useFloatingPanel from '../hooks/useFloatingPanel';
 
 const DESMOS_URLS = {
   graphing: 'https://www.desmos.com/testing/cb-sat-ap/graphing',
   scientific: 'https://www.desmos.com/testing/cb-sat-ap/scientific',
 };
 
-const MIN_WIDTH = 350;
-const MIN_HEIGHT = 400;
-const DEFAULT_WIDTH = 500;
-const DEFAULT_HEIGHT = 600;
+const MODE_STORAGE_KEY = 'sat-prep-calculator-mode';
 
-function loadState() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch {
-    // ignore
-  }
-  return null;
-}
+export default function FloatingCalculator({ isOpen, onClose }) {
+  const {
+    position,
+    size,
+    isInteracting,
+    isMobile,
+    interactionType,
+    handleDragStart,
+    handleResizeStart,
+  } = useFloatingPanel('sat-prep-calculator-panel');
 
-function saveState(state) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  } catch {
-    // ignore
-  }
-}
-
-export default function FloatingCalculator() {
-  const saved = useRef(loadState());
-
-  const [isOpen, setIsOpen] = useState(saved.current?.isOpen ?? false);
-  const [mode, setMode] = useState(saved.current?.mode ?? 'graphing');
-  const [position, setPosition] = useState(
-    saved.current?.position ?? {
-      x: typeof window !== 'undefined' ? window.innerWidth - DEFAULT_WIDTH - 24 : 100,
-      y: typeof window !== 'undefined' ? window.innerHeight - DEFAULT_HEIGHT - 24 : 100,
+  // Persist mode to its own localStorage key
+  const [mode, setMode] = useState(() => {
+    try {
+      return localStorage.getItem(MODE_STORAGE_KEY) || 'graphing';
+    } catch {
+      return 'graphing';
     }
-  );
-  const [size, setSize] = useState(
-    saved.current?.size ?? { width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT }
-  );
-  const [isInteracting, setIsInteracting] = useState(false);
+  });
   const [iframeError, setIframeError] = useState(false);
-  const [isMobile, setIsMobile] = useState(
-    typeof window !== 'undefined' ? window.innerWidth < 768 : false
-  );
 
-  // Track drag/resize origin with refs (don't need re-renders for these)
-  const dragOrigin = useRef({ x: 0, y: 0, posX: 0, posY: 0 });
-  const resizeOrigin = useRef({ x: 0, y: 0, w: 0, h: 0 });
-  const interactionType = useRef(null); // 'drag' | 'resize'
-  const handlersRef = useRef({ onMove: null, onUp: null });
-
-  // Persist state
   useEffect(() => {
-    saveState({ isOpen, mode, position, size });
-  }, [isOpen, mode, position, size]);
-
-  // Listen for resize to detect mobile
-  useEffect(() => {
-    function handleResize() {
-      setIsMobile(window.innerWidth < 768);
+    try {
+      localStorage.setItem(MODE_STORAGE_KEY, mode);
+    } catch {
+      // ignore
     }
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [mode]);
 
-  // Cleanup document listeners on unmount
-  useEffect(() => {
-    return () => {
-      if (handlersRef.current.onMove) {
-        document.removeEventListener('pointermove', handlersRef.current.onMove);
-        document.removeEventListener('pointerup', handlersRef.current.onUp);
-      }
-    };
-  }, []);
-
-  // Constrain position to viewport
-  function constrain(x, y, w, h) {
-    const maxX = window.innerWidth - w;
-    const maxY = window.innerHeight - h;
-    return {
-      x: Math.max(0, Math.min(x, maxX)),
-      y: Math.max(0, Math.min(y, maxY)),
-    };
-  }
-
-  // Drag start
-  function handleDragStart(e) {
-    e.preventDefault();
-    interactionType.current = 'drag';
-    dragOrigin.current = {
-      x: e.clientX,
-      y: e.clientY,
-      posX: position.x,
-      posY: position.y,
-    };
-    setIsInteracting(true);
-
-    const onMove = (ev) => {
-      const dx = ev.clientX - dragOrigin.current.x;
-      const dy = ev.clientY - dragOrigin.current.y;
-      setSize((prevSize) => {
-        const newPos = constrain(
-          dragOrigin.current.posX + dx,
-          dragOrigin.current.posY + dy,
-          prevSize.width,
-          prevSize.height
-        );
-        setPosition(newPos);
-        return prevSize;
-      });
-    };
-    const onUp = () => {
-      interactionType.current = null;
-      setIsInteracting(false);
-      document.removeEventListener('pointermove', handlersRef.current.onMove);
-      document.removeEventListener('pointerup', handlersRef.current.onUp);
-      handlersRef.current = { onMove: null, onUp: null };
-    };
-    handlersRef.current = { onMove, onUp };
-    document.addEventListener('pointermove', onMove);
-    document.addEventListener('pointerup', onUp);
-  }
-
-  // Resize start
-  function handleResizeStart(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    interactionType.current = 'resize';
-    resizeOrigin.current = {
-      x: e.clientX,
-      y: e.clientY,
-      w: size.width,
-      h: size.height,
-    };
-    setIsInteracting(true);
-
-    const onMove = (ev) => {
-      const dx = ev.clientX - resizeOrigin.current.x;
-      const dy = ev.clientY - resizeOrigin.current.y;
-      const newW = Math.max(MIN_WIDTH, resizeOrigin.current.w + dx);
-      const newH = Math.max(MIN_HEIGHT, resizeOrigin.current.h + dy);
-      setSize({ width: newW, height: newH });
-      setPosition((prev) => constrain(prev.x, prev.y, newW, newH));
-    };
-    const onUp = () => {
-      interactionType.current = null;
-      setIsInteracting(false);
-      document.removeEventListener('pointermove', handlersRef.current.onMove);
-      document.removeEventListener('pointerup', handlersRef.current.onUp);
-      handlersRef.current = { onMove: null, onUp: null };
-    };
-    handlersRef.current = { onMove, onUp };
-    document.addEventListener('pointermove', onMove);
-    document.addEventListener('pointerup', onUp);
-  }
-
-  const handleOpen = () => {
-    setIsOpen(true);
-    setIframeError(false);
-  };
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
-  // Reset iframe error when mode changes
   const handleModeChange = (newMode) => {
     setMode(newMode);
     setIframeError(false);
   };
 
-  // Toggle button (when calculator is closed)
   if (!isOpen) {
-    return (
-      <button
-        onClick={handleOpen}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 bg-navy-900 text-cream-50 dark:bg-gold-500 dark:text-navy-900"
-        aria-label="Open calculator"
-        title="Open calculator"
-      >
-        <Calculator className="w-6 h-6" />
-      </button>
-    );
+    return null;
   }
 
   // Mobile: full-screen overlay
@@ -232,7 +88,7 @@ export default function FloatingCalculator() {
               </button>
             </div>
             <button
-              onClick={handleClose}
+              onClick={onClose}
               className="ml-2 p-1 rounded hover:bg-red-600 transition-colors text-cream-200 hover:text-cream-50"
               aria-label="Close calculator"
             >
@@ -318,7 +174,7 @@ export default function FloatingCalculator() {
             </div>
             {/* Minimize */}
             <button
-              onClick={handleClose}
+              onClick={onClose}
               onPointerDown={(e) => e.stopPropagation()}
               className="ml-1 p-1 rounded hover:bg-navy-700 transition-colors text-cream-200 hover:text-cream-50"
               aria-label="Minimize calculator"
@@ -327,7 +183,7 @@ export default function FloatingCalculator() {
             </button>
             {/* Close */}
             <button
-              onClick={handleClose}
+              onClick={onClose}
               onPointerDown={(e) => e.stopPropagation()}
               className="p-1 rounded hover:bg-red-600 transition-colors text-cream-200 hover:text-cream-50"
               aria-label="Close calculator"
