@@ -238,7 +238,10 @@ function Triangle454590() {
 
 const ALL_SECTION_TITLES = SECTIONS.map((s) => s.title);
 
-export default function ReferenceSheet({ isOpen, onClose }) {
+export default function ReferenceSheet({ isOpen, onClose, variant = 'practice' }) {
+  const sections = variant === 'test'
+    ? SECTIONS.filter((s) => s.badge === 'official')
+    : SECTIONS;
   const {
     position,
     size,
@@ -276,7 +279,7 @@ export default function ReferenceSheet({ isOpen, onClose }) {
 
   const sectionContent = (
     <div className="divide-y divide-navy-200 dark:divide-navy-700">
-      {SECTIONS.map((section, idx) => {
+      {sections.map((section, idx) => {
         const isExpanded = expandedSections.has(section.title);
         return (
           <div key={section.title}>

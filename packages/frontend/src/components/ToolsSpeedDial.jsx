@@ -30,7 +30,7 @@ function saveToolsState(isCalculatorOpen, isReferenceOpen) {
   }
 }
 
-export default function ToolsSpeedDial() {
+export default function ToolsSpeedDial({ variant = 'practice' }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [initialState] = useState(loadToolsState);
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(initialState.isCalculatorOpen);
@@ -141,7 +141,7 @@ export default function ToolsSpeedDial() {
 
       {/* The actual panels */}
       <FloatingCalculator isOpen={isCalculatorOpen} onClose={() => setIsCalculatorOpen(false)} />
-      <ReferenceSheet isOpen={isReferenceOpen} onClose={() => setIsReferenceOpen(false)} />
+      <ReferenceSheet isOpen={isReferenceOpen} onClose={() => setIsReferenceOpen(false)} variant={variant} />
     </>
   );
 }

@@ -454,7 +454,7 @@ export default function TestSession() {
           </motion.div>
         )}
       </AnimatePresence>
-      <ToolsSpeedDial />
+      <ToolsSpeedDial variant="test" />
     </div>
   );
 }
