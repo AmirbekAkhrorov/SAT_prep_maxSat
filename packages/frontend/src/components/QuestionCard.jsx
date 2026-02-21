@@ -17,6 +17,7 @@ export default function QuestionCard({
   const [noteContent, setNoteContent] = useState(userNote?.content || '');
   const [isSavingNote, setIsSavingNote] = useState(false);
   const [activeLang, setActiveLang] = useState(null); // null = English, 'uz' | 'ru'
+  const [pendingLang, setPendingLang] = useState(null); // for rendering back face before flip
   const [showLangMenu, setShowLangMenu] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -39,20 +40,43 @@ export default function QuestionCard({
   // Reset language when question changes
   useEffect(() => {
     setActiveLang(null);
+    setPendingLang(null);
     setShowLangMenu(false);
   }, [question.question_id]);
+
+  // The language actually used to render the back face (stays set while animating)
+  const backLang = pendingLang || activeLang;
 
   const handleSelectLang = (lang) => {
     setShowLangMenu(false);
     const targetLang = lang === 'en' ? null : lang;
-    if (activeLang === targetLang) return; // already viewing this language
+    if (activeLang === targetLang) return;
 
-    // If switching between two non-English languages, flip back first then flip to new
-    if (activeLang !== null && targetLang !== null) {
+    if (targetLang === null) {
+      // Going back to English — just flip back
       setActiveLang(null);
-      setTimeout(() => setActiveLang(targetLang), 350);
+    } else if (activeLang === null) {
+      // From English to a translation — pre-render back face, then flip
+      setPendingLang(targetLang);
+      // requestAnimationFrame ensures DOM paints the back face before we trigger the CSS transition
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setActiveLang(targetLang);
+          setPendingLang(null);
+        });
+      });
     } else {
-      setActiveLang(targetLang);
+      // Switching between two translations — flip back, swap content, flip forward
+      setActiveLang(null);
+      setTimeout(() => {
+        setPendingLang(targetLang);
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            setActiveLang(targetLang);
+            setPendingLang(null);
+          });
+        });
+      }, 450); // wait for flip-back to complete (400ms transition + buffer)
     }
   };
 
@@ -114,11 +138,11 @@ export default function QuestionCard({
     );
   }
 
-  // Build translated question + choices for the active language
-  const translationData = activeLang ? getTranslation(question.question_id, activeLang) : null;
+  // Build translated question + choices using backLang (pre-renders before flip starts)
+  const translationData = backLang ? getTranslation(question.question_id, backLang) : null;
   const translatedQuestion = translationData ? { ...question, ...translationData } : null;
   const translatedChoices = translatedQuestion ? getChoicesFor(translatedQuestion) : [];
-  const uiStr = activeLang ? UI_STRINGS[activeLang] : null;
+  const uiStr = backLang ? UI_STRINGS[backLang] : null;
   // Current language being viewed (for dropdown button label)
   const currentLangKey = activeLang || 'en';
   const currentLangMeta = LANGUAGES[currentLangKey];
@@ -337,13 +361,14 @@ export default function QuestionCard({
           style={{
             transformStyle: 'preserve-3d',
             transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-            transition: 'transform 0.6s ease',
+            transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
             position: 'relative',
+            willChange: 'transform',
           }}
         >
           {/* ── FRONT FACE (English) ── */}
           <div
-            style={{ backfaceVisibility: 'hidden' }}
+            style={{ backfaceVisibility: 'hidden', willChange: 'transform' }}
             className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden"
           >
             {/* Header */}
@@ -374,7 +399,7 @@ export default function QuestionCard({
           </div>
 
           {/* ── BACK FACE (Translated) ── */}
-          {translatedQuestion && activeLang && (
+          {translatedQuestion && backLang && (
             <div
               style={{
                 backfaceVisibility: 'hidden',
@@ -383,13 +408,14 @@ export default function QuestionCard({
                 top: 0,
                 left: 0,
                 width: '100%',
+                willChange: 'transform',
               }}
               className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden"
             >
               {/* Language banner */}
               <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 border-b border-blue-200 dark:border-blue-800">
                 <span className="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400">
-                  {LANGUAGES[activeLang].flag} {LANGUAGES[activeLang].banner}
+                  {LANGUAGES[backLang].flag} {LANGUAGES[backLang].banner}
                 </span>
               </div>
               {/* Header */}
@@ -401,7 +427,7 @@ export default function QuestionCard({
                   <span className="text-sm text-navy-500 dark:text-navy-400">{question.domain}</span>
                 </div>
               </div>
-              {renderQuestionContent(translatedQuestion, translatedChoices, activeLang)}
+              {renderQuestionContent(translatedQuestion, translatedChoices, backLang)}
             </div>
           )}
         </div>
