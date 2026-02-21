@@ -20,6 +20,7 @@ export default function QuestionCard({
   const [backFaceLang, setBackFaceLang] = useState(null); // language rendered on back face
   const [showLangMenu, setShowLangMenu] = useState(false);
   const isAnimatingRef = useRef(false);
+  const flipRef = useRef(null);
   const dropdownRef = useRef(null);
 
   const availableLangs = getAvailableLanguages(question.question_id);
@@ -78,17 +79,24 @@ export default function QuestionCard({
       flipOnce();
       setTimeout(() => { isAnimatingRef.current = false; }, 420);
     } else {
-      // Translation → different translation: flip to English, swap back face, flip again
-      flipOnce();
-      setTimeout(() => {
+      // Translation → different translation: single rotation
+      // 1. Disable transition instantly
+      // 2. Snap back to front-facing (no visible movement)
+      // 3. Swap back face to new language
+      // 4. Re-enable transition and flip once
+      const el = flipRef.current;
+      if (el) {
+        el.style.transition = 'none';
+        setRotationDeg((prev) => prev - 180); // snap to front (no animation)
+      }
+      requestAnimationFrame(() => {
         setBackFaceLang(targetLang);
         requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            flipOnce();
-            setTimeout(() => { isAnimatingRef.current = false; }, 420);
-          });
+          if (el) el.style.transition = '';
+          flipOnce();
+          setTimeout(() => { isAnimatingRef.current = false; }, 420);
         });
-      }, 450);
+      });
     }
   };
 
@@ -370,6 +378,7 @@ export default function QuestionCard({
       {/* 3D flip container */}
       <div style={{ perspective: '1200px' }}>
         <div
+          ref={flipRef}
           style={{
             transformStyle: 'preserve-3d',
             transform: `rotateY(${rotationDeg}deg)`,
