@@ -20,11 +20,6 @@ export default function TestQuestionCard({
   const isAnimatingRef = useRef(false);
   const dropdownRef = useRef(null);
 
-  // Refs for measuring face heights — prevents Face B from overflowing into buttons
-  const faceARef = useRef(null);
-  const faceBRef = useRef(null);
-  const [containerMinHeight, setContainerMinHeight] = useState(0);
-
   const availableLangs = getAvailableLanguages(question.question_id);
   const canTranslate = availableLangs.length > 0;
 
@@ -38,18 +33,8 @@ export default function TestQuestionCard({
     setFaceBLang(null);
     setRotationDeg(0);
     setShowLangMenu(false);
-    setContainerMinHeight(0);
     isAnimatingRef.current = false;
   }, [question.question_id]);
-
-  // After render: measure both faces and lock container to the taller one.
-  // This prevents Face B (position:absolute) from overflowing into sibling elements.
-  useEffect(() => {
-    const aH = faceARef.current?.offsetHeight ?? 0;
-    const bH = faceBRef.current?.offsetHeight ?? 0;
-    const needed = Math.max(aH, bH);
-    if (needed > 0) setContainerMinHeight(needed);
-  });
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -106,25 +91,28 @@ export default function TestQuestionCard({
     hard: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400 border-red-200 dark:border-red-800',
   };
 
-  // Renders the visual card content for one face.
-  // `faceRef` goes on the outer 3D-transform wrapper; `lang` drives the banner.
-  // IMPORTANT: card styling (bg, rounded, shadow, overflow-hidden) is on the INNER
-  // div — never on the 3D-transformed element itself, which causes shape artifacts.
-  const renderFace = ({ questionText, options }, lang, faceRef, extraStyle = {}) => (
-    <div ref={faceRef} style={{ backfaceVisibility: 'hidden', willChange: 'transform', ...extraStyle }}>
-      {/* Inner visual card — overflow-hidden lives here, not on the 3D wrapper */}
-      <div className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden">
-        {/* Language banner */}
+  // Each face is a fixed-height flex column so every question card is identical in size.
+  // The scrollable body (flex-1 min-h-0 overflow-y-auto) handles long content.
+  // The 3D-transform wrapper is a plain div with no overflow/radius styling — those
+  // properties on a transformed element cause shape artifacts in all browsers.
+  const renderFace = ({ questionText, options }, lang, extraStyle = {}) => (
+    <div style={{ backfaceVisibility: 'hidden', willChange: 'transform', ...extraStyle }}>
+      {/* Visual card: fixed height, flex column.
+          overflow-hidden is safe here because this div is NOT 3D-transformed itself. */}
+      <div className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden flex flex-col"
+           style={{ height: '560px' }}>
+
+        {/* Language banner — flex-shrink-0 so it never squeezes the body */}
         {lang && (
-          <div className="bg-blue-50 dark:bg-blue-900/20 px-5 py-2 border-b border-blue-200 dark:border-blue-800">
+          <div className="flex-shrink-0 bg-blue-50 dark:bg-blue-900/20 px-5 py-2 border-b border-blue-200 dark:border-blue-800">
             <span className="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400">
               {LANGUAGES[lang]?.flag} {LANGUAGES[lang]?.banner}
             </span>
           </div>
         )}
 
-        {/* Card header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-cream-200 dark:border-navy-700">
+        {/* Card header — flex-shrink-0 */}
+        <div className="flex-shrink-0 flex items-center justify-between px-6 py-4 border-b border-cream-200 dark:border-navy-700">
           <div className="flex items-center gap-3">
             <span className="font-semibold text-navy-900 dark:text-cream-100">
               Question {questionNumber} of {totalQuestions}
@@ -136,11 +124,11 @@ export default function TestQuestionCard({
           <span className="text-sm text-navy-500 dark:text-navy-400">{question.domain}</span>
         </div>
 
-        {/* Card body */}
-        <div className="p-6">
+        {/* Scrollable body — fills remaining height, scrolls if content overflows */}
+        <div className="flex-1 min-h-0 overflow-y-auto p-6">
           {/* Passage */}
           {question.passage && (
-            <div className="mb-6 p-4 bg-cream-50 dark:bg-navy-800 rounded-xl border border-cream-200 dark:border-navy-700">
+            <div className="mb-5 p-4 bg-cream-50 dark:bg-navy-800 rounded-xl border border-cream-200 dark:border-navy-700">
               <p className="text-navy-700 dark:text-cream-300 text-sm leading-relaxed whitespace-pre-wrap">
                 {question.passage}
               </p>
@@ -148,16 +136,16 @@ export default function TestQuestionCard({
           )}
 
           {/* Question text */}
-          <div className="mb-6">
+          <div className="mb-5">
             <p className="text-navy-900 dark:text-cream-100 text-lg leading-relaxed font-medium">
               {questionText}
             </p>
-            <p className="text-sm text-navy-500 dark:text-navy-400 mt-2">{question.skill}</p>
+            <p className="text-sm text-navy-500 dark:text-navy-400 mt-1.5">{question.skill}</p>
           </div>
 
           {/* Visualization */}
           {question.visualization && (
-            <div className="my-6 flex justify-center">
+            <div className="my-5 flex justify-center">
               <MathVisualization visualization={question.visualization} />
             </div>
           )}
@@ -259,24 +247,23 @@ export default function TestQuestionCard({
       </div>
 
       {/* ── 3D flip container ──
-          minHeight is set to max(faceA, faceB) so Face B (position:absolute)
-          never overflows into the Previous/Next buttons below.           ── */}
+          Both faces are h-[560px] so the preserve-3d container is always
+          exactly 560px — no dynamic measurement needed, no overflow possible. ── */}
       <div style={{ perspective: '1200px' }}>
         <div
           style={{
             position: 'relative',
-            minHeight: containerMinHeight || undefined,
             transformStyle: 'preserve-3d',
             transform: `rotateY(${rotationDeg}deg)`,
             transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
             willChange: 'transform',
           }}
         >
-          {/* Face A — in normal flow, sets container height */}
-          {renderFace(faceAData, faceALang, faceARef)}
+          {/* Face A — in normal flow */}
+          {renderFace(faceAData, faceALang)}
 
-          {/* Face B — absolutely positioned on top, pre-rotated 180° */}
-          {renderFace(faceBData, faceBLang, faceBRef, {
+          {/* Face B — absolutely positioned, pre-rotated 180° */}
+          {renderFace(faceBData, faceBLang, {
             transform: 'rotateY(180deg)',
             position: 'absolute',
             top: 0,
