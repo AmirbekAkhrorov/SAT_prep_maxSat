@@ -20,10 +20,14 @@ export default function TestQuestionCard({
   const isAnimatingRef = useRef(false);
   const dropdownRef = useRef(null);
 
+  // Refs for measuring face heights — prevents Face B from overflowing into buttons
+  const faceARef = useRef(null);
+  const faceBRef = useRef(null);
+  const [containerMinHeight, setContainerMinHeight] = useState(0);
+
   const availableLangs = getAvailableLanguages(question.question_id);
   const canTranslate = availableLangs.length > 0;
 
-  // Face A visible at 0°, 360°... Face B visible at 180°, 540°...
   const showingFaceB = (rotationDeg / 180) % 2 === 1;
   const activeLang = showingFaceB ? faceBLang : faceALang;
   const isFlipped = activeLang !== null;
@@ -34,8 +38,18 @@ export default function TestQuestionCard({
     setFaceBLang(null);
     setRotationDeg(0);
     setShowLangMenu(false);
+    setContainerMinHeight(0);
     isAnimatingRef.current = false;
   }, [question.question_id]);
+
+  // After render: measure both faces and lock container to the taller one.
+  // This prevents Face B (position:absolute) from overflowing into sibling elements.
+  useEffect(() => {
+    const aH = faceARef.current?.offsetHeight ?? 0;
+    const bH = faceBRef.current?.offsetHeight ?? 0;
+    const needed = Math.max(aH, bH);
+    if (needed > 0) setContainerMinHeight(needed);
+  });
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -66,7 +80,6 @@ export default function TestQuestionCard({
   };
 
   // Build display data for one face (lang=null means English)
-  // Test mode: options array → map to translated choice_a/b/c/d fields
   const buildFaceData = (lang) => {
     const baseOptions = question.options || [];
     if (!lang) return { questionText: question.question_text, options: baseOptions };
@@ -93,92 +106,92 @@ export default function TestQuestionCard({
     hard: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400 border-red-200 dark:border-red-800',
   };
 
-  // Renders the full card face (header + content) — called for both Face A and Face B
-  // lang is the language this specific face is displaying (null = English)
-  const renderFace = ({ questionText, options }, lang) => (
-    <>
-      {/* Language banner (shown when translated) */}
-      {lang && (
-        <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 border-b border-blue-200 dark:border-blue-800">
-          <span className="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400">
-            {LANGUAGES[lang]?.flag} {LANGUAGES[lang]?.banner}
-          </span>
-        </div>
-      )}
+  // Renders the visual card content for one face.
+  // `faceRef` goes on the outer 3D-transform wrapper; `lang` drives the banner.
+  // IMPORTANT: card styling (bg, rounded, shadow, overflow-hidden) is on the INNER
+  // div — never on the 3D-transformed element itself, which causes shape artifacts.
+  const renderFace = ({ questionText, options }, lang, faceRef, extraStyle = {}) => (
+    <div ref={faceRef} style={{ backfaceVisibility: 'hidden', willChange: 'transform', ...extraStyle }}>
+      {/* Inner visual card — overflow-hidden lives here, not on the 3D wrapper */}
+      <div className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden">
+        {/* Language banner */}
+        {lang && (
+          <div className="bg-blue-50 dark:bg-blue-900/20 px-5 py-2 border-b border-blue-200 dark:border-blue-800">
+            <span className="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400">
+              {LANGUAGES[lang]?.flag} {LANGUAGES[lang]?.banner}
+            </span>
+          </div>
+        )}
 
-      {/* Card header — inside each face so it rotates with the card */}
-      <div className="flex items-center justify-between px-6 py-4 border-b border-cream-200 dark:border-navy-700">
-        <div className="flex items-center gap-3">
-          <span className="font-semibold text-navy-900 dark:text-cream-100">
-            Question {questionNumber} of {totalQuestions}
-          </span>
-          <span className={`px-3 py-1 rounded-full text-xs font-medium border ${difficultyColor[question.difficulty]}`}>
-            {question.difficulty}
-          </span>
+        {/* Card header */}
+        <div className="flex items-center justify-between px-6 py-4 border-b border-cream-200 dark:border-navy-700">
+          <div className="flex items-center gap-3">
+            <span className="font-semibold text-navy-900 dark:text-cream-100">
+              Question {questionNumber} of {totalQuestions}
+            </span>
+            <span className={`px-3 py-1 rounded-full text-xs font-medium border ${difficultyColor[question.difficulty]}`}>
+              {question.difficulty}
+            </span>
+          </div>
+          <span className="text-sm text-navy-500 dark:text-navy-400">{question.domain}</span>
         </div>
-        <span className="text-sm text-navy-500 dark:text-navy-400">{question.domain}</span>
-      </div>
 
-      {/* Content */}
-      <div className="p-6">
-        {/* Passage (if any) */}
-        {question.passage && (
-          <div className="mb-6 p-4 bg-cream-50 dark:bg-navy-800 rounded-xl border border-cream-200 dark:border-navy-700">
-            <p className="text-navy-700 dark:text-cream-300 text-sm leading-relaxed whitespace-pre-wrap">
-              {question.passage}
+        {/* Card body */}
+        <div className="p-6">
+          {/* Passage */}
+          {question.passage && (
+            <div className="mb-6 p-4 bg-cream-50 dark:bg-navy-800 rounded-xl border border-cream-200 dark:border-navy-700">
+              <p className="text-navy-700 dark:text-cream-300 text-sm leading-relaxed whitespace-pre-wrap">
+                {question.passage}
+              </p>
+            </div>
+          )}
+
+          {/* Question text */}
+          <div className="mb-6">
+            <p className="text-navy-900 dark:text-cream-100 text-lg leading-relaxed font-medium">
+              {questionText}
             </p>
+            <p className="text-sm text-navy-500 dark:text-navy-400 mt-2">{question.skill}</p>
           </div>
-        )}
 
-        {/* Question Text */}
-        <div className="mb-6">
-          <p className="text-navy-900 dark:text-cream-100 text-lg leading-relaxed font-medium">
-            {questionText}
-          </p>
-          <p className="text-sm text-navy-500 dark:text-navy-400 mt-2">{question.skill}</p>
-        </div>
+          {/* Visualization */}
+          {question.visualization && (
+            <div className="my-6 flex justify-center">
+              <MathVisualization visualization={question.visualization} />
+            </div>
+          )}
 
-        {/* Visualization */}
-        {question.visualization && (
-          <div className="my-6 flex justify-center">
-            <MathVisualization visualization={question.visualization} />
-          </div>
-        )}
-
-        {/* Answer Choices */}
-        {options.length > 0 ? (
-          <div className="space-y-3">
-            {options.map((choice) => {
-              const isSelected = selectedAnswer === choice.id;
-              return (
-                <button
-                  key={choice.id}
-                  onClick={() => onSelectAnswer(choice.id)}
-                  className={`w-full p-4 text-left rounded-xl border-2 transition-all ${
-                    isSelected
-                      ? 'border-gold-500 bg-cream-50 dark:bg-navy-800'
-                      : 'border-cream-200 dark:border-navy-700 hover:border-navy-300 dark:hover:border-navy-600 hover:bg-cream-50 dark:hover:bg-navy-800'
-                  }`}
-                >
-                  <div className="flex items-start gap-3">
-                    <span
-                      className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold ${
+          {/* Answer choices */}
+          {options.length > 0 ? (
+            <div className="space-y-3">
+              {options.map((choice) => {
+                const isSelected = selectedAnswer === choice.id;
+                return (
+                  <button
+                    key={choice.id}
+                    onClick={() => onSelectAnswer(choice.id)}
+                    className={`w-full p-4 text-left rounded-xl border-2 transition-all ${
+                      isSelected
+                        ? 'border-gold-500 bg-cream-50 dark:bg-navy-800'
+                        : 'border-cream-200 dark:border-navy-700 hover:border-navy-300 dark:hover:border-navy-600 hover:bg-cream-50 dark:hover:bg-navy-800'
+                    }`}
+                  >
+                    <div className="flex items-start gap-3">
+                      <span className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold ${
                         isSelected
                           ? 'bg-gold-500 text-white'
                           : 'bg-cream-200 dark:bg-navy-700 text-navy-600 dark:text-cream-300'
-                      }`}
-                    >
-                      {choice.id}
-                    </span>
-                    <span className="flex-1 text-navy-900 dark:text-cream-100">{choice.text}</span>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        ) : (
-          // Grid-in input for numeric answers
-          <div>
+                      }`}>
+                        {choice.id}
+                      </span>
+                      <span className="flex-1 text-navy-900 dark:text-cream-100">{choice.text}</span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          ) : (
             <input
               type="text"
               value={selectedAnswer || ''}
@@ -186,17 +199,16 @@ export default function TestQuestionCard({
               placeholder="Enter your numeric answer..."
               className="w-full p-4 text-lg rounded-xl border-2 border-cream-200 dark:border-navy-700 bg-white dark:bg-navy-800 text-navy-900 dark:text-cream-100 placeholder-navy-400 dark:placeholder-navy-500 focus:border-gold-500 focus:outline-none transition-all"
             />
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </>
+    </div>
   );
 
   return (
     <div>
-      {/* ── Top bar: flag + language selector — OUTSIDE the flip so always clickable ── */}
+      {/* ── Top bar: flag + language selector — OUTSIDE flip, always clickable ── */}
       <div className="flex items-center justify-between mb-2">
-        {/* Flag button */}
         <button
           onClick={onToggleFlag}
           className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
@@ -204,13 +216,11 @@ export default function TestQuestionCard({
               ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
               : 'text-navy-500 dark:text-cream-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
           }`}
-          title={isFlagged ? 'Remove flag' : 'Flag for review'}
         >
           <Flag className={`w-4 h-4 ${isFlagged ? 'fill-red-600 dark:fill-red-400' : ''}`} />
           {isFlagged ? 'Flagged' : 'Flag'}
         </button>
 
-        {/* Language selector */}
         {canTranslate && (
           <div className="relative" ref={dropdownRef}>
             <button
@@ -248,40 +258,31 @@ export default function TestQuestionCard({
         )}
       </div>
 
-      {/* ── 3D Flip container — card styling lives on each face ── */}
+      {/* ── 3D flip container ──
+          minHeight is set to max(faceA, faceB) so Face B (position:absolute)
+          never overflows into the Previous/Next buttons below.           ── */}
       <div style={{ perspective: '1200px' }}>
         <div
           style={{
             position: 'relative',
+            minHeight: containerMinHeight || undefined,
             transformStyle: 'preserve-3d',
             transform: `rotateY(${rotationDeg}deg)`,
             transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
             willChange: 'transform',
           }}
         >
-          {/* Face A */}
-          <div
-            style={{ backfaceVisibility: 'hidden', willChange: 'transform' }}
-            className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden"
-          >
-            {renderFace(faceAData, faceALang)}
-          </div>
+          {/* Face A — in normal flow, sets container height */}
+          {renderFace(faceAData, faceALang, faceARef)}
 
-          {/* Face B */}
-          <div
-            style={{
-              backfaceVisibility: 'hidden',
-              transform: 'rotateY(180deg)',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              willChange: 'transform',
-            }}
-            className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden"
-          >
-            {renderFace(faceBData, faceBLang)}
-          </div>
+          {/* Face B — absolutely positioned on top, pre-rotated 180° */}
+          {renderFace(faceBData, faceBLang, faceBRef, {
+            transform: 'rotateY(180deg)',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+          })}
         </div>
       </div>
     </div>
