@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   GraduationCap,
-  CheckCircle,
   XCircle,
   Flag,
-  ChevronDown,
-  ChevronUp,
   ArrowLeft,
   Trophy,
   Target,
@@ -15,6 +12,7 @@ import {
   Star,
 } from 'lucide-react';
 import ThemeToggle from '../components/ThemeToggle';
+import ReviewQuestionItem from '../components/ReviewQuestionItem';
 
 export default function TestResults() {
   const navigate = useNavigate();
@@ -288,175 +286,16 @@ export default function TestResults() {
           </div>
 
           <div className="space-y-3">
-            {questions.map((q, index) => {
-              const isExpanded = expandedQuestions.has(q.order);
-              const choices = q.options || [];
-
-              return (
-                <motion.div
-                  key={q.order}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  className="card overflow-hidden"
-                >
-                  {/* Question Header */}
-                  <button
-                    onClick={() => toggleQuestion(q.order)}
-                    className="w-full p-4 flex items-center justify-between hover:bg-cream-50 dark:hover:bg-navy-800 transition-colors"
-                  >
-                    <div className="flex items-center gap-3">
-                      {q.is_correct ? (
-                        <CheckCircle className="w-6 h-6 text-green-500" />
-                      ) : (
-                        <XCircle className="w-6 h-6 text-red-500" />
-                      )}
-                      <span className="font-semibold text-navy-900 dark:text-cream-100">
-                        Question {q.order}
-                      </span>
-                      <span
-                        className={`px-2 py-0.5 rounded-full text-xs font-medium border ${
-                          difficultyColor[q.difficulty]
-                        }`}
-                      >
-                        {q.difficulty}
-                      </span>
-                      {q.is_flagged && (
-                        <Flag className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                      )}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm text-navy-500 dark:text-navy-400">{q.domain}</span>
-                      {isExpanded ? (
-                        <ChevronUp className="w-5 h-5 text-navy-400" />
-                      ) : (
-                        <ChevronDown className="w-5 h-5 text-navy-400" />
-                      )}
-                    </div>
-                  </button>
-
-                  {/* Expanded Content */}
-                  <AnimatePresence>
-                    {isExpanded && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        className="border-t border-cream-200 dark:border-navy-700"
-                      >
-                        <div className="p-6">
-                          {/* Passage */}
-                          {q.passage && (
-                            <div className="mb-4 p-4 bg-cream-50 dark:bg-navy-800 rounded-xl border border-cream-200 dark:border-navy-700">
-                              <p className="text-navy-700 dark:text-cream-300 text-sm leading-relaxed whitespace-pre-wrap">
-                                {q.passage}
-                              </p>
-                            </div>
-                          )}
-
-                          {/* Question Text */}
-                          <p className="text-navy-900 dark:text-cream-100 font-medium mb-4">
-                            {q.question_text}
-                          </p>
-
-                          {/* Answer Choices */}
-                          {choices.length > 0 ? (
-                            <div className="space-y-2 mb-4">
-                              {choices.map((choice) => {
-                                const isUserAnswer = q.user_answer === choice.id;
-                                const isCorrectAnswer =
-                                  q.correct_answer === choice.id;
-
-                                let bgColor = 'bg-cream-50 dark:bg-navy-800 border-cream-200 dark:border-navy-700';
-                                if (isCorrectAnswer) {
-                                  bgColor =
-                                    'bg-green-50 dark:bg-green-900/30 border-green-300 dark:border-green-800';
-                                } else if (isUserAnswer && !q.is_correct) {
-                                  bgColor = 'bg-red-50 dark:bg-red-900/30 border-red-300 dark:border-red-800';
-                                }
-
-                                return (
-                                  <div
-                                    key={choice.id}
-                                    className={`p-3 rounded-xl border ${bgColor}`}
-                                  >
-                                    <div className="flex items-start gap-3">
-                                      <span
-                                        className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold ${
-                                          isCorrectAnswer
-                                            ? 'bg-green-500 text-white'
-                                            : isUserAnswer && !q.is_correct
-                                            ? 'bg-red-500 text-white'
-                                            : 'bg-cream-200 dark:bg-navy-700 text-navy-600 dark:text-cream-300'
-                                        }`}
-                                      >
-                                        {isCorrectAnswer
-                                          ? '✓'
-                                          : isUserAnswer && !q.is_correct
-                                          ? '✗'
-                                          : choice.id}
-                                      </span>
-                                      <span className="flex-1 text-navy-800 dark:text-cream-200">
-                                        {choice.text}
-                                      </span>
-                                      {isUserAnswer && (
-                                        <span className="text-xs text-navy-500">
-                                          Your answer
-                                        </span>
-                                      )}
-                                    </div>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          ) : (
-                            // Grid-in display
-                            <div className="mb-4 p-4 bg-cream-50 dark:bg-navy-800 rounded-xl">
-                              <div className="flex justify-between items-center">
-                                <div>
-                                  <span className="text-sm text-navy-500 dark:text-navy-400">
-                                    Your answer:
-                                  </span>
-                                  <span
-                                    className={`ml-2 font-semibold ${
-                                      q.is_correct
-                                        ? 'text-green-600'
-                                        : 'text-red-600'
-                                    }`}
-                                  >
-                                    {q.user_answer || '(no answer)'}
-                                  </span>
-                                </div>
-                                <div>
-                                  <span className="text-sm text-navy-500 dark:text-navy-400">
-                                    Correct answer:
-                                  </span>
-                                  <span className="ml-2 font-semibold text-green-600">
-                                    {q.correct_answer}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          )}
-
-                          {/* Explanation */}
-                          {q.explanation && (
-                            <div className="p-4 bg-blue-50 dark:bg-blue-900/30 rounded-xl border border-blue-200 dark:border-blue-800">
-                              <p className="text-sm font-semibold text-blue-800 dark:text-blue-300 mb-1">
-                                Explanation
-                              </p>
-                              <p className="text-navy-700 dark:text-cream-300 text-sm leading-relaxed">
-                                {q.explanation}
-                              </p>
-                            </div>
-                          )}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              );
-            })}
+            {questions.map((q, index) => (
+              <ReviewQuestionItem
+                key={q.order}
+                q={q}
+                index={index}
+                isExpanded={expandedQuestions.has(q.order)}
+                onToggle={() => toggleQuestion(q.order)}
+                difficultyColor={difficultyColor}
+              />
+            ))}
           </div>
         </motion.div>
       </main>
