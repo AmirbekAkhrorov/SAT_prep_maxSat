@@ -3,6 +3,10 @@ import { Flag, Languages, ChevronDown } from 'lucide-react';
 import { MathVisualization } from './visualizations';
 import { getTranslation, getAvailableLanguages, LANGUAGES } from '../data/translations';
 
+// The card fills the viewport between header and footer.
+// Header(72) + main-py-top(24) + topbar(40) + nav-buttons-below(60) + footer(72) + extra(12) = 280px
+const CARD_HEIGHT = 'calc(100vh - 280px)';
+
 export default function TestQuestionCard({
   question,
   questionNumber,
@@ -13,18 +17,12 @@ export default function TestQuestionCard({
   onToggleFlag,
 }) {
   // ── Language flip state ──────────────────────────────────────────────────────
-  const [faceALang, setFaceALang] = useState(null); // null = English
+  const [faceALang, setFaceALang] = useState(null);
   const [faceBLang, setFaceBLang] = useState(null);
   const [rotationDeg, setRotationDeg] = useState(0);
   const [showLangMenu, setShowLangMenu] = useState(false);
   const isAnimatingRef = useRef(false);
   const dropdownRef = useRef(null);
-
-  // Tracks the taller of the two faces so the preserve-3d container never
-  // collapses and Face B (position:absolute) never bleeds into sibling elements.
-  const faceARef = useRef(null);
-  const faceBRef = useRef(null);
-  const [containerMinHeight, setContainerMinHeight] = useState(0);
 
   const availableLangs = getAvailableLanguages(question.question_id);
   const canTranslate = availableLangs.length > 0;
@@ -39,21 +37,8 @@ export default function TestQuestionCard({
     setFaceBLang(null);
     setRotationDeg(0);
     setShowLangMenu(false);
-    setContainerMinHeight(0);
     isAnimatingRef.current = false;
   }, [question.question_id]);
-
-  // After every render, lock the container to the taller face.
-  // Uses a requestAnimationFrame so measurements happen after paint.
-  useEffect(() => {
-    const frame = requestAnimationFrame(() => {
-      const aH = faceARef.current?.offsetHeight ?? 0;
-      const bH = faceBRef.current?.offsetHeight ?? 0;
-      const needed = Math.max(aH, bH);
-      if (needed > 0) setContainerMinHeight(needed);
-    });
-    return () => cancelAnimationFrame(frame);
-  });
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -83,7 +68,6 @@ export default function TestQuestionCard({
     });
   };
 
-  // Build display data for one face (lang=null means English)
   const buildFaceData = (lang) => {
     const baseOptions = question.options || [];
     if (!lang) return { questionText: question.question_text, options: baseOptions };
@@ -110,18 +94,17 @@ export default function TestQuestionCard({
     hard:   'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400 border-red-200 dark:border-red-800',
   };
 
-  // Card renders naturally to fit its content — exactly like practice mode.
-  // The 3D-transform wrapper (outer div with ref) is kept visually neutral;
-  // overflow-hidden + rounded corners live on the inner visual card only,
-  // because those CSS properties on a 3D-transformed element cause artifacts.
-  const renderFace = ({ questionText, options }, lang, faceRef, extraStyle = {}) => (
-    <div ref={faceRef} style={{ backfaceVisibility: 'hidden', willChange: 'transform', ...extraStyle }}>
-      {/* Visual card — natural height, no scrolling, matches practice mode */}
-      <div className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden">
-
+  // Every face is viewport-height locked: the card frame never changes size.
+  // The 3D wrapper is visually neutral; card styling lives on the inner div.
+  const renderFace = ({ questionText, options }, lang, extraStyle = {}) => (
+    <div style={{ backfaceVisibility: 'hidden', willChange: 'transform', ...extraStyle }}>
+      <div
+        className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden flex flex-col"
+        style={{ height: CARD_HEIGHT }}
+      >
         {/* Language banner */}
         {lang && (
-          <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 border-b border-blue-200 dark:border-blue-800">
+          <div className="flex-shrink-0 bg-blue-50 dark:bg-blue-900/20 px-4 py-2 border-b border-blue-200 dark:border-blue-800">
             <span className="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400">
               {LANGUAGES[lang]?.flag} {LANGUAGES[lang]?.banner}
             </span>
@@ -129,7 +112,7 @@ export default function TestQuestionCard({
         )}
 
         {/* Card header */}
-        <div className="flex items-center justify-between p-4 border-b border-cream-200 dark:border-navy-700">
+        <div className="flex-shrink-0 flex items-center justify-between p-4 border-b border-cream-200 dark:border-navy-700">
           <div className="flex items-center gap-3">
             <span className="font-semibold text-navy-900 dark:text-cream-100">
               Question {questionNumber} of {totalQuestions}
@@ -141,9 +124,8 @@ export default function TestQuestionCard({
           <span className="text-sm text-navy-500 dark:text-navy-400">{question.domain}</span>
         </div>
 
-        {/* Card body — plain p-6, grows with content, no scroll */}
-        <div className="p-6">
-          {/* Passage */}
+        {/* Card body — fills remaining height, content centered vertically */}
+        <div className="flex-1 p-6 flex flex-col justify-start">
           {question.passage && (
             <div className="mb-6 p-4 bg-cream-50 dark:bg-navy-800 rounded-xl border border-cream-200 dark:border-navy-700">
               <p className="text-navy-700 dark:text-cream-300 text-sm leading-relaxed whitespace-pre-wrap">
@@ -152,7 +134,6 @@ export default function TestQuestionCard({
             </div>
           )}
 
-          {/* Question text */}
           <div className="mb-6">
             <p className="text-navy-900 dark:text-cream-100 text-lg leading-relaxed font-medium">
               {questionText}
@@ -160,14 +141,12 @@ export default function TestQuestionCard({
             <p className="text-sm text-navy-500 dark:text-navy-400 mt-2">{question.skill}</p>
           </div>
 
-          {/* Visualization */}
           {question.visualization && (
             <div className="my-6 flex justify-center">
               <MathVisualization visualization={question.visualization} />
             </div>
           )}
 
-          {/* Answer choices */}
           {options.length > 0 ? (
             <div className="space-y-3">
               {options.map((choice) => {
@@ -212,7 +191,7 @@ export default function TestQuestionCard({
 
   return (
     <div>
-      {/* ── Top bar: flag + language selector — OUTSIDE flip, always clickable ── */}
+      {/* Top bar: flag + language selector */}
       <div className="flex items-center justify-between mb-2">
         <button
           onClick={onToggleFlag}
@@ -263,25 +242,21 @@ export default function TestQuestionCard({
         )}
       </div>
 
-      {/* ── 3D flip container ──
-          containerMinHeight = max(faceA, faceB) measured after every paint,
-          so Face B (position:absolute) never bleeds into the buttons below.  ── */}
+      {/* 3D flip container — both faces are CARD_HEIGHT so the container is always
+          the same size. No ref measurement needed. */}
       <div style={{ perspective: '1200px' }}>
         <div
           style={{
             position: 'relative',
-            minHeight: containerMinHeight || undefined,
             transformStyle: 'preserve-3d',
             transform: `rotateY(${rotationDeg}deg)`,
             transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
             willChange: 'transform',
           }}
         >
-          {/* Face A — in normal flow, drives container height */}
-          {renderFace(faceAData, faceALang, faceARef)}
+          {renderFace(faceAData, faceALang)}
 
-          {/* Face B — absolutely positioned, pre-rotated 180° */}
-          {renderFace(faceBData, faceBLang, faceBRef, {
+          {renderFace(faceBData, faceBLang, {
             transform: 'rotateY(180deg)',
             position: 'absolute',
             top: 0,
