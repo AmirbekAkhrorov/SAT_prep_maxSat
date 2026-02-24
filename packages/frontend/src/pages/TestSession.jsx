@@ -274,7 +274,7 @@ export default function TestSession() {
 
       {/* Main Content */}
       <main className="flex-1 container-wide mx-auto px-6 py-6">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <AnimatePresence mode="wait">
             {currentQuestion && (
               <motion.div

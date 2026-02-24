@@ -26,6 +26,7 @@ export default function TestQuestionCard({
   // Face A visible at 0°, 360°... Face B visible at 180°, 540°...
   const showingFaceB = (rotationDeg / 180) % 2 === 1;
   const activeLang = showingFaceB ? faceBLang : faceALang;
+  const isFlipped = activeLang !== null;
 
   // Reset on question change
   useEffect(() => {
@@ -92,151 +93,162 @@ export default function TestQuestionCard({
     hard: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400 border-red-200 dark:border-red-800',
   };
 
-  // Render the inner content for one face
-  const renderFace = ({ questionText, options }) => (
-    <div className="p-6">
-      {/* Passage (if any) */}
-      {question.passage && (
-        <div className="mb-6 p-4 bg-cream-50 dark:bg-navy-800 rounded-xl border border-cream-200 dark:border-navy-700">
-          <p className="text-navy-700 dark:text-cream-300 text-sm leading-relaxed whitespace-pre-wrap">
-            {question.passage}
-          </p>
+  // Renders the full card face (header + content) — called for both Face A and Face B
+  // lang is the language this specific face is displaying (null = English)
+  const renderFace = ({ questionText, options }, lang) => (
+    <>
+      {/* Language banner (shown when translated) */}
+      {lang && (
+        <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 border-b border-blue-200 dark:border-blue-800">
+          <span className="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400">
+            {LANGUAGES[lang]?.flag} {LANGUAGES[lang]?.banner}
+          </span>
         </div>
       )}
 
-      {/* Question Text */}
-      <div className="mb-6">
-        <p className="text-navy-900 dark:text-cream-100 text-lg leading-relaxed font-medium">
-          {questionText}
-        </p>
-        <p className="text-sm text-navy-500 dark:text-navy-400 mt-2">
-          {question.domain} - {question.skill}
-        </p>
-      </div>
-
-      {/* Visualization */}
-      {question.visualization && (
-        <div className="my-6 flex justify-center">
-          <MathVisualization visualization={question.visualization} />
-        </div>
-      )}
-
-      {/* Answer Choices */}
-      {options.length > 0 ? (
-        <div className="space-y-3">
-          {options.map((choice) => {
-            const isSelected = selectedAnswer === choice.id;
-            return (
-              <button
-                key={choice.id}
-                onClick={() => onSelectAnswer(choice.id)}
-                className={`w-full p-4 text-left rounded-xl border-2 transition-all ${
-                  isSelected
-                    ? 'border-gold-500 bg-cream-50 dark:bg-navy-800'
-                    : 'border-cream-200 dark:border-navy-700 hover:border-navy-300 dark:hover:border-navy-600 hover:bg-cream-50 dark:hover:bg-navy-800'
-                }`}
-              >
-                <div className="flex items-start gap-3">
-                  <span
-                    className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold ${
-                      isSelected
-                        ? 'bg-gold-500 text-white'
-                        : 'bg-cream-200 dark:bg-navy-700 text-navy-600 dark:text-cream-300'
-                    }`}
-                  >
-                    {choice.id}
-                  </span>
-                  <span className="flex-1 text-navy-900 dark:text-cream-100">{choice.text}</span>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-      ) : (
-        // Grid-in input for numeric answers
-        <div>
-          <input
-            type="text"
-            value={selectedAnswer || ''}
-            onChange={(e) => onSelectAnswer(e.target.value)}
-            placeholder="Enter your numeric answer..."
-            className="w-full p-4 text-lg rounded-xl border-2 border-cream-200 dark:border-navy-700 bg-white dark:bg-navy-800 text-navy-900 dark:text-cream-100 placeholder-navy-400 dark:placeholder-navy-500 focus:border-gold-500 focus:outline-none transition-all"
-          />
-        </div>
-      )}
-    </div>
-  );
-
-  return (
-    <div className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden">
-      {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-cream-200 dark:border-navy-700">
+      {/* Card header — inside each face so it rotates with the card */}
+      <div className="flex items-center justify-between px-6 py-4 border-b border-cream-200 dark:border-navy-700">
         <div className="flex items-center gap-3">
           <span className="font-semibold text-navy-900 dark:text-cream-100">
             Question {questionNumber} of {totalQuestions}
           </span>
-          <span
-            className={`px-3 py-1 rounded-full text-xs font-medium border ${difficultyColor[question.difficulty]}`}
-          >
+          <span className={`px-3 py-1 rounded-full text-xs font-medium border ${difficultyColor[question.difficulty]}`}>
             {question.difficulty}
           </span>
         </div>
-        <div className="flex items-center gap-2">
-          {/* Language selector — outside flip so it's always clickable */}
-          {canTranslate && (
-            <div className="relative" ref={dropdownRef}>
-              <button
-                onClick={() => setShowLangMenu((v) => !v)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-sans transition-colors ${
-                  activeLang
-                    ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800'
-                    : 'text-navy-600 dark:text-cream-300 hover:bg-cream-100 dark:hover:bg-navy-800 border border-cream-200 dark:border-navy-700'
-                }`}
-              >
-                <Languages className="w-4 h-4" />
-                {currentLangMeta.flag} {currentLangMeta.label}
-                <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform ${showLangMenu ? 'rotate-180' : ''}`}
-                />
-              </button>
-              {showLangMenu && (
-                <div className="absolute right-0 mt-1 w-44 bg-white dark:bg-navy-800 rounded-xl shadow-lg border border-cream-200 dark:border-navy-700 z-50 overflow-hidden">
-                  {dropdownLangs.map((lang) => {
-                    const meta = LANGUAGES[lang];
-                    return (
-                      <button
-                        key={lang}
-                        onClick={() => handleSelectLang(lang)}
-                        className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-navy-700 dark:text-cream-300 hover:bg-cream-50 dark:hover:bg-navy-700 transition-colors"
-                      >
-                        {meta.flag} {meta.label}
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Flag button */}
-          <button
-            onClick={onToggleFlag}
-            className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
-              isFlagged
-                ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
-                : 'text-navy-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20'
-            }`}
-            title={isFlagged ? 'Remove flag' : 'Flag for review'}
-          >
-            <Flag className={`w-4 h-4 ${isFlagged ? 'fill-red-600' : ''}`} />
-            <span className="text-sm font-medium">
-              {isFlagged ? 'Flagged' : 'Flag'}
-            </span>
-          </button>
-        </div>
+        <span className="text-sm text-navy-500 dark:text-navy-400">{question.domain}</span>
       </div>
 
-      {/* 3D Flip container */}
+      {/* Content */}
+      <div className="p-6">
+        {/* Passage (if any) */}
+        {question.passage && (
+          <div className="mb-6 p-4 bg-cream-50 dark:bg-navy-800 rounded-xl border border-cream-200 dark:border-navy-700">
+            <p className="text-navy-700 dark:text-cream-300 text-sm leading-relaxed whitespace-pre-wrap">
+              {question.passage}
+            </p>
+          </div>
+        )}
+
+        {/* Question Text */}
+        <div className="mb-6">
+          <p className="text-navy-900 dark:text-cream-100 text-lg leading-relaxed font-medium">
+            {questionText}
+          </p>
+          <p className="text-sm text-navy-500 dark:text-navy-400 mt-2">{question.skill}</p>
+        </div>
+
+        {/* Visualization */}
+        {question.visualization && (
+          <div className="my-6 flex justify-center">
+            <MathVisualization visualization={question.visualization} />
+          </div>
+        )}
+
+        {/* Answer Choices */}
+        {options.length > 0 ? (
+          <div className="space-y-3">
+            {options.map((choice) => {
+              const isSelected = selectedAnswer === choice.id;
+              return (
+                <button
+                  key={choice.id}
+                  onClick={() => onSelectAnswer(choice.id)}
+                  className={`w-full p-4 text-left rounded-xl border-2 transition-all ${
+                    isSelected
+                      ? 'border-gold-500 bg-cream-50 dark:bg-navy-800'
+                      : 'border-cream-200 dark:border-navy-700 hover:border-navy-300 dark:hover:border-navy-600 hover:bg-cream-50 dark:hover:bg-navy-800'
+                  }`}
+                >
+                  <div className="flex items-start gap-3">
+                    <span
+                      className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold ${
+                        isSelected
+                          ? 'bg-gold-500 text-white'
+                          : 'bg-cream-200 dark:bg-navy-700 text-navy-600 dark:text-cream-300'
+                      }`}
+                    >
+                      {choice.id}
+                    </span>
+                    <span className="flex-1 text-navy-900 dark:text-cream-100">{choice.text}</span>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        ) : (
+          // Grid-in input for numeric answers
+          <div>
+            <input
+              type="text"
+              value={selectedAnswer || ''}
+              onChange={(e) => onSelectAnswer(e.target.value)}
+              placeholder="Enter your numeric answer..."
+              className="w-full p-4 text-lg rounded-xl border-2 border-cream-200 dark:border-navy-700 bg-white dark:bg-navy-800 text-navy-900 dark:text-cream-100 placeholder-navy-400 dark:placeholder-navy-500 focus:border-gold-500 focus:outline-none transition-all"
+            />
+          </div>
+        )}
+      </div>
+    </>
+  );
+
+  return (
+    <div>
+      {/* ── Top bar: flag + language selector — OUTSIDE the flip so always clickable ── */}
+      <div className="flex items-center justify-between mb-2">
+        {/* Flag button */}
+        <button
+          onClick={onToggleFlag}
+          className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+            isFlagged
+              ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
+              : 'text-navy-500 dark:text-cream-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
+          }`}
+          title={isFlagged ? 'Remove flag' : 'Flag for review'}
+        >
+          <Flag className={`w-4 h-4 ${isFlagged ? 'fill-red-600 dark:fill-red-400' : ''}`} />
+          {isFlagged ? 'Flagged' : 'Flag'}
+        </button>
+
+        {/* Language selector */}
+        {canTranslate && (
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setShowLangMenu((v) => !v)}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-sans font-medium transition-all ${
+                isFlipped
+                  ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
+                  : 'bg-cream-100 dark:bg-navy-800 text-navy-500 dark:text-cream-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600'
+              }`}
+            >
+              <Languages className="w-4 h-4" />
+              <span className="text-base leading-none">{currentLangMeta.flag}</span>
+              {currentLangMeta.label}
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showLangMenu ? 'rotate-180' : ''}`} />
+            </button>
+
+            {showLangMenu && (
+              <div className="absolute right-0 mt-1.5 w-48 bg-white dark:bg-navy-800 rounded-xl shadow-lg border border-cream-200 dark:border-navy-700 overflow-hidden z-50">
+                {dropdownLangs.map((lang) => {
+                  const meta = LANGUAGES[lang];
+                  return (
+                    <button
+                      key={lang}
+                      onClick={() => handleSelectLang(lang)}
+                      className="w-full flex items-center gap-3 px-4 py-3 text-left text-sm font-sans transition-colors text-navy-700 dark:text-cream-200 hover:bg-cream-50 dark:hover:bg-navy-700"
+                    >
+                      <span className="text-lg">{meta.flag}</span>
+                      <span className="font-medium">{meta.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* ── 3D Flip container — card styling lives on each face ── */}
       <div style={{ perspective: '1200px' }}>
         <div
           style={{
@@ -244,12 +256,17 @@ export default function TestQuestionCard({
             transformStyle: 'preserve-3d',
             transform: `rotateY(${rotationDeg}deg)`,
             transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+            willChange: 'transform',
           }}
         >
           {/* Face A */}
-          <div style={{ backfaceVisibility: 'hidden' }}>
-            {renderFace(faceAData)}
+          <div
+            style={{ backfaceVisibility: 'hidden', willChange: 'transform' }}
+            className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden"
+          >
+            {renderFace(faceAData, faceALang)}
           </div>
+
           {/* Face B */}
           <div
             style={{
@@ -259,9 +276,11 @@ export default function TestQuestionCard({
               top: 0,
               left: 0,
               width: '100%',
+              willChange: 'transform',
             }}
+            className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden"
           >
-            {renderFace(faceBData)}
+            {renderFace(faceBData, faceBLang)}
           </div>
         </div>
       </div>
