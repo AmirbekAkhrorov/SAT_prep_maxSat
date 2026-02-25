@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, XCircle, Flag, ChevronDown, ChevronUp, Languages } from 'lucide-react';
-import { getTranslation, getAvailableLanguages, LANGUAGES } from '../data/translations';
+import { getTranslation, getAvailableLanguages, LANGUAGES, UI_STRINGS } from '../data/translations';
 
 export default function ReviewQuestionItem({ q, index, isExpanded, onToggle, difficultyColor }) {
   // ── Language flip state ──────────────────────────────────────────────────────
@@ -81,6 +81,13 @@ export default function ReviewQuestionItem({ q, index, isExpanded, onToggle, dif
   const allLangs = ['en', ...availableLangs];
   const dropdownLangs = allLangs.filter((l) => l !== currentLangKey);
 
+  const ui = UI_STRINGS[activeLang] || {};
+  const t = {
+    explanation: ui.explanation || 'Explanation',
+    yourAnswer: ui.yourAnswer || 'Your answer',
+    correctAnswer: ui.correctAnswer || 'Correct answer',
+  };
+
   const renderExpandedContent = ({ questionText, options, explanation }) => (
     <div className="p-6">
       {/* Passage */}
@@ -123,7 +130,7 @@ export default function ReviewQuestionItem({ q, index, isExpanded, onToggle, dif
                   </span>
                   <span className="flex-1 text-navy-800 dark:text-cream-200">{choice.text}</span>
                   {isUserAnswer && (
-                    <span className="text-xs text-navy-500">Your answer</span>
+                    <span className="text-xs text-navy-500">{t.yourAnswer}</span>
                   )}
                 </div>
               </div>
@@ -134,13 +141,13 @@ export default function ReviewQuestionItem({ q, index, isExpanded, onToggle, dif
         <div className="mb-4 p-4 bg-cream-50 dark:bg-navy-800 rounded-xl">
           <div className="flex justify-between items-center">
             <div>
-              <span className="text-sm text-navy-500 dark:text-navy-400">Your answer:</span>
+              <span className="text-sm text-navy-500 dark:text-navy-400">{t.yourAnswer}:</span>
               <span className={`ml-2 font-semibold ${q.is_correct ? 'text-green-600' : 'text-red-600'}`}>
                 {q.user_answer || '(no answer)'}
               </span>
             </div>
             <div>
-              <span className="text-sm text-navy-500 dark:text-navy-400">Correct answer:</span>
+              <span className="text-sm text-navy-500 dark:text-navy-400">{t.correctAnswer}:</span>
               <span className="ml-2 font-semibold text-green-600">{q.correct_answer}</span>
             </div>
           </div>
@@ -150,7 +157,7 @@ export default function ReviewQuestionItem({ q, index, isExpanded, onToggle, dif
       {/* Explanation */}
       {explanation && (
         <div className="p-4 bg-blue-50 dark:bg-blue-900/30 rounded-xl border border-blue-200 dark:border-blue-800">
-          <p className="text-sm font-semibold text-blue-800 dark:text-blue-300 mb-1">Explanation</p>
+          <p className="text-sm font-semibold text-blue-800 dark:text-blue-300 mb-1">{t.explanation}</p>
           <p className="text-navy-700 dark:text-cream-300 text-sm leading-relaxed">{explanation}</p>
         </div>
       )}

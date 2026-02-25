@@ -13010,6 +13010,8 @@ export const UI_STRINGS = {
     enterAnswer: 'Javobingizni quyida kiriting',
     placeholder: 'Javobingizni kiriting...',
     correctAnswer: "To'g'ri javob",
+    explanation: 'Izoh',
+    yourAnswer: 'Sizning javobingiz',
   },
   ru: {
     checkAnswer: 'Проверить ответ',
@@ -13019,6 +13021,8 @@ export const UI_STRINGS = {
     enterAnswer: 'Введите числовой ответ ниже',
     placeholder: 'Введите ответ...',
     correctAnswer: 'Правильный ответ',
+    explanation: 'Объяснение',
+    yourAnswer: 'Ваш ответ',
   },
 };
 
