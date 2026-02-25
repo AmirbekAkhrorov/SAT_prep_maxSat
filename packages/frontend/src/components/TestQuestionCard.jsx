@@ -252,7 +252,7 @@ export default function TestQuestionCard({
           {/* Face A */}
           <div
             ref={faceARef}
-            style={{ backfaceVisibility: 'hidden', willChange: 'transform' }}
+            style={{ backfaceVisibility: 'hidden', willChange: 'transform', minHeight: 'calc(100vh - 320px)' }}
             className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden"
           >
             {renderFaceContent(faceALang, faceAData)}
@@ -269,6 +269,7 @@ export default function TestQuestionCard({
               left: 0,
               width: '100%',
               willChange: 'transform',
+              minHeight: 'calc(100vh - 320px)',
             }}
             className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden"
           >
