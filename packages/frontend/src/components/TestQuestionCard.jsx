@@ -101,8 +101,8 @@ export default function TestQuestionCard({
     hard:   'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400 border-red-200 dark:border-red-800',
   };
 
-  // Renders face content — banner + header + body, all inside the face div.
-  // NO height constraint, NO flex-col, NO extra wrapper — identical to QuestionCard.
+  // Renders face content — banner + header + scrollable body.
+  // Face div has exact height; body flex-grows and scrolls only when content overflows.
   const renderFaceContent = (lang, { questionText, options }) => (
     <>
       {lang && (
@@ -123,7 +123,7 @@ export default function TestQuestionCard({
           {questionNumber} / {totalQuestions}
         </span>
       </div>
-      <div className="p-6">
+      <div className="p-6" style={{ flex: 1, minHeight: 0, overflowY: 'auto' }}>
         {question.passage && (
           <div className="mb-6 p-4 bg-cream-50 dark:bg-navy-800 rounded-xl border border-cream-200 dark:border-navy-700">
             <p className="text-navy-700 dark:text-cream-300 text-sm leading-relaxed whitespace-pre-wrap">
@@ -252,7 +252,7 @@ export default function TestQuestionCard({
           {/* Face A */}
           <div
             ref={faceARef}
-            style={{ backfaceVisibility: 'hidden', willChange: 'transform', minHeight: 'calc(100vh - 320px)' }}
+            style={{ backfaceVisibility: 'hidden', willChange: 'transform', height: 'calc(100vh - 320px)', display: 'flex', flexDirection: 'column' }}
             className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden"
           >
             {renderFaceContent(faceALang, faceAData)}
@@ -269,7 +269,9 @@ export default function TestQuestionCard({
               left: 0,
               width: '100%',
               willChange: 'transform',
-              minHeight: 'calc(100vh - 320px)',
+              height: 'calc(100vh - 320px)',
+              display: 'flex',
+              flexDirection: 'column',
             }}
             className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden"
           >
