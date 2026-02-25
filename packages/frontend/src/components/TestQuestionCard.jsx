@@ -101,56 +101,59 @@ export default function TestQuestionCard({
     hard:   'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400 border-red-200 dark:border-red-800',
   };
 
-  // Renders face content — banner + header + scrollable body.
-  // Face div has exact height; body flex-grows and scrolls only when content overflows.
+  // Renders face content — header + body.
+  // No banner inside the face (it stole height and caused clipping).
+  // The topbar language button already shows the active language.
   const renderFaceContent = (lang, { questionText, options }) => (
     <>
-      {lang && (
-        <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 border-b border-blue-200 dark:border-blue-800">
-          <span className="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400">
-            {LANGUAGES[lang]?.flag} {LANGUAGES[lang]?.banner}
-          </span>
-        </div>
-      )}
-      <div className="flex items-center justify-between p-4 border-b border-cream-200 dark:border-navy-700">
+      <div className={`flex items-center justify-between p-4 border-b ${
+        lang
+          ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800'
+          : 'border-cream-200 dark:border-navy-700'
+      }`}>
         <div className="flex items-center gap-3">
           <span className={`px-3 py-1 rounded-full text-xs font-medium border ${difficultyColor[question.difficulty]}`}>
             {question.difficulty}
           </span>
           <span className="text-sm text-navy-500 dark:text-navy-400">{question.domain}</span>
+          {lang && (
+            <span className="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400">
+              {LANGUAGES[lang]?.flag} {LANGUAGES[lang]?.label}
+            </span>
+          )}
         </div>
         <span className="font-semibold text-navy-900 dark:text-cream-100 text-sm">
           {questionNumber} / {totalQuestions}
         </span>
       </div>
-      <div className="p-6" style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
+      <div className="p-5" style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
         {question.passage && (
-          <div className="mb-6 p-4 bg-cream-50 dark:bg-navy-800 rounded-xl border border-cream-200 dark:border-navy-700">
+          <div className="mb-4 p-3 bg-cream-50 dark:bg-navy-800 rounded-xl border border-cream-200 dark:border-navy-700">
             <p className="text-navy-700 dark:text-cream-300 text-sm leading-relaxed whitespace-pre-wrap">
               {question.passage}
             </p>
           </div>
         )}
-        <div className="mb-6">
+        <div className="mb-4">
           <p className="text-navy-900 dark:text-cream-100 text-lg leading-relaxed font-medium">
             {questionText}
           </p>
-          <p className="text-sm text-navy-500 dark:text-navy-400 mt-2">{question.skill}</p>
+          <p className="text-sm text-navy-500 dark:text-navy-400 mt-1">{question.skill}</p>
         </div>
         {question.visualization && (
-          <div className="my-3 flex justify-center">
-            <MathVisualization visualization={question.visualization} maxWidth={200} />
+          <div className="my-2 flex justify-center">
+            <MathVisualization visualization={question.visualization} maxWidth={150} />
           </div>
         )}
         {options.length > 0 ? (
-          <div className="space-y-3">
+          <div className="space-y-2">
             {options.map((choice) => {
               const isSelected = selectedAnswer === choice.id;
               return (
                 <button
                   key={choice.id}
                   onClick={() => onSelectAnswer(choice.id)}
-                  className={`w-full p-4 text-left rounded-xl border-2 transition-all ${
+                  className={`w-full p-3 text-left rounded-xl border-2 transition-all ${
                     isSelected
                       ? 'border-gold-500 bg-cream-50 dark:bg-navy-800'
                       : 'border-cream-200 dark:border-navy-700 hover:border-navy-300 dark:hover:border-navy-600 hover:bg-cream-50 dark:hover:bg-navy-800'
