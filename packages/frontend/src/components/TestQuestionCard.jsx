@@ -123,7 +123,7 @@ export default function TestQuestionCard({
           {questionNumber} / {totalQuestions}
         </span>
       </div>
-      <div className="p-6" style={{ flex: 1, minHeight: 0, overflowY: 'auto' }}>
+      <div className="p-6" style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
         {question.passage && (
           <div className="mb-6 p-4 bg-cream-50 dark:bg-navy-800 rounded-xl border border-cream-200 dark:border-navy-700">
             <p className="text-navy-700 dark:text-cream-300 text-sm leading-relaxed whitespace-pre-wrap">
@@ -138,8 +138,8 @@ export default function TestQuestionCard({
           <p className="text-sm text-navy-500 dark:text-navy-400 mt-2">{question.skill}</p>
         </div>
         {question.visualization && (
-          <div className="my-6 flex justify-center">
-            <MathVisualization visualization={question.visualization} />
+          <div className="my-3 flex justify-center">
+            <MathVisualization visualization={question.visualization} maxWidth={200} />
           </div>
         )}
         {options.length > 0 ? (
