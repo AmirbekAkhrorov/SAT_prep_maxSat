@@ -126,7 +126,7 @@ export default function TestQuestionCard({
           {questionNumber} / {totalQuestions}
         </span>
       </div>
-      <div className="p-5" style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
+      <div className="p-5">
         {question.passage && (
           <div className="mb-4 p-3 bg-cream-50 dark:bg-navy-800 rounded-xl border border-cream-200 dark:border-navy-700">
             <p className="text-navy-700 dark:text-cream-300 text-sm leading-relaxed whitespace-pre-wrap">
@@ -141,8 +141,8 @@ export default function TestQuestionCard({
           <p className="text-sm text-navy-500 dark:text-navy-400 mt-1">{question.skill}</p>
         </div>
         {question.visualization && (
-          <div className="my-2 flex justify-center">
-            <MathVisualization visualization={question.visualization} maxWidth={150} />
+          <div className="my-3 flex justify-center">
+            <MathVisualization visualization={question.visualization} maxWidth={280} />
           </div>
         )}
         {options.length > 0 ? (
@@ -238,9 +238,9 @@ export default function TestQuestionCard({
         )}
       </div>
 
-      {/* 3D flip — structure is 1:1 with QuestionCard.jsx:
-          Face = single div with BOTH 3D styles AND card classes.
-          No extra wrapper div, no height, no flex. */}
+      {/* 3D flip — Face = single div with 3D styles + card classes.
+          Natural height: card grows to fit content, no fixed height constraint.
+          containerMinHeight keeps the flip container from collapsing when Face B is active. */}
       <div style={{ perspective: '1200px' }}>
         <div
           style={{
@@ -255,7 +255,7 @@ export default function TestQuestionCard({
           {/* Face A */}
           <div
             ref={faceARef}
-            style={{ backfaceVisibility: 'hidden', willChange: 'transform', height: 'calc(100vh - 320px)', display: 'flex', flexDirection: 'column' }}
+            style={{ backfaceVisibility: 'hidden', willChange: 'transform' }}
             className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden"
           >
             {renderFaceContent(faceALang, faceAData)}
@@ -272,9 +272,6 @@ export default function TestQuestionCard({
               left: 0,
               width: '100%',
               willChange: 'transform',
-              height: 'calc(100vh - 320px)',
-              display: 'flex',
-              flexDirection: 'column',
             }}
             className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden"
           >

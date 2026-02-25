@@ -12,7 +12,7 @@ import {
 } from './renderers';
 
 export default function MathVisualization({ visualization, maxWidth }) {
-  if (!visualization || !visualization.type) {
+  if (!visualization || !visualization.type || !visualization.config) {
     return null;
   }
 

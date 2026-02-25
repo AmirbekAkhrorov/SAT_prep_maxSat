@@ -12,6 +12,9 @@ export default function ChartRenderer({ config, maxWidth }) {
     yLabel,
     title,
   } = config;
+  if (!Array.isArray(data) || data.length === 0) return null;
+  if (chartType === 'line' && data.length < 2) return null;
+
   const dw = maxWidth && maxWidth < width ? maxWidth : width;
   const dh = Math.round(height * (dw / width));
 
@@ -20,7 +23,7 @@ export default function ChartRenderer({ config, maxWidth }) {
   const chartHeight = height - padding.top - padding.bottom;
 
   // Calculate scales
-  const maxValue = Math.max(...data.map(d => d.value)) * 1.1;
+  const maxValue = (Math.max(...data.map(d => d.value || 0)) || 1) * 1.1;
   const yScale = (value) => padding.top + chartHeight - (value / maxValue) * chartHeight;
 
   // Colors for data points
@@ -142,8 +145,9 @@ export default function ChartRenderer({ config, maxWidth }) {
 
   const renderScatterChart = () => {
     // For scatter, data points have x and y values
-    const xValues = data.map(d => d.x);
-    const yValues = data.map(d => d.y);
+    const xValues = data.map(d => d.x).filter(v => typeof v === 'number');
+    const yValues = data.map(d => d.y).filter(v => typeof v === 'number');
+    if (xValues.length === 0) return null;
     const xMin = Math.min(...xValues);
     const xMax = Math.max(...xValues);
     const yMin = Math.min(...yValues);

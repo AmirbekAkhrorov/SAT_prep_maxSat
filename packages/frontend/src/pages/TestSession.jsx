@@ -273,7 +273,7 @@ export default function TestSession() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 container-wide mx-auto px-6 py-6">
+      <main className="flex-1 overflow-y-auto container-wide mx-auto px-6 py-6">
         <div className="max-w-4xl mx-auto">
           <AnimatePresence mode="wait">
             {currentQuestion && (
