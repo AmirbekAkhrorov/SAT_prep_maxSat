@@ -21,8 +21,11 @@ export default function QuestionCard({
   const [faceBLang, setFaceBLang] = useState(null);
   const [rotationDeg, setRotationDeg] = useState(0); // always increments by 180
   const [showLangMenu, setShowLangMenu] = useState(false);
+  const [containerMinHeight, setContainerMinHeight] = useState(0);
   const isAnimatingRef = useRef(false);
   const dropdownRef = useRef(null);
+  const faceARef = useRef(null);
+  const faceBRef = useRef(null);
 
   const availableLangs = getAvailableLanguages(question.question_id);
   const canTranslate = availableLangs.length > 0;
@@ -44,12 +47,24 @@ export default function QuestionCard({
     return () => document.removeEventListener('mousedown', handleClick);
   }, [showLangMenu]);
 
+  // Measure both faces every render — keeps containerMinHeight fresh
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      const aH = faceARef.current?.offsetHeight ?? 0;
+      const bH = faceBRef.current?.offsetHeight ?? 0;
+      const needed = Math.max(aH, bH);
+      if (needed > 0) setContainerMinHeight(needed);
+    });
+    return () => cancelAnimationFrame(frame);
+  });
+
   // Reset when question changes
   useEffect(() => {
     setFaceALang(null);
     setFaceBLang(null);
     setRotationDeg(0);
     setShowLangMenu(false);
+    setContainerMinHeight(0);
     isAnimatingRef.current = false;
   }, [question.question_id]);
 
@@ -171,8 +186,8 @@ export default function QuestionCard({
       </div>
 
       {question.visualization && (
-        <div className="my-6 flex justify-center">
-          <MathVisualization visualization={question.visualization} />
+        <div className="my-4 flex justify-center">
+          <MathVisualization visualization={question.visualization} maxWidth={280} />
         </div>
       )}
 
@@ -313,25 +328,29 @@ export default function QuestionCard({
   );
   };
 
-  // Helper to render a face card wrapper (header + banner + content)
+  // Helper to render a face card wrapper (header + content)
+  // Language indicator is merged into the header row — no separate banner div
+  // so both faces have identical structure and equal height contribution.
   const renderFace = (faceData) => {
     const { q, qChoices, lang } = faceData;
     const langInfo = lang ? LANGUAGES[lang] : null;
     return (
       <>
-        {langInfo && (
-          <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 border-b border-blue-200 dark:border-blue-800">
-            <span className="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400">
-              {langInfo.flag} {langInfo.banner}
-            </span>
-          </div>
-        )}
-        <div className="flex items-center justify-between p-4 border-b border-cream-200 dark:border-navy-700">
+        <div className={`flex items-center justify-between p-4 border-b ${
+          lang
+            ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800'
+            : 'border-cream-200 dark:border-navy-700'
+        }`}>
           <div className="flex items-center gap-3">
             <span className={`px-3 py-1 rounded-full text-xs font-medium border ${difficultyColor[question.difficulty]}`}>
               {question.difficulty}
             </span>
             <span className="text-sm text-navy-500 dark:text-navy-400">{question.domain}</span>
+            {langInfo && (
+              <span className="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400">
+                {langInfo.flag} {langInfo.banner}
+              </span>
+            )}
           </div>
           <div className="flex items-center gap-2">
             {userProgress?.is_mastered && (
@@ -403,11 +422,13 @@ export default function QuestionCard({
             transform: `rotateY(${rotationDeg}deg)`,
             transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
             position: 'relative',
+            minHeight: containerMinHeight || undefined,
             willChange: 'transform',
           }}
         >
           {/* ── FACE A ── */}
           <div
+            ref={faceARef}
             style={{ backfaceVisibility: 'hidden', willChange: 'transform' }}
             className="bg-white dark:bg-navy-900 rounded-2xl shadow-card overflow-hidden"
           >
@@ -416,6 +437,7 @@ export default function QuestionCard({
 
           {/* ── FACE B ── */}
           <div
+            ref={faceBRef}
             style={{
               backfaceVisibility: 'hidden',
               transform: 'rotateY(180deg)',
