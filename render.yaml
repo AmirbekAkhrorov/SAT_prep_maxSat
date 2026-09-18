@@ -55,11 +55,10 @@ services:
       # to "mandatory" the moment EMAIL_HOST below is filled in.
       - key: ACCOUNT_EMAIL_VERIFICATION
         value: none
-      # Set EMAIL_HOST/USER/PASSWORD to turn on real mail. While EMAIL_HOST
-      # is empty Django uses the console backend and mail goes to the logs.
-      - key: EMAIL_HOST
-        sync: false
-      - key: EMAIL_HOST_USER
-        sync: false
-      - key: EMAIL_HOST_PASSWORD
-        sync: false
+      # NOTE: EMAIL_HOST / EMAIL_HOST_USER / EMAIL_HOST_PASSWORD are
+      # deliberately NOT declared here. Render prompts for a value for every
+      # "sync: false" key, and any placeholder in EMAIL_HOST switches Django
+      # off the console backend and onto SMTP — which is exactly the
+      # connection-refused 500 this config exists to avoid. Add them in the
+      # dashboard (Environment > Add) only when you have real credentials,
+      # and flip ACCOUNT_EMAIL_VERIFICATION to "mandatory" at the same time.
