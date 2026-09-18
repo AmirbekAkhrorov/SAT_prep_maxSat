@@ -22,7 +22,10 @@ services:
     rootDir: packages/backend
     buildCommand: "./render-build.sh"
     startCommand: "gunicorn sat_prep.wsgi:application --bind 0.0.0.0:$PORT"
-    healthCheckPath: /api/questions/stats/
+    # Dedicated plain-Django endpoint: no DRF throttling (the probe would
+    # otherwise exhaust the anon rate limit and get cycled) and exempt from
+    # SECURE_SSL_REDIRECT, so the internal HTTP probe sees 200 not 301.
+    healthCheckPath: /healthz/
     envVars:
       - key: PYTHON_VERSION
         value: "3.12.7"
@@ -47,6 +50,16 @@ services:
         sync: false
       - key: CSRF_TRUSTED_ORIGINS
         sync: false
-      # Requires SMTP to be configured, otherwise signups cannot confirm.
+      # "none" because no SMTP is configured yet: with "mandatory" allauth
+      # tries to send a confirmation mail and every signup 500s. Switch this
+      # to "mandatory" the moment EMAIL_HOST below is filled in.
       - key: ACCOUNT_EMAIL_VERIFICATION
-        value: mandatory
+        value: none
+      # Set EMAIL_HOST/USER/PASSWORD to turn on real mail. While EMAIL_HOST
+      # is empty Django uses the console backend and mail goes to the logs.
+      - key: EMAIL_HOST
+        sync: false
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false

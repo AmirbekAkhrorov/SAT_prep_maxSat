@@ -229,6 +229,28 @@ CORS_ALLOWED_ORIGINS = env_list(
 )
 CSRF_TRUSTED_ORIGINS = env_list("CSRF_TRUSTED_ORIGINS", "")
 
+# ---------------------------------------------------------------------------
+# Email
+# ---------------------------------------------------------------------------
+# Django's default backend speaks SMTP to localhost:25, which does not exist on
+# a container host: every password reset or address confirmation would raise
+# ConnectionRefusedError and surface as a 500. Until EMAIL_HOST is configured we
+# fall back to the console backend, so mail is written to the logs instead of
+# crashing the request. Set EMAIL_HOST (plus user/password) to switch to real
+# SMTP — no code change needed.
+EMAIL_HOST = os.environ.get("EMAIL_HOST", "")
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT", "587"))
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
+EMAIL_USE_TLS = env_bool("EMAIL_USE_TLS", True)
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "noreply@satprep.app")
+EMAIL_BACKEND = os.environ.get(
+    "EMAIL_BACKEND",
+    "django.core.mail.backends.smtp.EmailBackend"
+    if EMAIL_HOST
+    else "django.core.mail.backends.console.EmailBackend",
+)
+
 # Allauth settings (modern keys; the ACCOUNT_* ones below were deprecated)
 ACCOUNT_LOGIN_METHODS = {"email"}
 ACCOUNT_SIGNUP_FIELDS = ["email*", "username*", "password1*", "password2*"]
@@ -262,6 +284,11 @@ if not DEBUG:
     # without this Django sees "http" and SECURE_SSL_REDIRECT loops forever.
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
     SECURE_SSL_REDIRECT = env_bool("SECURE_SSL_REDIRECT", True)
+    # The platform health probe reaches the container over plain HTTP with
+    # no X-Forwarded-Proto, so without this exemption Django answers 301,
+    # the probe never sees a 2xx, and the deploy is marked unhealthy.
+    # Matched against the path with no leading slash.
+    SECURE_REDIRECT_EXEMPT = [r"^healthz/?$"]
 
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
