@@ -7,9 +7,9 @@ import Hero from './components/Hero';
 import InteractiveQuiz from './components/InteractiveQuiz';
 import Features from './components/Features';
 import HowItWorks from './components/HowItWorks';
-import Testimonials from './components/Testimonials';
 import CallToAction from './components/CallToAction';
 import Footer from './components/Footer';
+import MathBackground from './components/MathBackground';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
@@ -18,6 +18,7 @@ import Test from './pages/Test';
 import TestSession from './pages/TestSession';
 import TestResults from './pages/TestResults';
 import Leaderboard from './pages/Leaderboard';
+import Upload from './pages/Upload';
 
 function LandingPage() {
   return (
@@ -28,10 +29,10 @@ function LandingPage() {
         <Features />
         <InteractiveQuiz />
         <HowItWorks />
-        <Testimonials />
         <CallToAction />
       </main>
       <Footer />
+      <MathBackground />
     </>
   );
 }
@@ -109,6 +110,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Leaderboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/cabinet/upload"
+            element={
+              <ProtectedRoute>
+                <Upload />
               </ProtectedRoute>
             }
           />

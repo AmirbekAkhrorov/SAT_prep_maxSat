@@ -31,6 +31,8 @@ class QuestionListSerializer(serializers.ModelSerializer):
             "passage",
             "question_text",
             "options",
+            "visualization",
+            "is_new",
         ]
 
     def get_options(self, obj):
@@ -61,6 +63,8 @@ class QuestionDetailSerializer(serializers.ModelSerializer):
             "options",
             "correct_answer",
             "explanation",
+            "visualization",
+            "is_new",
         ]
 
     def get_options(self, obj):
@@ -112,6 +116,7 @@ class TestSessionQuestionSerializer(serializers.ModelSerializer):
     domain = serializers.CharField(source="question.domain")
     skill = serializers.CharField(source="question.skill_name")
     difficulty = serializers.CharField(source="question.difficulty")
+    visualization = serializers.JSONField(source="question.visualization", allow_null=True)
 
     class Meta:
         model = TestSessionQuestion
@@ -127,6 +132,7 @@ class TestSessionQuestionSerializer(serializers.ModelSerializer):
             "difficulty",
             "user_answer",
             "is_flagged",
+            "visualization",
         ]
 
     def get_options(self, obj):
@@ -145,6 +151,7 @@ class TestSessionQuestionReviewSerializer(serializers.ModelSerializer):
     difficulty = serializers.CharField(source="question.difficulty")
     correct_answer = serializers.CharField(source="question.correct_answer")
     explanation = serializers.CharField(source="question.explanation")
+    visualization = serializers.JSONField(source="question.visualization", allow_null=True)
 
     class Meta:
         model = TestSessionQuestion
@@ -163,6 +170,7 @@ class TestSessionQuestionReviewSerializer(serializers.ModelSerializer):
             "is_flagged",
             "correct_answer",
             "explanation",
+            "visualization",
         ]
 
     def get_options(self, obj):

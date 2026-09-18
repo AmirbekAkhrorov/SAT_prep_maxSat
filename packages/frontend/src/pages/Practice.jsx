@@ -2,7 +2,6 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  GraduationCap,
   Filter,
   ChevronRight,
   ChevronDown,
@@ -399,10 +398,10 @@ export default function Practice() {
                 </button>
                 <Link to="/cabinet" className="flex items-center gap-3 group">
                   <div className="w-10 h-10 bg-navy-900 dark:bg-navy-800 rounded-xl flex items-center justify-center">
-                    <GraduationCap className="w-5 h-5 text-gold-400" />
+                    <span className="font-display font-black text-sm leading-none"><span className="text-cream-100">m</span><span className="text-gold-400">S</span></span>
                   </div>
                   <span className="font-display text-xl font-semibold text-navy-900 dark:text-cream-100">
-                    SAT<span className="text-gold-600 dark:text-gold-400">Prep</span>
+                    max<span className="text-gold-500 dark:text-gold-400 font-black">SAT</span>
                   </span>
                 </Link>
                 <div className="h-6 w-px bg-cream-300 dark:bg-navy-700" />
@@ -474,10 +473,10 @@ export default function Practice() {
             <div className="flex items-center gap-4">
               <Link to="/cabinet" className="flex items-center gap-3 group">
                 <div className="w-10 h-10 bg-navy-900 dark:bg-navy-800 rounded-xl flex items-center justify-center">
-                  <GraduationCap className="w-5 h-5 text-gold-400" />
+                  <span className="font-display font-black text-sm leading-none"><span className="text-cream-100">m</span><span className="text-gold-400">S</span></span>
                 </div>
                 <span className="font-display text-xl font-semibold text-navy-900 dark:text-cream-100">
-                  SAT<span className="text-gold-600 dark:text-gold-400">Prep</span>
+                  max<span className="text-gold-500 dark:text-gold-400 font-black">SAT</span>
                 </span>
               </Link>
               <div className="h-6 w-px bg-cream-300 dark:bg-navy-700" />
@@ -869,6 +868,9 @@ export default function Practice() {
                                         </p>
                                       </div>
                                       <div className="flex items-center gap-3">
+                                        {q.is_new && (
+                                          <span className="px-1.5 py-0.5 text-[10px] font-bold uppercase bg-gold-100 dark:bg-gold-900/30 text-gold-700 dark:text-gold-400 border border-gold-300 dark:border-gold-700 rounded flex-shrink-0">NEW</span>
+                                        )}
                                         {isAttempted && (
                                           <CheckCircle className="w-4 h-4 text-blue-500 flex-shrink-0" title="Attempted" />
                                         )}

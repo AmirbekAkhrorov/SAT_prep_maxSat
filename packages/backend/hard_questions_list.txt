@@ -1,0 +1,120 @@
+GEO-H-001: A sphere has volume 288π. What is its radius?
+
+GEO-H-002: In right triangle ABC with right angle at C, if sin(A) = 3/5, what is cos(A)?
+
+GEO-H-003: A sector of a circle has area 12π and central angle 120°. What is the radius?
+
+GEO-H-004: Triangle ABC is similar to triangle DEF. If AB = 6, BC = 8, AC = 10, and DE = 9, what is EF?
+
+GEO-H-005: In triangle DEF, angle E = 90°, DE = 8, and EF = 15. What is tan(D)?
+
+GEO-H-006: A cone has radius 3 and slant height 5. What is its lateral surface area?
+
+GEO-H-007: An inscribed angle in a circle intercepts an arc of 140°. What is the measure of the inscribed angle?
+
+GEO-H-008: In a triangle, the sides are 5, 12, and 13. What type of triangle is this?
+
+GEO-H-009: From a point 50 feet from the base of a building, the angle of elevation to the top is 60°. How tall is the building? (Use √3 ≈ 1.73)
+
+GEO-H-010: A circular pool has diameter 20 feet. A 3-foot-wide walkway surrounds the pool. What is the area of just the walkway?
+
+GEO-H-011: The medians of a triangle intersect at the centroid. If a median has length 12, how far is the centroid from the vertex?
+
+GEO-H-012: Two tangent lines from an external point to a circle have lengths 12. If the radius is 5, what is the distance from the point to the center?
+
+GEO-H-013: A pyramid has a square base with side 6 and height 4. What is its volume?
+
+GEO-H-014: If cos(θ) = 5/13, what is tan(θ)?
+
+GEO-H-015: In triangle ABC, D is on BC such that AD is the angle bisector of angle A. If AB = 6, AC = 9, and BC = 10, what is BD?
+
+GEO-H-016: A regular hexagon is inscribed in a circle of radius 6. What is the area of the hexagon?
+
+GEO-H-017: A hemisphere has radius 6. What is its total surface area (including the flat base)?
+
+GEO-H-018: A ladder 10 feet long leans against a wall. If the bottom is 6 feet from the wall, what angle does the ladder make with the ground?
+
+GEO-H-019: The diagonals of a rhombus are 10 and 24. What is the side length of the rhombus?
+
+GEO-H-020: A circle is inscribed in a square with side 10. What is the area between the square and circle?
+
+GEO-H-021: A frustum of a cone has radii 3 and 6, and height 4. What is its volume?
+
+GEO-H-022: If sin(A) = 4/5 and angle A is in the second quadrant, what is cos(A)?
+
+GEO-H-023: A triangle has vertices at (0, 0), (6, 0), and (3, 4). What is its area?
+
+GEO-H-024: Two circles with radii 5 and 12 are externally tangent. What is the distance between their centers?
+
+GEO-H-025: A cube has diagonal (space diagonal) of length 6√3. What is the volume of the cube?
+
+GEO-H-026: In triangle ABC, angle C = 90°, a = 8, and c = 10. Find angle A to the nearest degree.
+
+GEO-H-027: The altitudes of a triangle intersect at the orthocenter. In a right triangle, where is the orthocenter?
+
+GEO-H-028: A central angle of a circle is 2 radians. If the radius is 5, what is the arc length?
+
+GEO-H-029: A cylinder is inscribed in a sphere of radius 5. If the cylinder has maximum volume, what is that volume?
+
+GEO-H-030: Two observers 100 meters apart on flat ground see a balloon. Observer A sees it at 60° elevation, Observer B at 45°. How high is the balloon? (Use √3 ≈ 1.73)
+
+GEO-H-031: A cone is inscribed in a hemisphere of radius 6, with the cone's base as the hemisphere's base. What is the cone's volume?
+
+GEO-H-032: In triangle ABC, AB = 13, BC = 14, CA = 15. What is the area?
+
+GEO-H-033: If sin(A) = 3/5 and cos(B) = 5/13 where A and B are acute, what is sin(A + B)?
+
+GEO-H-034: Two circles of radius 5 and 12 have centers 13 apart. They intersect at two points. What is the length of their common chord?
+
+GEO-H-035: A sphere is inscribed in a cube of side 10. What is the volume of the space between them?
+
+GEO-H-036: In triangle ABC, angle A = 60°, AB = 10, AC = 14. What is BC?
+
+GEO-H-037: In triangle ABC, angle C = 90°, angle A = 30°, and BC = 7. What is AC?
+
+GEO-H-038: A circle passes through (0, 0), (6, 0), and (0, 8). What is its radius?
+
+GEO-H-039: A cylindrical hole of radius 2 is drilled through a sphere of radius 5 (along a diameter). What volume remains?
+
+GEO-H-040: The centroid of a triangle divides each median in ratio:
+
+GEO-H-041: If tan(θ) = 2 and θ is acute, what is sin(θ)?
+
+GEO-H-042: A chord of length 8 is 3 units from the center of a circle. What is the radius?
+
+GEO-H-043: A frustum (truncated cone) has radii 3 and 6, and height 4. What is its volume?
+
+GEO-H-044: Triangle ABC has vertices A(1, 1), B(5, 1), C(3, 5). What is the area?
+
+GEO-H-045: A regular hexagon has side 6. What is the distance from center to a vertex?
+
+GEO-H-046: A secant from external point P passes through a circle, creating segments of 4 and 5 (inside the circle). A tangent from P has length t. What is t?
+
+GEO-H-047: The surface area of a sphere equals the curved surface area of a cylinder that just contains it. If the sphere has radius r, what is the total surface area of the cylinder?
+
+GEO-H-048: In triangle ABC, the altitude from A has length 12, and the median from A has length 13. If BC = 10, what is the area?
+
+GEO-H-049: sin(75°) equals:
+
+GEO-H-050: Two circles are externally tangent. Their radii are 3 and 5. What is the length of a common external tangent?
+
+GEO-H-051: A tetrahedron has all edges of length 6. What is its volume?
+
+GEO-H-052: In triangle ABC, angle A = 40°, angle B = 60°. The bisector of angle C meets AB at D. What is angle ACD?
+
+GEO-H-053: The area of a triangle with sides a, b and included angle C is (1/2)ab sin(C). If a = 8, b = 10, and C = 30°, what is the area?
+
+GEO-H-054: An equilateral triangle is inscribed in a circle. If the triangle's side is 6, what is the circle's radius?
+
+GEO-H-055: A cone and cylinder have equal volumes. If both have radius 3 and the cylinder height is 4, what is the cone's height?
+
+GEO-H-056: The orthocenter of a right triangle is at:
+
+GEO-H-057: In triangle ABC, a = 7, b = 8, c = 9. Using the law of cosines, what is cos(C)?
+
+GEO-H-058: A circle is inscribed in a square of side 10. What is the area between the square and circle?
+
+GEO-H-059: A right circular cone has slant height 10 and base radius 6. What is its total surface area?
+
+GEO-H-060: A quadrilateral has vertices at (0,0), (4,0), (5,3), and (1,3). What is its area?
+

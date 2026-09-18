@@ -143,6 +143,7 @@ class Command(BaseCommand):
                         "correct_answer": q["correct_answer"],
                         "explanation": q["explanation"],
                         "source": q.get("source", Question.SOURCE_COLLEGE_BOARD),
+                        "visualization": q.get("visualization"),
                     },
                 )
 

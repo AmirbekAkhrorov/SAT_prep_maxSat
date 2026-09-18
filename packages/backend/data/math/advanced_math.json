@@ -78,7 +78,30 @@
       "choice_c": "32",
       "choice_d": "64",
       "correct_answer": "B",
-      "explanation": "f(4) = 2^4 = 2 × 2 × 2 × 2 = 16."
+      "explanation": "f(4) = 2^4 = 2 × 2 × 2 × 2 = 16.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -3,
+            4
+          ],
+          "yRange": [
+            -1,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "2^x",
+              "color": "#9b59b6",
+              "label": "y = 2^x"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-E-007",
@@ -117,7 +140,40 @@
       "choice_c": "4",
       "choice_d": "No maximum",
       "correct_answer": "C",
-      "explanation": "Since the coefficient of x² is negative (-1), the parabola opens downward. The vertex is at x = 0, and f(0) = -0² + 4 = 4. This is the maximum."
+      "explanation": "Since the coefficient of x² is negative (-1), the parabola opens downward. The vertex is at x = 0, and f(0) = -0² + 4 = 4. This is the maximum.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            6
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "-1*x^2 + 0*x + 4",
+              "color": "#4169E1",
+              "label": "f(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                4
+              ],
+              "label": "vertex",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-E-010",
@@ -130,7 +186,46 @@
       "choice_c": "x = 2 and x = -2",
       "choice_d": "x = 4 only",
       "correct_answer": "C",
-      "explanation": "Substitute y = 4 into y = x²: 4 = x², so x = ±2."
+      "explanation": "Substitute y = 4 into y = x²: 4 = x², so x = ±2.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "4",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                2,
+                4
+              ],
+              "label": "(2, 4)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-E-011",
@@ -208,7 +303,30 @@
       "choice_c": "9",
       "choice_d": "27",
       "correct_answer": "C",
-      "explanation": "f(2) = 3² = 9."
+      "explanation": "f(2) = 3² = 9.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -3,
+            4
+          ],
+          "yRange": [
+            -1,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "3^x",
+              "color": "#9b59b6",
+              "label": "y = 3^x"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-E-017",
@@ -234,7 +352,46 @@
       "choice_c": "4.5",
       "choice_d": "9",
       "correct_answer": "B",
-      "explanation": "x² = 9, so x = ±3. The positive value is 3."
+      "explanation": "x² = 9, so x = ±3. The positive value is 3.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "x",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                1
+              ],
+              "label": "(1, 1)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-E-019",
@@ -312,7 +469,46 @@
       "choice_c": "2",
       "choice_d": "4",
       "correct_answer": "B",
-      "explanation": "Set equal: x = x² → x² - x = 0 → x(x-1) = 0. Solutions: x = 0 and x = 1. The positive value is 1."
+      "explanation": "Set equal: x = x² → x² - x = 0 → x(x-1) = 0. Solutions: x = 0 and x = 1. The positive value is 1.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "x",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                1
+              ],
+              "label": "(1, 1)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-E-025",
@@ -377,7 +573,46 @@
       "choice_c": "x = 0 and x = 2",
       "choice_d": "x = -2 and x = 2",
       "correct_answer": "C",
-      "explanation": "Set equal: 2x = x² → x² - 2x = 0 → x(x - 2) = 0. Solutions: x = 0 and x = 2."
+      "explanation": "Set equal: 2x = x² → x² - 2x = 0 → x(x - 2) = 0. Solutions: x = 0 and x = 2.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "x",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                1
+              ],
+              "label": "(1, 1)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-E-030",
@@ -429,7 +664,40 @@
       "choice_c": "(3, 4)",
       "choice_d": "(-3, 4)",
       "correct_answer": "A",
-      "explanation": "In vertex form f(x) = (x - h)² + k, the vertex is (h, k). Here h = 3 and k = -4, so vertex is (3, -4)."
+      "explanation": "In vertex form f(x) = (x - h)² + k, the vertex is (h, k). Here h = 3 and k = -4, so vertex is (3, -4).",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -2,
+            10
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "1*x^2",
+              "color": "#4169E1",
+              "label": "f(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                0
+              ],
+              "label": "vertex",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-004",
@@ -442,7 +710,30 @@
       "choice_c": "P(t) = 1000(2)^(5t)",
       "choice_d": "P(t) = 2000t",
       "correct_answer": "B",
-      "explanation": "For exponential growth with doubling time of 5 years: P(t) = P₀(2)^(t/T) where T is doubling time. So P(t) = 1000(2)^(t/5)."
+      "explanation": "For exponential growth with doubling time of 5 years: P(t) = P₀(2)^(t/T) where T is doubling time. So P(t) = 1000(2)^(t/5).",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -3,
+            4
+          ],
+          "yRange": [
+            -1,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "2^x",
+              "color": "#9b59b6",
+              "label": "y = 2^x"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-005",
@@ -468,7 +759,30 @@
       "choice_c": "x³/(3y²)",
       "choice_d": "3xy²",
       "correct_answer": "A",
-      "explanation": "Simplify coefficients: 3/9 = 1/3. For x: x³/x² = x. For y: y²/y⁴ = 1/y². Result: x/(3y²)."
+      "explanation": "Simplify coefficients: 3/9 = 1/3. For x: x³/x² = x. For y: y²/y⁴ = 1/y². Result: x/(3y²).",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 320,
+          "height": 250,
+          "xRange": [
+            -4,
+            4
+          ],
+          "yRange": [
+            -10,
+            10
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^3",
+              "color": "#2ecc71",
+              "label": "f(x)"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-007",
@@ -481,7 +795,46 @@
       "choice_c": "3",
       "choice_d": "4",
       "correct_answer": "C",
-      "explanation": "Set equal: x² - 4 = 2x - 1 → x² - 2x - 3 = 0 → (x - 3)(x + 1) = 0. So x = 3 or x = -1. The larger value is 3."
+      "explanation": "Set equal: x² - 4 = 2x - 1 → x² - 2x - 3 = 0 → (x - 3)(x + 1) = 0. So x = 3 or x = -1. The larger value is 3.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "x",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                1
+              ],
+              "label": "(1, 1)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-008",
@@ -559,7 +912,40 @@
       "choice_c": "3",
       "choice_d": "4",
       "correct_answer": "B",
-      "explanation": "For a parabola ax² + bx + c, the vertex x-coordinate is -b/(2a) = -8/(2(-2)) = -8/(-4) = 2."
+      "explanation": "For a parabola ax² + bx + c, the vertex x-coordinate is -b/(2a) = -8/(2(-2)) = -8/(-4) = 2.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            6
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "1*x^2 + -4*x + 0",
+              "color": "#4169E1",
+              "label": "f(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                2,
+                -4
+              ],
+              "label": "vertex",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-014",
@@ -572,7 +958,46 @@
       "choice_c": "2",
       "choice_d": "Infinitely many",
       "correct_answer": "B",
-      "explanation": "Set equal: x² = 4x - 4 → x² - 4x + 4 = 0 → (x - 2)² = 0. Only x = 2. One intersection point."
+      "explanation": "Set equal: x² = 4x - 4 → x² - 4x + 4 = 0 → (x - 2)² = 0. Only x = 2. One intersection point.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "4",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                2,
+                4
+              ],
+              "label": "(2, 4)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-015",
@@ -650,7 +1075,46 @@
       "choice_c": "2",
       "choice_d": "4",
       "correct_answer": "B",
-      "explanation": "x² - 1 = 3 → x² = 4 → x = ±2. Sum = 2 + (-2) = 0."
+      "explanation": "x² - 1 = 3 → x² = 4 → x = ±2. Sum = 2 + (-2) = 0.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "x",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                1
+              ],
+              "label": "(1, 1)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-021",
@@ -702,7 +1166,46 @@
       "choice_c": "6",
       "choice_d": "8",
       "correct_answer": "B",
-      "explanation": "Set equal: x² = -x² + 8 → 2x² = 8 → x² = 4 → x = ±2. Then y = (2)² = 4."
+      "explanation": "Set equal: x² = -x² + 8 → 2x² = 8 → x² = 4 → x = ±2. Then y = (2)² = 4.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "x",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                1
+              ],
+              "label": "(1, 1)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-025",
@@ -728,7 +1231,30 @@
       "choice_c": "6",
       "choice_d": "16",
       "correct_answer": "B",
-      "explanation": "32 = 2⁵, so 2^x = 2⁵ means x = 5."
+      "explanation": "32 = 2⁵, so 2^x = 2⁵ means x = 5.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -3,
+            4
+          ],
+          "yRange": [
+            -1,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "2^x",
+              "color": "#9b59b6",
+              "label": "y = 2^x"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-027",
@@ -741,7 +1267,30 @@
       "choice_c": "x = 1 and x = -3",
       "choice_d": "x = 2 only",
       "correct_answer": "A",
-      "explanation": "Set f(x) = 0: x² - 4x + 3 = 0 → (x - 1)(x - 3) = 0. x = 1 and x = 3."
+      "explanation": "Set f(x) = 0: x² - 4x + 3 = 0 → (x - 1)(x - 3) = 0. x = 1 and x = 3.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            6
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "1*x^2 + 0*x + -4",
+              "color": "#4169E1",
+              "label": "f(x)"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-028",
@@ -767,7 +1316,46 @@
       "choice_c": "3",
       "choice_d": "4",
       "correct_answer": "B",
-      "explanation": "x² + 2 = 6 → x² = 4 → x = ±2. The positive value is 2."
+      "explanation": "x² + 2 = 6 → x² = 4 → x = ±2. The positive value is 2.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "x",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                1
+              ],
+              "label": "(1, 1)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-030",
@@ -793,7 +1381,30 @@
       "choice_c": "2",
       "choice_d": "4",
       "correct_answer": "C",
-      "explanation": "x³ - 8 is a difference of cubes: a³ - b³ = (a - b)(a² + ab + b²). Here: x³ - 2³ = (x - 2)(x² + 2x + 4). So a = 2."
+      "explanation": "x³ - 8 is a difference of cubes: a³ - b³ = (a - b)(a² + ab + b²). Here: x³ - 2³ = (x - 2)(x² + 2x + 4). So a = 2.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 320,
+          "height": 250,
+          "xRange": [
+            -4,
+            4
+          ],
+          "yRange": [
+            -10,
+            10
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^3",
+              "color": "#2ecc71",
+              "label": "f(x)"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-002",
@@ -858,7 +1469,46 @@
       "choice_c": "12",
       "choice_d": "18",
       "correct_answer": "B",
-      "explanation": "Set equal: x² = 2x + 3 → x² - 2x - 3 = 0 → (x - 3)(x + 1) = 0 → x = 3 or x = -1. y-values: y = 2(3) + 3 = 9 and y = 2(-1) + 3 = 1. Sum = 9 + 1 = 10."
+      "explanation": "Set equal: x² = 2x + 3 → x² - 2x - 3 = 0 → (x - 3)(x + 1) = 0 → x = 3 or x = -1. y-values: y = 2(3) + 3 = 9 and y = 2(-1) + 3 = 1. Sum = 9 + 1 = 10.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "x",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                1
+              ],
+              "label": "(1, 1)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-007",
@@ -897,7 +1547,30 @@
       "choice_c": "4",
       "choice_d": "8",
       "correct_answer": "A",
-      "explanation": "f(2) = (2)³ - 3(2)² + 2(2) = 8 - 12 + 4 = 0."
+      "explanation": "f(2) = (2)³ - 3(2)² + 2(2) = 8 - 12 + 4 = 0.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 320,
+          "height": 250,
+          "xRange": [
+            -4,
+            4
+          ],
+          "yRange": [
+            -10,
+            10
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^3 - 3*x",
+              "color": "#2ecc71",
+              "label": "f(x)"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-010",
@@ -910,7 +1583,46 @@
       "choice_c": "2",
       "choice_d": "Infinitely many",
       "correct_answer": "C",
-      "explanation": "Set equal: x² - 4x + 3 = -x + 5 → x² - 3x - 2 = 0. Discriminant = 9 + 8 = 17 > 0, so 2 solutions."
+      "explanation": "Set equal: x² - 4x + 3 = -x + 5 → x² - 3x - 2 = 0. Discriminant = 9 + 8 = 17 > 0, so 2 solutions.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "x",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                1
+              ],
+              "label": "(1, 1)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-011",
@@ -962,7 +1674,40 @@
       "choice_c": "1",
       "choice_d": "2",
       "correct_answer": "A",
-      "explanation": "Substitute (3, 2): 2 = 9 - 6 + k = 3 + k. So k = -1."
+      "explanation": "Substitute (3, 2): 2 = 9 - 6 + k = 3 + k. So k = -1.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -2,
+            10
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "1*x^2",
+              "color": "#4169E1",
+              "label": "f(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                0
+              ],
+              "label": "vertex",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-015",
@@ -975,7 +1720,30 @@
       "choice_c": "x² - 4",
       "choice_d": "x² + 4",
       "correct_answer": "A",
-      "explanation": "Sum of cubes: x³ + 8 = (x + 2)(x² - 2x + 4). Divide by (x + 2): x² - 2x + 4."
+      "explanation": "Sum of cubes: x³ + 8 = (x + 2)(x² - 2x + 4). Divide by (x + 2): x² - 2x + 4.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 320,
+          "height": 250,
+          "xRange": [
+            -4,
+            4
+          ],
+          "yRange": [
+            -10,
+            10
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^3",
+              "color": "#2ecc71",
+              "label": "f(x)"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-016",
@@ -1001,7 +1769,30 @@
       "choice_c": "P(t) = 500(3)^(2t)",
       "choice_d": "P(t) = 1500t",
       "correct_answer": "B",
-      "explanation": "Triples every 2 hours: P(t) = 500(3)^(t/2). At t = 2: P = 500(3)¹ = 1500 ✓"
+      "explanation": "Triples every 2 hours: P(t) = 500(3)^(t/2). At t = 2: P = 500(3)¹ = 1500 ✓",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -3,
+            4
+          ],
+          "yRange": [
+            -1,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "2^x",
+              "color": "#9b59b6",
+              "label": "y = 2^x"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-018",
@@ -1014,7 +1805,40 @@
       "choice_c": "1",
       "choice_d": "2",
       "correct_answer": "A",
-      "explanation": "Tangent means one solution: x² - 2x + 2 = mx → x² - (2+m)x + 2 = 0. Discriminant = 0: (2+m)² - 8 = 0 → (2+m)² = 8 → 2+m = ±2√2. For tangency from origin, m = -2 - 2√2 or m = -2 + 2√2 ≈ 0.83. Since -2 is among choices, the answer is A."
+      "explanation": "Tangent means one solution: x² - 2x + 2 = mx → x² - (2+m)x + 2 = 0. Discriminant = 0: (2+m)² - 8 = 0 → (2+m)² = 8 → 2+m = ±2√2. For tangency from origin, m = -2 - 2√2 or m = -2 + 2√2 ≈ 0.83. Since -2 is among choices, the answer is A.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -2,
+            10
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "1*x^2",
+              "color": "#4169E1",
+              "label": "f(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                0
+              ],
+              "label": "vertex",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-019",
@@ -1066,7 +1890,46 @@
       "choice_c": "4",
       "choice_d": "Both A and C",
       "correct_answer": "D",
-      "explanation": "x² = kx - 4 → x² - kx + 4 = 0. One solution when discriminant = 0: k² - 16 = 0 → k = ±4."
+      "explanation": "x² = kx - 4 → x² - kx + 4 = 0. One solution when discriminant = 0: k² - 16 = 0 → k = ±4.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "x",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                1
+              ],
+              "label": "(1, 1)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-023",
@@ -1118,7 +1981,46 @@
       "choice_c": "6",
       "choice_d": "6√2",
       "correct_answer": "B",
-      "explanation": "x² = x + 6 → x² - x - 6 = 0 → (x-3)(x+2) = 0. Points: (3, 9) and (-2, 4). Distance = √[(3-(-2))² + (9-4)²] = √(25 + 25) = √50 = 5√2."
+      "explanation": "x² = x + 6 → x² - x - 6 = 0 → (x-3)(x+2) = 0. Points: (3, 9) and (-2, 4). Distance = √[(3-(-2))² + (9-4)²] = √(25 + 25) = √50 = 5√2.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "x",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                1
+              ],
+              "label": "(1, 1)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-027",
@@ -1157,7 +2059,30 @@
       "choice_c": "8",
       "choice_d": "9",
       "correct_answer": "C",
-      "explanation": "Check each: x=1: 2>1✓, x=2: 4=4✗, x=3: 8>9✗, x=4: 16>16✗, x=5: 32>25✓, x=6: 64>36✓, x=7: 128>49✓, x=8: 256>64✓, x=9: 512>81✓, x=10: 1024>100✓. Count: 8 values."
+      "explanation": "Check each: x=1: 2>1✓, x=2: 4=4✗, x=3: 8>9✗, x=4: 16>16✗, x=5: 32>25✓, x=6: 64>36✓, x=7: 128>49✓, x=8: 256>64✓, x=9: 512>81✓, x=10: 1024>100✓. Count: 8 values.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -3,
+            4
+          ],
+          "yRange": [
+            -1,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "2^x",
+              "color": "#9b59b6",
+              "label": "y = 2^x"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-030",
@@ -1248,7 +2173,30 @@
       "choice_c": "8",
       "choice_d": "9",
       "correct_answer": "C",
-      "explanation": "g(3) = 2³ = 8."
+      "explanation": "g(3) = 2³ = 8.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -3,
+            4
+          ],
+          "yRange": [
+            -1,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "2^x",
+              "color": "#9b59b6",
+              "label": "y = 2^x"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-E-037",
@@ -1300,7 +2248,46 @@
       "choice_c": "To the right",
       "choice_d": "To the left",
       "correct_answer": "A",
-      "explanation": "y = x² has a positive leading coefficient, so the parabola opens upward."
+      "explanation": "y = x² has a positive leading coefficient, so the parabola opens upward.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "x",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                1
+              ],
+              "label": "(1, 1)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-E-041",
@@ -1378,7 +2365,40 @@
       "choice_c": "(4, 0)",
       "choice_d": "(-4, 0)",
       "correct_answer": "B",
-      "explanation": "y = x² - 4 is y = x² shifted down 4 units. Vertex is at (0, -4)."
+      "explanation": "y = x² - 4 is y = x² shifted down 4 units. Vertex is at (0, -4).",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            6
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "-1*x^2 + 0*x + 4",
+              "color": "#4169E1",
+              "label": "f(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                4
+              ],
+              "label": "vertex",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-E-047",
@@ -1417,7 +2437,30 @@
       "choice_c": "3",
       "choice_d": "9",
       "correct_answer": "B",
-      "explanation": "Any non-zero number raised to the power 0 equals 1: 3⁰ = 1."
+      "explanation": "Any non-zero number raised to the power 0 equals 1: 3⁰ = 1.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -3,
+            4
+          ],
+          "yRange": [
+            -1,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "3^x",
+              "color": "#9b59b6",
+              "label": "y = 3^x"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-E-050",
@@ -1456,7 +2499,46 @@
       "choice_c": "5",
       "choice_d": "25",
       "correct_answer": "C",
-      "explanation": "Set x = 0: y = 0² + 5 = 5."
+      "explanation": "Set x = 0: y = 0² + 5 = 5.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "x",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                1
+              ],
+              "label": "(1, 1)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-E-053",
@@ -1573,7 +2655,30 @@
       "choice_c": "(x - 2)(x² + 2x)",
       "choice_d": "x²(x - 4)",
       "correct_answer": "B",
-      "explanation": "x³ - 4x = x(x² - 4) = x(x - 2)(x + 2), using difference of squares."
+      "explanation": "x³ - 4x = x(x² - 4) = x(x - 2)(x + 2), using difference of squares.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 320,
+          "height": 250,
+          "xRange": [
+            -4,
+            4
+          ],
+          "yRange": [
+            -10,
+            10
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^3",
+              "color": "#2ecc71",
+              "label": "f(x)"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-032",
@@ -1625,7 +2730,40 @@
       "choice_c": "(3, -2)",
       "choice_d": "(2, 3)",
       "correct_answer": "A",
-      "explanation": "The vertex form is f(x) = (x - h)² + k with vertex (h, k). Here h = 3, k = 2."
+      "explanation": "The vertex form is f(x) = (x - h)² + k with vertex (h, k). Here h = 3, k = 2.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -2,
+            10
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "1*x^2",
+              "color": "#4169E1",
+              "label": "f(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                0
+              ],
+              "label": "vertex",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-036",
@@ -1651,7 +2789,46 @@
       "choice_c": "x = 1 and x = 3",
       "choice_d": "x = -1 and x = -3",
       "correct_answer": "A",
-      "explanation": "x² = 2x + 3, so x² - 2x - 3 = 0. Factor: (x - 3)(x + 1) = 0, giving x = 3 or x = -1."
+      "explanation": "x² = 2x + 3, so x² - 2x - 3 = 0. Factor: (x - 3)(x + 1) = 0, giving x = 3 or x = -1.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "x",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                1
+              ],
+              "label": "(1, 1)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-038",
@@ -1690,7 +2867,30 @@
       "choice_c": "P = 100(3)^(t/2)",
       "choice_d": "P = 200t",
       "correct_answer": "B",
-      "explanation": "Doubling every 3 years means P = 100(2)^(t/3)."
+      "explanation": "Doubling every 3 years means P = 100(2)^(t/3).",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -3,
+            4
+          ],
+          "yRange": [
+            -1,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "2^x",
+              "color": "#9b59b6",
+              "label": "y = 2^x"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-041",
@@ -1755,7 +2955,30 @@
       "choice_c": "6x⁶",
       "choice_d": "5x⁶",
       "correct_answer": "B",
-      "explanation": "(2x³)(3x²) = 2·3·x³·x² = 6x⁵."
+      "explanation": "(2x³)(3x²) = 2·3·x³·x² = 6x⁵.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 320,
+          "height": 250,
+          "xRange": [
+            -4,
+            4
+          ],
+          "yRange": [
+            -10,
+            10
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^3",
+              "color": "#2ecc71",
+              "label": "f(x)"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-046",
@@ -1781,7 +3004,40 @@
       "choice_c": "x = 5",
       "choice_d": "x = -6",
       "correct_answer": "B",
-      "explanation": "For y = ax² + bx + c, axis of symmetry is x = -b/(2a) = -(-6)/(2·1) = 3."
+      "explanation": "For y = ax² + bx + c, axis of symmetry is x = -b/(2a) = -(-6)/(2·1) = 3.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -2,
+            10
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "1*x^2",
+              "color": "#4169E1",
+              "label": "f(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                0
+              ],
+              "label": "vertex",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-048",
@@ -1859,7 +3115,30 @@
       "choice_c": "6",
       "choice_d": "8",
       "correct_answer": "B",
-      "explanation": "f(3) = 8, f(2) = 4. f(3) - f(2) = 8 - 4 = 4."
+      "explanation": "f(3) = 8, f(2) = 4. f(3) - f(2) = 8 - 4 = 4.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -3,
+            4
+          ],
+          "yRange": [
+            -1,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "2^x",
+              "color": "#9b59b6",
+              "label": "y = 2^x"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-054",
@@ -1872,7 +3151,46 @@
       "choice_c": "2",
       "choice_d": "3",
       "correct_answer": "C",
-      "explanation": "x² = x + 2, x² - x - 2 = 0, (x - 2)(x + 1) = 0. Two solutions, so 2 intersection points."
+      "explanation": "x² = x + 2, x² - x - 2 = 0, (x - 2)(x + 1) = 0. Two solutions, so 2 intersection points.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "x",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                1
+              ],
+              "label": "(1, 1)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-M-055",
@@ -2015,7 +3333,40 @@
       "choice_c": "13",
       "choice_d": "15",
       "correct_answer": "B",
-      "explanation": "f(x) = (x - 3)² + (k - 9). Minimum is k - 9 = 2, so k = 11."
+      "explanation": "f(x) = (x - 3)² + (k - 9). Minimum is k - 9 = 2, so k = 11.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            6
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "1*x^2 + -4*x + 0",
+              "color": "#4169E1",
+              "label": "f(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                2,
+                -4
+              ],
+              "label": "vertex",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-036",
@@ -2028,7 +3379,30 @@
       "choice_c": "x = 3",
       "choice_d": "x = 4",
       "correct_answer": "C",
-      "explanation": "3^(2x) = 27 · 3^x = 3³ · 3^x = 3^(x+3). So 2x = x + 3, x = 3."
+      "explanation": "3^(2x) = 27 · 3^x = 3³ · 3^x = 3^(x+3). So 2x = x + 3, x = 3.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -3,
+            4
+          ],
+          "yRange": [
+            -1,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "3^x",
+              "color": "#9b59b6",
+              "label": "y = 3^x"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-037",
@@ -2054,7 +3428,30 @@
       "choice_c": "x² + 2x + 4",
       "choice_d": "x² - 2x + 4",
       "correct_answer": "C",
-      "explanation": "x³ - 8 = (x - 2)(x² + 2x + 4) by sum/difference of cubes. Dividing by (x - 2) gives x² + 2x + 4."
+      "explanation": "x³ - 8 = (x - 2)(x² + 2x + 4) by sum/difference of cubes. Dividing by (x - 2) gives x² + 2x + 4.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 320,
+          "height": 250,
+          "xRange": [
+            -4,
+            4
+          ],
+          "yRange": [
+            -10,
+            10
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^3",
+              "color": "#2ecc71",
+              "label": "f(x)"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-039",
@@ -2080,7 +3477,30 @@
       "choice_c": "12 years",
       "choice_d": "16 years",
       "correct_answer": "B",
-      "explanation": "P = P₀(3)^(t/4) = 9P₀ = 3²P₀. So 3^(t/4) = 3², t/4 = 2, t = 8 years."
+      "explanation": "P = P₀(3)^(t/4) = 9P₀ = 3²P₀. So 3^(t/4) = 3², t/4 = 2, t = 8 years.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -3,
+            4
+          ],
+          "yRange": [
+            -1,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "2^x",
+              "color": "#9b59b6",
+              "label": "y = 2^x"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-041",
@@ -2132,7 +3552,46 @@
       "choice_c": "2",
       "choice_d": "4",
       "correct_answer": "C",
-      "explanation": "x² = 4 gives x = ±2. Two intersection points: (2, 4) and (-2, 4)."
+      "explanation": "x² = 4 gives x = ±2. Two intersection points: (2, 4) and (-2, 4).",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "4",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                2,
+                4
+              ],
+              "label": "(2, 4)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-045",
@@ -2171,7 +3630,40 @@
       "choice_c": "3",
       "choice_d": "4",
       "correct_answer": "B",
-      "explanation": "Vertex form: f(x) = a(x - 2)² - 3. At x = 0: f(0) = 4a - 3 = 5, so 4a = 8, a = 2."
+      "explanation": "Vertex form: f(x) = a(x - 2)² - 3. At x = 0: f(0) = 4a - 3 = 5, so 4a = 8, a = 2.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -2,
+            10
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "1*x^2",
+              "color": "#4169E1",
+              "label": "f(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                0
+              ],
+              "label": "vertex",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-048",
@@ -2275,7 +3767,46 @@
       "choice_c": "k = ±4",
       "choice_d": "k = 0 or k = ±2√2",
       "correct_answer": "D",
-      "explanation": "x² - 2 = kx, x² - kx - 2 = 0. One solution when discriminant = 0: k² + 8 = 0 (no real k), or x = 0 is the only solution. At x = 0: y = -2 = 0, contradiction unless k = 0 gives y = 0 ≠ -2. Actually discriminant k² + 8 > 0 always, so always 2 solutions. One solution only if line is tangent: k² - 4(1)(-2) = k² + 8 = 0 has no solution. So this needs rechecking."
+      "explanation": "x² - 2 = kx, x² - kx - 2 = 0. One solution when discriminant = 0: k² + 8 = 0 (no real k), or x = 0 is the only solution. At x = 0: y = -2 = 0, contradiction unless k = 0 gives y = 0 ≠ -2. Actually discriminant k² + 8 > 0 always, so always 2 solutions. One solution only if line is tangent: k² - 4(1)(-2) = k² + 8 = 0 has no solution. So this needs rechecking.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "x",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                1
+              ],
+              "label": "(1, 1)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-056",
@@ -2301,7 +3832,30 @@
       "choice_c": "x = 1 and x = 3",
       "choice_d": "x = 0 and x = 2",
       "correct_answer": "A",
-      "explanation": "Let u = 2^x. Then 4^x = u². Equation: u² - 6u + 8 = 0, (u - 2)(u - 4) = 0. u = 2 → 2^x = 2, x = 1. u = 4 → 2^x = 4, x = 2."
+      "explanation": "Let u = 2^x. Then 4^x = u². Equation: u² - 6u + 8 = 0, (u - 2)(u - 4) = 0. u = 2 → 2^x = 2, x = 1. u = 4 → 2^x = 4, x = 2.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -3,
+            4
+          ],
+          "yRange": [
+            -1,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "2^x",
+              "color": "#9b59b6",
+              "label": "y = 2^x"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-058",
@@ -2327,7 +3881,30 @@
       "choice_c": "84",
       "choice_d": "96",
       "correct_answer": "B",
-      "explanation": "xy = (36 - 20)/2 = 8. x³ + y³ = (x + y)(x² - xy + y²) = 6(20 - 8) = 6(12) = 72."
+      "explanation": "xy = (36 - 20)/2 = 8. x³ + y³ = (x + y)(x² - xy + y²) = 6(20 - 8) = 6(12) = 72.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 320,
+          "height": 250,
+          "xRange": [
+            -4,
+            4
+          ],
+          "yRange": [
+            -10,
+            10
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x^3",
+              "color": "#2ecc71",
+              "label": "f(x)"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ADV-H-060",

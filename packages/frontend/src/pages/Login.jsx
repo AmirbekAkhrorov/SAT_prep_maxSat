@@ -129,10 +129,10 @@ export default function Login() {
           <div className="flex items-center justify-between mb-8">
             <Link to="/" className="flex items-center gap-3">
               <div className="w-11 h-11 bg-navy-900 dark:bg-navy-800 rounded-xl flex items-center justify-center">
-                <GraduationCap className="w-6 h-6 text-gold-400" />
+                <span className="font-display font-black text-base leading-none"><span className="text-cream-100">m</span><span className="text-gold-400">S</span></span>
               </div>
               <span className="font-display text-xl font-semibold text-navy-900 dark:text-cream-100">
-                SAT<span className="text-gold-600 dark:text-gold-400">Prep</span>
+                max<span className="text-gold-500 dark:text-gold-400 font-black">SAT</span>
               </span>
             </Link>
             <ThemeToggle />

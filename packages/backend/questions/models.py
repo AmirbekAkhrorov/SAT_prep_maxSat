@@ -147,6 +147,16 @@ class Question(models.Model):
     )
     explanation = models.TextField(help_text="Detailed rationale explaining the correct answer")
 
+    # Visualization (for math questions with graphs, geometry, charts, etc.)
+    visualization = models.JSONField(
+        null=True,
+        blank=True,
+        help_text="JSON config for visual elements (geometry, graphs, charts, tables)"
+    )
+
+    # New-question flag (True for the latest teacher upload batch)
+    is_new = models.BooleanField(default=False, db_index=True)
+
     # Metadata
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -1,30 +1,33 @@
 import { motion } from 'framer-motion';
-import { UserPlus, LineChart, Award, ArrowRight } from 'lucide-react';
+import { GraduationCap, Languages, Trophy, ArrowRight } from 'lucide-react';
 
 const steps = [
   {
     number: '01',
-    icon: UserPlus,
-    title: 'Take a Diagnostic Test',
+    icon: GraduationCap,
+    title: 'Pick a Test & Start the Clock',
     description:
-      'Start with a comprehensive assessment to identify your strengths and areas for improvement.',
+      'Choose from Mini (5 questions, 10 min), Section (20 questions, 35 min), or Full (55 questions, 120 min). Each test pulls real questions from all four SAT Math domains under authentic timed conditions.',
+    chips: ['5 · 20 · 55 Questions', 'Algebra · Geometry · Advanced Math · Problem Solving'],
     color: 'navy',
   },
   {
     number: '02',
-    icon: LineChart,
-    title: 'Follow Your Custom Plan',
+    icon: Languages,
+    title: 'Answer in Your Language',
     description:
-      'Our AI creates a personalized study schedule targeting your weak areas with the right practice questions.',
-    color: 'gold',
+      'Work through each question in English, then flip to Uzbek or Russian with one tap whenever you need to. Navigate freely, flag tricky questions to revisit, and enter your answers — all while the timer runs.',
+    chips: ['🇺🇸 English · 🇷🇺 Russian · 🇺🇿 Uzbek', 'Flag · Navigate · Free Response'],
+    color: 'sage',
   },
   {
     number: '03',
-    icon: Award,
-    title: 'Achieve Your Target Score',
+    icon: Trophy,
+    title: 'Review, Earn Points & Climb',
     description:
-      'Track your progress, refine your strategies, and walk into test day with confidence.',
-    color: 'sage',
+      'Submit to see your score. Every question shows the correct answer with a full explanation — flip to your language in the review too. Earn points for each correct answer, grow your streak, and watch your rank rise on the weekly leaderboard.',
+    chips: ['Points · Daily Streak · Accuracy', 'Weekly & Monthly Leaderboard'],
+    color: 'gold',
   },
 ];
 
@@ -35,8 +38,6 @@ export default function HowItWorks() {
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-navy-800 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-gold-500/10 rounded-full blur-3xl" />
-
-        {/* Grid pattern */}
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -47,7 +48,7 @@ export default function HowItWorks() {
         />
       </div>
 
-      <div className="container-wide mx-auto relative">
+      <div className="container-wide mx-auto relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -58,15 +59,19 @@ export default function HowItWorks() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full mb-6">
             <span className="font-sans text-sm font-medium text-gold-400">
-              Simple Process
+              How It Works
             </span>
           </div>
           <h2 className="font-display text-display-md md:text-display-lg text-cream-100 mb-6">
-            Your Path to SAT Success
+            From First Question to{' '}
+            <span className="relative inline-block">
+              <span className="relative z-10">Top of the Board</span>
+              <span className="absolute bottom-1 left-0 w-full h-3 bg-gold-500/20 -z-0" />
+            </span>
           </h2>
           <p className="font-body text-lg text-cream-300 leading-relaxed">
-            Three simple steps to transform your SAT preparation and achieve
-            the score you deserve.
+            Three steps — that's the whole loop. Each session makes you faster,
+            sharper, and higher on the leaderboard.
           </p>
         </motion.div>
 
@@ -109,12 +114,30 @@ export default function HowItWorks() {
                 <h3 className="font-display text-xl font-semibold text-cream-100 mb-4">
                   {step.title}
                 </h3>
-                <p className="font-body text-cream-400 leading-relaxed max-w-xs mx-auto">
+                <p className="font-body text-cream-400 leading-relaxed max-w-xs mx-auto mb-5">
                   {step.description}
                 </p>
+
+                {/* Detail chips */}
+                <div className="flex flex-col items-center gap-2">
+                  {step.chips.map((chip) => (
+                    <span
+                      key={chip}
+                      className={`inline-block px-3 py-1 rounded-full text-xs font-sans font-medium border ${
+                        step.color === 'gold'
+                          ? 'bg-gold-500/20 border-gold-400/50 text-gold-300'
+                          : step.color === 'sage'
+                          ? 'bg-emerald-500/20 border-emerald-400/50 text-emerald-300'
+                          : 'bg-white/10 border-white/20 text-cream-200'
+                      }`}
+                    >
+                      {chip}
+                    </span>
+                  ))}
+                </div>
               </div>
 
-              {/* Arrow (between steps on desktop) */}
+              {/* Arrow between steps */}
               {index < steps.length - 1 && (
                 <div className="hidden md:flex absolute top-20 -right-4 z-10">
                   <ArrowRight className="w-8 h-8 text-gold-500/50" />
@@ -124,19 +147,6 @@ export default function HowItWorks() {
           ))}
         </div>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-20 text-center"
-        >
-          <button className="btn-gold group">
-            Get Started Free
-            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-          </button>
-        </motion.div>
       </div>
     </section>
   );

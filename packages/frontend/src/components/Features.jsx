@@ -1,63 +1,62 @@
 import { motion } from 'framer-motion';
 import {
-  Brain,
-  BarChart3,
-  Clock,
-  Target,
-  Sparkles,
+  GraduationCap,
+  Trophy,
+  Languages,
   BookOpen,
-  TrendingUp,
+  Lightbulb,
+  BarChart3,
   Zap,
 } from 'lucide-react';
 
 const features = [
   {
-    icon: Brain,
-    title: 'AI-Powered Learning',
+    icon: GraduationCap,
+    title: 'Three Real Test Modes',
     description:
-      'Our adaptive algorithm identifies your weaknesses and creates personalized study plans that evolve with your progress.',
-    color: 'gold',
-    accent: 'from-gold-400 to-gold-500',
-  },
-  {
-    icon: BarChart3,
-    title: 'Detailed Analytics',
-    description:
-      'Track your performance across all sections with comprehensive dashboards. Understand exactly where you need to focus.',
+      'Mini (5 questions), Section (20 questions), and Full (55 questions) timed tests — each matching the exact digital SAT format to build real test stamina.',
     color: 'navy',
     accent: 'from-navy-600 to-navy-500',
   },
   {
-    icon: Clock,
-    title: 'Timed Practice Tests',
+    icon: Trophy,
+    title: 'Leaderboard & Rankings',
     description:
-      'Simulate real SAT conditions with full-length timed tests. Build your stamina and time management skills.',
+      'Earn points for every correct answer, build daily streaks, and climb from Beginner to SAT Master on the weekly and monthly rankings.',
+    color: 'gold',
+    accent: 'from-gold-400 to-gold-500',
+  },
+  {
+    icon: Languages,
+    title: 'English · Uzbek · Russian',
+    description:
+      'Flip any question between English, Uzbek, and Russian with one tap. Every question in the bank is fully translated — study in the language you think best.',
     color: 'sage',
     accent: 'from-sage-500 to-sage-400',
   },
   {
-    icon: Target,
-    title: 'Score Predictions',
-    description:
-      'Get accurate score predictions based on your practice performance. Know where you stand before test day.',
-    color: 'coral',
-    accent: 'from-coral-500 to-coral-400',
-  },
-  {
     icon: BookOpen,
-    title: '10,000+ Questions',
+    title: '720+ Official Questions',
     description:
-      'Access our vast library of SAT-style questions covering every topic and difficulty level.',
+      'A complete question bank across Algebra, Advanced Math, Geometry, and Problem Solving & Data Analysis — covering every domain of the digital SAT Math section.',
     color: 'navy',
     accent: 'from-navy-500 to-navy-400',
   },
   {
-    icon: Sparkles,
-    title: 'Instant Explanations',
+    icon: Lightbulb,
+    title: 'Deep Answer Review',
     description:
-      'Understand your mistakes with detailed explanations for every question. Learn the strategies that work.',
+      'After every test, revisit each question with the correct answer and a full explanation. Switch languages in review too — understand every mistake in your language.',
     color: 'gold',
     accent: 'from-gold-500 to-gold-400',
+  },
+  {
+    icon: BarChart3,
+    title: 'Progress & Stats',
+    description:
+      'Track accuracy, streaks, and total points over time. See exactly which domains need attention and watch your performance trend upward session by session.',
+    color: 'coral',
+    accent: 'from-coral-500 to-coral-400',
   },
 ];
 
@@ -89,7 +88,7 @@ export default function Features() {
         <div className="absolute bottom-20 -left-20 w-80 h-80 bg-navy-200/20 rounded-full blur-3xl" />
       </div>
 
-      <div className="container-wide mx-auto relative">
+      <div className="container-wide mx-auto relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -101,7 +100,7 @@ export default function Features() {
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-cream-200 border border-cream-300 rounded-full mb-6">
             <Zap className="w-4 h-4 text-gold-600" />
             <span className="font-sans text-sm font-medium text-navy-700">
-              Why Choose Us
+              Built for SAT Prep
             </span>
           </div>
           <h2 className="font-display text-display-md md:text-display-lg text-navy-900 mb-6">
@@ -113,8 +112,8 @@ export default function Features() {
             </span>
           </h2>
           <p className="font-body text-lg text-navy-600 leading-relaxed">
-            Our comprehensive platform combines cutting-edge AI technology with
-            proven test-taking strategies to maximize your score potential.
+            Four math domains, three languages, three test modes — one complete
+            platform built around the digital SAT format.
           </p>
         </motion.div>
 
@@ -126,7 +125,7 @@ export default function Features() {
           viewport={{ once: true, margin: '-100px' }}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {features.map((feature, index) => (
+          {features.map((feature) => (
             <motion.div
               key={feature.title}
               variants={itemVariants}
@@ -155,31 +154,6 @@ export default function Features() {
               </div>
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 text-center"
-        >
-          <div className="inline-flex flex-col sm:flex-row items-center gap-4 p-6 bg-white rounded-2xl shadow-card border border-cream-200">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-gold-400 to-gold-500 rounded-xl flex items-center justify-center">
-                <TrendingUp className="w-6 h-6 text-white" />
-              </div>
-              <div className="text-left">
-                <p className="font-sans text-sm text-navy-500">Average improvement</p>
-                <p className="font-display text-2xl font-bold text-navy-900">+150 points</p>
-              </div>
-            </div>
-            <div className="h-12 w-px bg-cream-200 hidden sm:block" />
-            <button className="btn-primary">
-              Start Improving Today
-            </button>
-          </div>
         </motion.div>
       </div>
     </section>

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  GraduationCap,
   BookOpen,
   ClipboardCheck,
   Trophy,
@@ -11,7 +10,10 @@ import {
   TrendingUp,
   ArrowRight,
   LogOut,
-  Medal
+  Medal,
+  Upload,
+  PenLine,
+  FileText
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import RankBadge, { RankIcon } from '../components/RankBadge';
@@ -94,10 +96,10 @@ export default function Dashboard() {
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-3 group">
               <div className="w-10 h-10 bg-navy-900 dark:bg-navy-800 rounded-xl flex items-center justify-center">
-                <GraduationCap className="w-5 h-5 text-gold-400" />
+                <span className="font-display font-black text-sm leading-none"><span className="text-cream-100">m</span><span className="text-gold-400">S</span></span>
               </div>
               <span className="font-display text-xl font-semibold text-navy-900 dark:text-cream-100">
-                SAT<span className="text-gold-600 dark:text-gold-400">Prep</span>
+                max<span className="text-gold-500 dark:text-gold-400 font-black">SAT</span>
               </span>
             </Link>
 
@@ -151,6 +153,39 @@ export default function Dashboard() {
             Ready to continue your SAT preparation journey?
           </p>
         </motion.div>
+
+        {/* Teacher Upload Card */}
+        {user?.role === 'teacher' && (
+          <motion.div variants={itemVariants} className="mb-8">
+            <div className="bg-gradient-to-r from-gold-500 to-gold-400 rounded-2xl p-6 shadow-gold">
+              <div className="flex items-center gap-4 mb-5">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                  <Upload className="w-6 h-6 text-navy-900" />
+                </div>
+                <div>
+                  <h2 className="font-display text-xl font-bold text-navy-900">Upload New Exam Questions</h2>
+                  <p className="font-sans text-sm text-navy-800/70">Add questions from the latest SAT exam</p>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <Link
+                  to="/cabinet/upload"
+                  className="flex-1 flex items-center justify-center gap-2.5 py-3 bg-navy-900 text-cream-100 rounded-xl font-sans font-medium text-sm hover:bg-navy-800 transition-colors"
+                >
+                  <PenLine className="w-4.5 h-4.5" />
+                  Enter Manually
+                </Link>
+                <Link
+                  to="/cabinet/upload?mode=pdf"
+                  className="flex-1 flex items-center justify-center gap-2.5 py-3 bg-white/90 text-navy-900 rounded-xl font-sans font-medium text-sm hover:bg-white transition-colors"
+                >
+                  <FileText className="w-4.5 h-4.5" />
+                  Upload PDF
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        )}
 
         {/* Stats Grid */}
         <motion.div variants={itemVariants} className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">

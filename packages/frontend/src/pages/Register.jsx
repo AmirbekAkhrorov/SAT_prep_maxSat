@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { GraduationCap, Mail, Lock, User, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import ThemeToggle from '../components/ThemeToggle';
@@ -8,10 +8,11 @@ const GOOGLE_CLIENT_ID = '21555557010-1v1skvapn1o9ldhu25tv7t3f5q74dtpm.apps.goog
 
 export default function Register() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
-    username: '',
+    username: location.state?.username || '',
     password1: '',
     password2: '',
   });
@@ -135,27 +136,27 @@ export default function Register() {
             <GraduationCap className="w-32 h-32 text-gold-400" />
           </div>
           <h2 className="text-3xl font-bold text-cream-100 mb-4">
-            Start your SAT journey today
+            720 real SAT questions, ready for you
           </h2>
           <p className="text-navy-300 text-lg mb-8">
-            Get access to thousands of practice questions, personalized study plans, and real-time progress tracking.
+            Four math domains, three languages, three test modes — all built around the digital SAT format. Free to join, no card needed.
           </p>
           <div className="grid grid-cols-2 gap-4 text-left max-w-sm mx-auto">
             <div className="flex items-center gap-3 text-navy-200">
               <div className="w-2 h-2 bg-gold-500 rounded-full" />
-              <span>Full-length practice tests</span>
+              <span>Mini · Section · Full tests</span>
             </div>
             <div className="flex items-center gap-3 text-navy-200">
               <div className="w-2 h-2 bg-gold-500 rounded-full" />
-              <span>Personalized analytics</span>
+              <span>English · Uzbek · Russian</span>
             </div>
             <div className="flex items-center gap-3 text-navy-200">
               <div className="w-2 h-2 bg-gold-500 rounded-full" />
-              <span>Expert video explanations</span>
+              <span>Instant answer explanations</span>
             </div>
             <div className="flex items-center gap-3 text-navy-200">
               <div className="w-2 h-2 bg-gold-500 rounded-full" />
-              <span>Progress tracking</span>
+              <span>Leaderboard &amp; rankings</span>
             </div>
           </div>
         </div>
@@ -168,17 +169,17 @@ export default function Register() {
           <div className="flex items-center justify-between mb-8">
             <Link to="/" className="flex items-center gap-3">
               <div className="w-11 h-11 bg-navy-900 dark:bg-navy-800 rounded-xl flex items-center justify-center">
-                <GraduationCap className="w-6 h-6 text-gold-400" />
+                <span className="font-display font-black text-base leading-none"><span className="text-cream-100">m</span><span className="text-gold-400">S</span></span>
               </div>
               <span className="font-display text-xl font-semibold text-navy-900 dark:text-cream-100">
-                SAT<span className="text-gold-600 dark:text-gold-400">Prep</span>
+                max<span className="text-gold-500 dark:text-gold-400 font-black">SAT</span>
               </span>
             </Link>
             <ThemeToggle />
           </div>
 
           <h1 className="text-3xl font-bold text-navy-900 dark:text-cream-100 mb-2">Create your account</h1>
-          <p className="text-navy-600 dark:text-cream-300 mb-8">Start your free 7-day trial. No credit card required.</p>
+          <p className="text-navy-600 dark:text-cream-300 mb-8">Free to join. Start your first SAT test in under a minute.</p>
 
           {error && (
             <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl flex items-center gap-3 text-red-700 dark:text-red-300">

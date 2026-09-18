@@ -39,7 +39,32 @@
       "choice_c": "9.2",
       "choice_d": "12",
       "correct_answer": "B",
-      "explanation": "The data is already sorted. With 5 values, the median is the middle (3rd) value: 9."
+      "explanation": "The data is already sorted. With 5 values, the median is the middle (3rd) value: 9.",
+      "visualization": {
+        "type": "table",
+        "config": {
+          "title": "Data Set",
+          "headers": [
+            "Position",
+            "1st",
+            "2nd",
+            "3rd",
+            "4th",
+            "5th"
+          ],
+          "rows": [
+            [
+              "Value",
+              3,
+              7,
+              9,
+              12,
+              15
+            ]
+          ],
+          "highlightColumn": 3
+        }
+      }
     },
     {
       "question_id": "PDA-E-004",
@@ -52,7 +77,28 @@
       "choice_c": "3/5",
       "choice_d": "4/6",
       "correct_answer": "B",
-      "explanation": "Total marbles = 4 + 6 = 10. P(red) = 4/10 = 2/5."
+      "explanation": "Total marbles = 4 + 6 = 10. P(red) = 4/10 = 2/5.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "pie",
+          "width": 280,
+          "height": 200,
+          "title": "Marbles in Bag",
+          "data": [
+            {
+              "label": "Red",
+              "value": 4,
+              "color": "#dc2626"
+            },
+            {
+              "label": "Blue",
+              "value": 6,
+              "color": "#2563eb"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-E-005",
@@ -91,7 +137,36 @@
       "choice_c": "12",
       "choice_d": "14",
       "correct_answer": "B",
-      "explanation": "Mean = (4 + 8 + 12 + 16)/4 = 40/4 = 10."
+      "explanation": "Mean = (4 + 8 + 12 + 16)/4 = 40/4 = 10.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "bar",
+          "width": 350,
+          "height": 200,
+          "title": "Data Values",
+          "xLabel": "Data Point",
+          "yLabel": "Value",
+          "data": [
+            {
+              "label": "1",
+              "value": 4
+            },
+            {
+              "label": "2",
+              "value": 8
+            },
+            {
+              "label": "3",
+              "value": 12
+            },
+            {
+              "label": "4",
+              "value": 16
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-E-008",
@@ -104,7 +179,52 @@
       "choice_c": "17",
       "choice_d": "20",
       "correct_answer": "C",
-      "explanation": "y = 3(4) + 5 = 12 + 5 = 17."
+      "explanation": "y = 3(4) + 5 = 12 + 5 = 17.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "scatter",
+          "width": 320,
+          "height": 280,
+          "title": "Data Correlation",
+          "xLabel": "X Variable",
+          "yLabel": "Y Variable",
+          "data": [
+            {
+              "x": 1,
+              "y": 22
+            },
+            {
+              "x": 2,
+              "y": 28
+            },
+            {
+              "x": 3,
+              "y": 35
+            },
+            {
+              "x": 4,
+              "y": 40
+            },
+            {
+              "x": 5,
+              "y": 48
+            },
+            {
+              "x": 6,
+              "y": 52
+            },
+            {
+              "x": 7,
+              "y": 61
+            },
+            {
+              "x": 8,
+              "y": 65
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-E-009",
@@ -182,7 +302,52 @@
       "choice_c": "No correlation",
       "choice_d": "Perfect correlation",
       "correct_answer": "B",
-      "explanation": "Points going up from left to right indicate a positive correlation (as x increases, y increases)."
+      "explanation": "Points going up from left to right indicate a positive correlation (as x increases, y increases).",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "scatter",
+          "width": 320,
+          "height": 280,
+          "title": "Data Correlation",
+          "xLabel": "X Variable",
+          "yLabel": "Y Variable",
+          "data": [
+            {
+              "x": 1,
+              "y": 22
+            },
+            {
+              "x": 2,
+              "y": 28
+            },
+            {
+              "x": 3,
+              "y": 35
+            },
+            {
+              "x": 4,
+              "y": 40
+            },
+            {
+              "x": 5,
+              "y": 48
+            },
+            {
+              "x": 6,
+              "y": 52
+            },
+            {
+              "x": 7,
+              "y": 61
+            },
+            {
+              "x": 8,
+              "y": 65
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-E-015",
@@ -260,7 +425,52 @@
       "choice_c": "10",
       "choice_d": "12",
       "correct_answer": "C",
-      "explanation": "When x = 0, y = 2(0) + 10 = 10. This is the y-intercept."
+      "explanation": "When x = 0, y = 2(0) + 10 = 10. This is the y-intercept.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "scatter",
+          "width": 320,
+          "height": 280,
+          "title": "Data Correlation",
+          "xLabel": "X Variable",
+          "yLabel": "Y Variable",
+          "data": [
+            {
+              "x": 1,
+              "y": 22
+            },
+            {
+              "x": 2,
+              "y": 28
+            },
+            {
+              "x": 3,
+              "y": 35
+            },
+            {
+              "x": 4,
+              "y": 40
+            },
+            {
+              "x": 5,
+              "y": 48
+            },
+            {
+              "x": 6,
+              "y": 52
+            },
+            {
+              "x": 7,
+              "y": 61
+            },
+            {
+              "x": 8,
+              "y": 65
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-E-021",
@@ -429,7 +639,52 @@
       "choice_c": "x and y are not related",
       "choice_d": "y is always greater than x",
       "correct_answer": "B",
-      "explanation": "Negative correlation means as one variable increases, the other decreases."
+      "explanation": "Negative correlation means as one variable increases, the other decreases.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "scatter",
+          "width": 320,
+          "height": 280,
+          "title": "Data Correlation",
+          "xLabel": "X Variable",
+          "yLabel": "Y Variable",
+          "data": [
+            {
+              "x": 1,
+              "y": 22
+            },
+            {
+              "x": 2,
+              "y": 28
+            },
+            {
+              "x": 3,
+              "y": 35
+            },
+            {
+              "x": 4,
+              "y": 40
+            },
+            {
+              "x": 5,
+              "y": 48
+            },
+            {
+              "x": 6,
+              "y": 52
+            },
+            {
+              "x": 7,
+              "y": 61
+            },
+            {
+              "x": 8,
+              "y": 65
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-M-004",
@@ -572,7 +827,52 @@
       "choice_c": "Increases by 10",
       "choice_d": "Decreases by 10",
       "correct_answer": "B",
-      "explanation": "The slope is -2, meaning for each unit increase in x, y decreases by 2. For 10 units, y decreases by 20."
+      "explanation": "The slope is -2, meaning for each unit increase in x, y decreases by 2. For 10 units, y decreases by 20.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "scatter",
+          "width": 320,
+          "height": 280,
+          "title": "Data Correlation",
+          "xLabel": "X Variable",
+          "yLabel": "Y Variable",
+          "data": [
+            {
+              "x": 1,
+              "y": 22
+            },
+            {
+              "x": 2,
+              "y": 28
+            },
+            {
+              "x": 3,
+              "y": 35
+            },
+            {
+              "x": 4,
+              "y": 40
+            },
+            {
+              "x": 5,
+              "y": 48
+            },
+            {
+              "x": 6,
+              "y": 52
+            },
+            {
+              "x": 7,
+              "y": 61
+            },
+            {
+              "x": 8,
+              "y": 65
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-M-015",
@@ -676,7 +976,52 @@
       "choice_c": "Strong negative relationship",
       "choice_d": "No relationship",
       "correct_answer": "B",
-      "explanation": "r = 0.8 indicates a strong positive correlation (close to 1)."
+      "explanation": "r = 0.8 indicates a strong positive correlation (close to 1).",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "scatter",
+          "width": 320,
+          "height": 280,
+          "title": "Data Correlation",
+          "xLabel": "X Variable",
+          "yLabel": "Y Variable",
+          "data": [
+            {
+              "x": 1,
+              "y": 22
+            },
+            {
+              "x": 2,
+              "y": 28
+            },
+            {
+              "x": 3,
+              "y": 35
+            },
+            {
+              "x": 4,
+              "y": 40
+            },
+            {
+              "x": 5,
+              "y": 48
+            },
+            {
+              "x": 6,
+              "y": 52
+            },
+            {
+              "x": 7,
+              "y": 61
+            },
+            {
+              "x": 8,
+              "y": 65
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-M-023",
@@ -793,7 +1138,38 @@
       "choice_c": "105",
       "choice_d": "110",
       "correct_answer": "C",
-      "explanation": "New mean = 2(old mean) + 5 = 2(50) + 5 = 105."
+      "explanation": "New mean = 2(old mean) + 5 = 2(50) + 5 = 105.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "bar",
+          "width": 350,
+          "height": 250,
+          "title": "Data Values",
+          "data": [
+            {
+              "label": "V1",
+              "value": 50,
+              "color": "#3498db"
+            },
+            {
+              "label": "V2",
+              "value": 10,
+              "color": "#2ecc71"
+            },
+            {
+              "label": "V3",
+              "value": 2,
+              "color": "#e74c3c"
+            },
+            {
+              "label": "V4",
+              "value": 5,
+              "color": "#9b59b6"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-H-002",
@@ -910,7 +1286,52 @@
       "choice_c": "92.5%",
       "choice_d": "100%",
       "correct_answer": "A",
-      "explanation": "The coefficient of determination r² = 0.85² = 0.7225 = 72.25% explains the variation."
+      "explanation": "The coefficient of determination r² = 0.85² = 0.7225 = 72.25% explains the variation.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "scatter",
+          "width": 320,
+          "height": 280,
+          "title": "Data Correlation",
+          "xLabel": "X Variable",
+          "yLabel": "Y Variable",
+          "data": [
+            {
+              "x": 1,
+              "y": 22
+            },
+            {
+              "x": 2,
+              "y": 28
+            },
+            {
+              "x": 3,
+              "y": 35
+            },
+            {
+              "x": 4,
+              "y": 40
+            },
+            {
+              "x": 5,
+              "y": 48
+            },
+            {
+              "x": 6,
+              "y": 52
+            },
+            {
+              "x": 7,
+              "y": 61
+            },
+            {
+              "x": 8,
+              "y": 65
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-H-011",
@@ -988,7 +1409,52 @@
       "choice_c": "15",
       "choice_d": "17",
       "correct_answer": "A",
-      "explanation": "Predicted: y = 0.8(10) + 5 = 13. Residual = actual - predicted = -2. Actual = 13 - 2 = 11."
+      "explanation": "Predicted: y = 0.8(10) + 5 = 13. Residual = actual - predicted = -2. Actual = 13 - 2 = 11.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "scatter",
+          "width": 320,
+          "height": 280,
+          "title": "Data Correlation",
+          "xLabel": "X Variable",
+          "yLabel": "Y Variable",
+          "data": [
+            {
+              "x": 1,
+              "y": 22
+            },
+            {
+              "x": 2,
+              "y": 28
+            },
+            {
+              "x": 3,
+              "y": 35
+            },
+            {
+              "x": 4,
+              "y": 40
+            },
+            {
+              "x": 5,
+              "y": 48
+            },
+            {
+              "x": 6,
+              "y": 52
+            },
+            {
+              "x": 7,
+              "y": 61
+            },
+            {
+              "x": 8,
+              "y": 65
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-H-017",
@@ -1131,7 +1597,38 @@
       "choice_c": "99.7%",
       "choice_d": "100%",
       "correct_answer": "B",
-      "explanation": "70 to 130 is 100 ± 30 = 100 ± 2(15), which is 2 standard deviations. About 95% falls within 2 SD."
+      "explanation": "70 to 130 is 100 ± 30 = 100 ± 2(15), which is 2 standard deviations. About 95% falls within 2 SD.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "bar",
+          "width": 350,
+          "height": 250,
+          "title": "Data Values",
+          "data": [
+            {
+              "label": "V1",
+              "value": 100,
+              "color": "#3498db"
+            },
+            {
+              "label": "V2",
+              "value": 15,
+              "color": "#2ecc71"
+            },
+            {
+              "label": "V3",
+              "value": 70,
+              "color": "#e74c3c"
+            },
+            {
+              "label": "V4",
+              "value": 130,
+              "color": "#9b59b6"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-H-028",
@@ -1430,7 +1927,52 @@
       "choice_c": "No correlation",
       "choice_d": "Perfect correlation",
       "correct_answer": "B",
-      "explanation": "An upward pattern indicates positive correlation: as x increases, y increases."
+      "explanation": "An upward pattern indicates positive correlation: as x increases, y increases.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "scatter",
+          "width": 320,
+          "height": 280,
+          "title": "Data Correlation",
+          "xLabel": "X Variable",
+          "yLabel": "Y Variable",
+          "data": [
+            {
+              "x": 1,
+              "y": 22
+            },
+            {
+              "x": 2,
+              "y": 28
+            },
+            {
+              "x": 3,
+              "y": 35
+            },
+            {
+              "x": 4,
+              "y": 40
+            },
+            {
+              "x": 5,
+              "y": 48
+            },
+            {
+              "x": 6,
+              "y": 52
+            },
+            {
+              "x": 7,
+              "y": 61
+            },
+            {
+              "x": 8,
+              "y": 65
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-E-051",
@@ -1521,7 +2063,52 @@
       "choice_c": "11",
       "choice_d": "13",
       "correct_answer": "C",
-      "explanation": "y = 2(3) + 5 = 6 + 5 = 11."
+      "explanation": "y = 2(3) + 5 = 6 + 5 = 11.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "scatter",
+          "width": 320,
+          "height": 280,
+          "title": "Data Correlation",
+          "xLabel": "X Variable",
+          "yLabel": "Y Variable",
+          "data": [
+            {
+              "x": 1,
+              "y": 22
+            },
+            {
+              "x": 2,
+              "y": 28
+            },
+            {
+              "x": 3,
+              "y": 35
+            },
+            {
+              "x": 4,
+              "y": 40
+            },
+            {
+              "x": 5,
+              "y": 48
+            },
+            {
+              "x": 6,
+              "y": 52
+            },
+            {
+              "x": 7,
+              "y": 61
+            },
+            {
+              "x": 8,
+              "y": 65
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-E-058",
@@ -1664,7 +2251,43 @@
       "choice_c": "10.5",
       "choice_d": "11",
       "correct_answer": "C",
-      "explanation": "Ordered: 3, 5, 9, 12, 14, 18. Median = (9 + 12)/2 = 10.5."
+      "explanation": "Ordered: 3, 5, 9, 12, 14, 18. Median = (9 + 12)/2 = 10.5.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "bar",
+          "width": 350,
+          "height": 250,
+          "title": "Data Values",
+          "data": [
+            {
+              "label": "V1",
+              "value": 12,
+              "color": "#3498db"
+            },
+            {
+              "label": "V2",
+              "value": 5,
+              "color": "#2ecc71"
+            },
+            {
+              "label": "V3",
+              "value": 18,
+              "color": "#e74c3c"
+            },
+            {
+              "label": "V4",
+              "value": 3,
+              "color": "#9b59b6"
+            },
+            {
+              "label": "V5",
+              "value": 9,
+              "color": "#f39c12"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-M-039",
@@ -1755,7 +2378,52 @@
       "choice_c": "Strong negative relationship",
       "choice_d": "Weak negative relationship",
       "correct_answer": "C",
-      "explanation": "r close to -1 indicates a strong negative (inverse) relationship."
+      "explanation": "r close to -1 indicates a strong negative (inverse) relationship.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "scatter",
+          "width": 320,
+          "height": 280,
+          "title": "Data Correlation",
+          "xLabel": "X Variable",
+          "yLabel": "Y Variable",
+          "data": [
+            {
+              "x": 1,
+              "y": 22
+            },
+            {
+              "x": 2,
+              "y": 28
+            },
+            {
+              "x": 3,
+              "y": 35
+            },
+            {
+              "x": 4,
+              "y": 40
+            },
+            {
+              "x": 5,
+              "y": 48
+            },
+            {
+              "x": 6,
+              "y": 52
+            },
+            {
+              "x": 7,
+              "y": 61
+            },
+            {
+              "x": 8,
+              "y": 65
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-M-046",
@@ -1807,7 +2475,52 @@
       "choice_c": "A confounding variable (temperature)",
       "choice_d": "No relationship exists",
       "correct_answer": "C",
-      "explanation": "Both increase in summer due to heat, a confounding variable. Correlation ≠ causation."
+      "explanation": "Both increase in summer due to heat, a confounding variable. Correlation ≠ causation.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "scatter",
+          "width": 320,
+          "height": 280,
+          "title": "Data Correlation",
+          "xLabel": "X Variable",
+          "yLabel": "Y Variable",
+          "data": [
+            {
+              "x": 1,
+              "y": 22
+            },
+            {
+              "x": 2,
+              "y": 28
+            },
+            {
+              "x": 3,
+              "y": 35
+            },
+            {
+              "x": 4,
+              "y": 40
+            },
+            {
+              "x": 5,
+              "y": 48
+            },
+            {
+              "x": 6,
+              "y": 52
+            },
+            {
+              "x": 7,
+              "y": 61
+            },
+            {
+              "x": 8,
+              "y": 65
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-M-050",
@@ -1859,7 +2572,52 @@
       "choice_c": "x decreases by 2 for each unit increase in y",
       "choice_d": "The initial value is -2",
       "correct_answer": "A",
-      "explanation": "The slope -2 means y decreases by 2 for each 1-unit increase in x."
+      "explanation": "The slope -2 means y decreases by 2 for each 1-unit increase in x.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "scatter",
+          "width": 320,
+          "height": 280,
+          "title": "Data Correlation",
+          "xLabel": "X Variable",
+          "yLabel": "Y Variable",
+          "data": [
+            {
+              "x": 1,
+              "y": 22
+            },
+            {
+              "x": 2,
+              "y": 28
+            },
+            {
+              "x": 3,
+              "y": 35
+            },
+            {
+              "x": 4,
+              "y": 40
+            },
+            {
+              "x": 5,
+              "y": 48
+            },
+            {
+              "x": 6,
+              "y": 52
+            },
+            {
+              "x": 7,
+              "y": 61
+            },
+            {
+              "x": 8,
+              "y": 65
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-M-054",
@@ -1950,7 +2708,43 @@
       "choice_c": "82",
       "choice_d": "84",
       "correct_answer": "B",
-      "explanation": "Sum = 5 × 80 = 400. Known sum = 75 + 82 + 78 + 85 = 320. Fifth = 400 - 320 = 80."
+      "explanation": "Sum = 5 × 80 = 400. Known sum = 75 + 82 + 78 + 85 = 320. Fifth = 400 - 320 = 80.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "bar",
+          "width": 350,
+          "height": 250,
+          "title": "Data Values",
+          "data": [
+            {
+              "label": "V1",
+              "value": 80,
+              "color": "#3498db"
+            },
+            {
+              "label": "V2",
+              "value": 75,
+              "color": "#2ecc71"
+            },
+            {
+              "label": "V3",
+              "value": 82,
+              "color": "#e74c3c"
+            },
+            {
+              "label": "V4",
+              "value": 78,
+              "color": "#9b59b6"
+            },
+            {
+              "label": "V5",
+              "value": 85,
+              "color": "#f39c12"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-H-031",
@@ -1989,7 +2783,38 @@
       "choice_c": "53",
       "choice_d": "55",
       "correct_answer": "C",
-      "explanation": "Original sum = 500. Change adds 30 to sum. New sum = 530. New mean = 53."
+      "explanation": "Original sum = 500. Change adds 30 to sum. New sum = 530. New mean = 53.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "bar",
+          "width": 350,
+          "height": 250,
+          "title": "Data Values",
+          "data": [
+            {
+              "label": "V1",
+              "value": 10,
+              "color": "#3498db"
+            },
+            {
+              "label": "V2",
+              "value": 50,
+              "color": "#2ecc71"
+            },
+            {
+              "label": "V3",
+              "value": 30,
+              "color": "#e74c3c"
+            },
+            {
+              "label": "V4",
+              "value": 60,
+              "color": "#9b59b6"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-H-034",
@@ -2054,7 +2879,43 @@
       "choice_c": "Same",
       "choice_d": "Cannot determine",
       "correct_answer": "A",
-      "explanation": "Both have mean 7. Set A values are more spread out (range 8 vs 4), so A has greater SD."
+      "explanation": "Both have mean 7. Set A values are more spread out (range 8 vs 4), so A has greater SD.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "bar",
+          "width": 350,
+          "height": 250,
+          "title": "Data Values",
+          "data": [
+            {
+              "label": "V1",
+              "value": 3,
+              "color": "#3498db"
+            },
+            {
+              "label": "V2",
+              "value": 5,
+              "color": "#2ecc71"
+            },
+            {
+              "label": "V3",
+              "value": 7,
+              "color": "#e74c3c"
+            },
+            {
+              "label": "V4",
+              "value": 9,
+              "color": "#9b59b6"
+            },
+            {
+              "label": "V5",
+              "value": 11,
+              "color": "#f39c12"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-H-039",
@@ -2145,7 +3006,52 @@
       "choice_c": "81%",
       "choice_d": "90%",
       "correct_answer": "C",
-      "explanation": "r² = 0.81 means 81% of the variation in y is explained by the linear relationship with x."
+      "explanation": "r² = 0.81 means 81% of the variation in y is explained by the linear relationship with x.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "scatter",
+          "width": 320,
+          "height": 280,
+          "title": "Data Correlation",
+          "xLabel": "X Variable",
+          "yLabel": "Y Variable",
+          "data": [
+            {
+              "x": 1,
+              "y": 22
+            },
+            {
+              "x": 2,
+              "y": 28
+            },
+            {
+              "x": 3,
+              "y": 35
+            },
+            {
+              "x": 4,
+              "y": 40
+            },
+            {
+              "x": 5,
+              "y": 48
+            },
+            {
+              "x": 6,
+              "y": 52
+            },
+            {
+              "x": 7,
+              "y": 61
+            },
+            {
+              "x": 8,
+              "y": 65
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-H-046",
@@ -2314,7 +3220,52 @@
       "choice_c": "The correlation is r = 0.8",
       "choice_d": "The y-intercept has no meaningful interpretation",
       "correct_answer": "D",
-      "explanation": "The y-intercept (10) may or may not have meaning depending on context. A, B, C are true statements."
+      "explanation": "The y-intercept (10) may or may not have meaning depending on context. A, B, C are true statements.",
+      "visualization": {
+        "type": "chart",
+        "config": {
+          "chartType": "scatter",
+          "width": 320,
+          "height": 280,
+          "title": "Data Correlation",
+          "xLabel": "X Variable",
+          "yLabel": "Y Variable",
+          "data": [
+            {
+              "x": 1,
+              "y": 22
+            },
+            {
+              "x": 2,
+              "y": 28
+            },
+            {
+              "x": 3,
+              "y": 35
+            },
+            {
+              "x": 4,
+              "y": 40
+            },
+            {
+              "x": 5,
+              "y": 48
+            },
+            {
+              "x": 6,
+              "y": 52
+            },
+            {
+              "x": 7,
+              "y": 61
+            },
+            {
+              "x": 8,
+              "y": 65
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "PDA-H-059",

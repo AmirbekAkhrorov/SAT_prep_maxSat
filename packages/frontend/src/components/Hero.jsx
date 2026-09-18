@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { ArrowRight, Sparkles, TrendingUp, Users, BookOpen } from 'lucide-react';
+import { ArrowRight, Sparkles, TrendingUp, BookOpen, Globe } from 'lucide-react';
 
 function AnimatedCounter({ end, duration = 2, suffix = '' }) {
   const [count, setCount] = useState(0);
@@ -32,9 +32,16 @@ function AnimatedCounter({ end, duration = 2, suffix = '' }) {
 }
 
 const stats = [
-  { value: 50000, suffix: '+', label: 'Students', icon: Users },
-  { value: 150, suffix: '+', label: 'Point Average Gain', icon: TrendingUp },
-  { value: 10000, suffix: '+', label: 'Practice Questions', icon: BookOpen },
+  { value: 720, suffix: '+', label: 'Real SAT Questions', icon: BookOpen },
+  { value: 4, suffix: '', label: 'Math Domains', icon: TrendingUp },
+  { value: 3, suffix: '', label: 'Languages', icon: Globe },
+];
+
+const domains = [
+  { label: 'Algebra', width: '90%', color: 'from-navy-700 to-navy-500' },
+  { label: 'Advanced Math', width: '75%', color: 'from-gold-500 to-gold-400' },
+  { label: 'Geometry', width: '82%', color: 'from-sage-600 to-sage-500' },
+  { label: 'Problem Solving', width: '68%', color: 'from-navy-500 to-navy-400' },
 ];
 
 export default function Hero() {
@@ -42,14 +49,10 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Gradient orbs */}
         <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-gradient-to-br from-gold-200/40 dark:from-gold-500/20 to-transparent rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-navy-200/20 dark:from-navy-500/20 to-transparent rounded-full blur-3xl" />
 
-        {/* Decorative shapes - using CSS animations for better performance */}
-        <div
-          className="absolute top-32 right-20 w-20 h-20 border-2 border-gold-300/50 dark:border-gold-400/30 rounded-2xl animate-float-slow"
-        />
+        <div className="absolute top-32 right-20 w-20 h-20 border-2 border-gold-300/50 dark:border-gold-400/30 rounded-2xl animate-float-slow" />
         <div
           className="absolute top-60 right-40 w-12 h-12 bg-gold-400/20 dark:bg-gold-400/10 rounded-full animate-float-medium"
           style={{ animationDelay: '1s' }}
@@ -59,7 +62,6 @@ export default function Hero() {
           style={{ animationDelay: '0.5s' }}
         />
 
-        {/* Grid pattern */}
         <div
           className="absolute inset-0 opacity-[0.015]"
           style={{
@@ -70,7 +72,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="container-wide mx-auto px-6 md:px-8 py-16 md:py-24">
+      <div className="container-wide mx-auto px-6 md:px-8 py-16 md:py-24 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-8 items-center">
           {/* Content */}
           <div className="max-w-2xl">
@@ -82,7 +84,7 @@ export default function Hero() {
             >
               <Sparkles className="w-4 h-4 text-gold-600 dark:text-gold-400" />
               <span className="font-sans text-sm font-medium text-gold-700 dark:text-gold-400">
-                AI-Powered SAT Preparation
+                Digital SAT Math · 3 Languages · 3 Test Modes
               </span>
             </motion.div>
 
@@ -95,7 +97,7 @@ export default function Hero() {
               Master the SAT.
               <br />
               <span className="relative inline-block">
-                <span className="relative z-10">Unlock Your Future.</span>
+                <span className="relative z-10">Ace Every Domain.</span>
                 <motion.span
                   initial={{ width: 0 }}
                   animate={{ width: '100%' }}
@@ -111,9 +113,10 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="font-body text-xl text-navy-600 dark:text-cream-300 leading-relaxed mb-10"
             >
-              Personalized practice tests, adaptive learning powered by AI, and
-              detailed analytics to help you achieve your dream score. Join thousands
-              of students who improved by 150+ points.
+              720 real SAT Math questions across Algebra, Advanced Math,
+              Geometry, and Problem Solving — in English, Uzbek, and Russian.
+              Timed tests, instant explanations, and a leaderboard to keep
+              you pushing.
             </motion.p>
 
             <motion.div
@@ -126,9 +129,9 @@ export default function Hero() {
                 Try Free Demo
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </a>
-              <button className="btn-secondary">
-                Watch Video
-              </button>
+              <a href="#cta" className="btn-secondary">
+                Create Free Account
+              </a>
             </motion.div>
 
             {/* Stats */}
@@ -166,10 +169,10 @@ export default function Hero() {
               <div className="bg-white dark:bg-navy-900 rounded-3xl shadow-card-hover p-8 border border-cream-200 dark:border-navy-700">
                 <div className="flex items-center justify-between mb-8">
                   <div>
-                    <p className="font-sans text-sm text-navy-500 dark:text-navy-400 mb-1">Your Practice Score</p>
+                    <p className="font-sans text-sm text-navy-500 dark:text-navy-400 mb-1">Math Section Score</p>
                     <div className="flex items-baseline gap-2">
-                      <span className="font-display text-5xl font-bold text-navy-900 dark:text-cream-100">1520</span>
-                      <span className="font-sans text-sm text-sage-600 dark:text-sage-400 font-medium">+180 pts</span>
+                      <span className="font-display text-5xl font-bold text-navy-900 dark:text-cream-100">750</span>
+                      <span className="font-sans text-sm text-sage-600 dark:text-sage-400 font-medium">+90 pts</span>
                     </div>
                   </div>
                   <div className="w-16 h-16 bg-gradient-to-br from-gold-400 to-gold-500 rounded-2xl flex items-center justify-center shadow-gold">
@@ -177,36 +180,23 @@ export default function Hero() {
                   </div>
                 </div>
 
-                {/* Score breakdown */}
+                {/* Domain breakdown */}
                 <div className="space-y-4">
-                  <div>
-                    <div className="flex justify-between font-sans text-sm mb-2">
-                      <span className="text-navy-600 dark:text-cream-300">Reading & Writing</span>
-                      <span className="font-semibold text-navy-900 dark:text-cream-100">760</span>
+                  {domains.map((domain, i) => (
+                    <div key={domain.label}>
+                      <div className="flex justify-between font-sans text-sm mb-2">
+                        <span className="text-navy-600 dark:text-cream-300">{domain.label}</span>
+                      </div>
+                      <div className="h-2 bg-cream-200 dark:bg-navy-700 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: domain.width }}
+                          transition={{ duration: 1.2, delay: 0.8 + i * 0.15 }}
+                          className={`h-full bg-gradient-to-r ${domain.color} rounded-full`}
+                        />
+                      </div>
                     </div>
-                    <div className="h-2 bg-cream-200 dark:bg-navy-700 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: '95%' }}
-                        transition={{ duration: 1.2, delay: 0.8 }}
-                        className="h-full bg-gradient-to-r from-navy-700 to-navy-500 rounded-full"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex justify-between font-sans text-sm mb-2">
-                      <span className="text-navy-600 dark:text-cream-300">Math</span>
-                      <span className="font-semibold text-navy-900 dark:text-cream-100">760</span>
-                    </div>
-                    <div className="h-2 bg-cream-200 dark:bg-navy-700 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: '95%' }}
-                        transition={{ duration: 1.2, delay: 1 }}
-                        className="h-full bg-gradient-to-r from-gold-500 to-gold-400 rounded-full"
-                      />
-                    </div>
-                  </div>
+                  ))}
                 </div>
 
                 {/* Weekly progress mini chart */}
@@ -235,10 +225,8 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Floating badges - using CSS animations for better performance */}
-              <div
-                className="absolute -top-6 -right-6 bg-sage-500 text-white px-4 py-2 rounded-full font-sans text-sm font-semibold shadow-lg animate-float-badge"
-              >
+              {/* Floating badges */}
+              <div className="absolute -top-6 -right-6 bg-sage-500 text-white px-4 py-2 rounded-full font-sans text-sm font-semibold shadow-lg animate-float-badge">
                 98th Percentile
               </div>
 

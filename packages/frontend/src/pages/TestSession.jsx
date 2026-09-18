@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  GraduationCap,
   ChevronLeft,
   ChevronRight,
   AlertTriangle,
@@ -249,7 +248,7 @@ export default function TestSession() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 bg-navy-900 dark:bg-navy-800 rounded-xl flex items-center justify-center">
-                <GraduationCap className="w-5 h-5 text-gold-400" />
+                <span className="font-display font-black text-sm leading-none"><span className="text-cream-100">m</span><span className="text-gold-400">S</span></span>
               </div>
               <div>
                 <span className="font-display text-lg font-semibold text-navy-900 dark:text-cream-100">

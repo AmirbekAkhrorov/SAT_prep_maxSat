@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, GraduationCap, User, LogOut } from 'lucide-react';
+import { Menu, X, User, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import ThemeToggle from './ThemeToggle';
 
@@ -9,7 +9,7 @@ const navLinks = [
   { name: 'Features', href: '#features' },
   { name: 'Try Demo', href: '#quiz' },
   { name: 'How It Works', href: '#how-it-works' },
-  { name: 'Testimonials', href: '#testimonials' },
+  { name: 'Start Now', href: '#cta' },
 ];
 
 export default function Navbar() {
@@ -57,12 +57,12 @@ export default function Navbar() {
             <Link to="/" className="flex items-center gap-3 group">
               <div className="relative">
                 <div className="w-11 h-11 bg-navy-900 rounded-xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-300">
-                  <GraduationCap className="w-6 h-6 text-gold-400" />
+                  <span className="font-display font-black text-base leading-none"><span className="text-cream-100">m</span><span className="text-gold-400">S</span></span>
                 </div>
                 <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-gold-500 rounded-full border-2 border-cream-100" />
               </div>
               <span className="font-display text-xl font-semibold text-navy-900 dark:text-cream-100">
-                SAT<span className="text-gold-600 dark:text-gold-400">Prep</span>
+                max<span className="text-gold-500 dark:text-gold-400 font-black">SAT</span>
               </span>
             </Link>
 

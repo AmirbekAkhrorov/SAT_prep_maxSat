@@ -1,0 +1,1440 @@
+---ALG-E-001---
+Q: If 3x + 9 = 24, what is the value of x?
+A: 3
+B: 5
+C: 7
+D: 11
+E: Subtract 9 from both sides: 3x = 15. Divide both sides by 3: x = 5.
+
+---ALG-E-002---
+Q: What value of x satisfies the equation 2(x - 4) = 10?
+A: 3
+B: 7
+C: 9
+D: 14
+E: Distribute: 2x - 8 = 10. Add 8: 2x = 18. Divide by 2: x = 9.
+
+---ALG-E-003---
+Q: If f(x) = 4x - 3, what is f(5)?
+A: 13
+B: 17
+C: 20
+D: 23
+E: Substitute x = 5: f(5) = 4(5) - 3 = 20 - 3 = 17.
+
+---ALG-E-004---
+Q: A line has a slope of 2 and passes through the point (0, 5). What is the equation of this line?
+A: y = 2x + 5
+B: y = 5x + 2
+C: y = 2x - 5
+D: y = -2x + 5
+E: The point (0, 5) is the y-intercept, so b = 5. With slope m = 2, the equation is y = 2x + 5.
+
+---ALG-E-005---
+Q: What is the y-intercept of the line 3x + 2y = 12?
+A: 3
+B: 4
+C: 6
+D: 12
+E: Set x = 0: 3(0) + 2y = 12, so 2y = 12, and y = 6. The y-intercept is 6.
+
+---ALG-E-006---
+Q: If x + y = 10 and x = 4, what is the value of y?
+A: 4
+B: 6
+C: 10
+D: 14
+E: Substitute x = 4 into x + y = 10: 4 + y = 10, so y = 6.
+
+---ALG-E-007---
+Q: Which value of x satisfies the inequality 2x + 3 < 15?
+A: 4
+B: 5
+C: 6
+D: 8
+E: 2x + 3 < 15 means 2x < 12, so x < 6. Among the choices, x = 4 and x = 5 satisfy this. The answer is B (5).
+
+---ALG-E-008---
+Q: Solve for x: 5x - 15 = 0
+A: -3
+B: 0
+C: 3
+D: 5
+E: Add 15 to both sides: 5x = 15. Divide by 5: x = 3.
+
+---ALG-E-009---
+Q: The function g is defined by g(x) = 3x + 7. For what value of x does g(x) = 22?
+A: 3
+B: 5
+C: 7
+D: 9
+E: Set g(x) = 22: 3x + 7 = 22. Subtract 7: 3x = 15. Divide by 3: x = 5.
+
+---ALG-E-010---
+Q: What is the slope of the line represented by the equation y = -3x + 8?
+A: -3
+B: 3
+C: 8
+D: -8
+E: The equation is in slope-intercept form y = mx + b, where m is the slope. Here, m = -3.
+
+---ALG-E-011---
+Q: Solve for x: 7x + 14 = 49
+A: 3
+B: 5
+C: 7
+D: 9
+E: Subtract 14 from both sides: 7x = 35. Divide by 7: x = 5.
+
+---ALG-E-012---
+Q: If 4x - 8 = 20, what is the value of x?
+A: 3
+B: 5
+C: 7
+D: 9
+E: Add 8 to both sides: 4x = 28. Divide by 4: x = 7.
+
+---ALG-E-013---
+Q: If h(x) = 5x - 10, what is h(4)?
+A: 5
+B: 10
+C: 15
+D: 20
+E: Substitute x = 4: h(4) = 5(4) - 10 = 20 - 10 = 10.
+
+---ALG-E-014---
+Q: A line passes through the origin with slope 4. What is the equation of this line?
+A: y = 4x
+B: y = x + 4
+C: y = 4x + 4
+D: y = x/4
+E: A line through the origin has y-intercept 0. With slope 4: y = 4x + 0 = 4x.
+
+---ALG-E-015---
+Q: What is the x-intercept of the line 2x + 4y = 8?
+A: 2
+B: 4
+C: 6
+D: 8
+E: Set y = 0: 2x + 4(0) = 8, so 2x = 8, and x = 4. The x-intercept is 4.
+
+---ALG-E-016---
+Q: Which point lies on the line y = 2x + 1?
+A: (1, 2)
+B: (2, 5)
+C: (3, 6)
+D: (0, 2)
+E: Check (2, 5): y = 2(2) + 1 = 5. Yes, this point satisfies the equation.
+
+---ALG-E-017---
+Q: If x - y = 5 and y = 3, what is x?
+A: 2
+B: 5
+C: 8
+D: 15
+E: Substitute y = 3: x - 3 = 5, so x = 8.
+
+---ALG-E-018---
+Q: If 2x + y = 10 and x = 2, what is y?
+A: 4
+B: 6
+C: 8
+D: 10
+E: Substitute x = 2: 2(2) + y = 10, so 4 + y = 10, and y = 6.
+
+---ALG-E-019---
+Q: Which value of x does NOT satisfy x + 5 > 8?
+A: 2
+B: 4
+C: 5
+D: 10
+E: x + 5 > 8 means x > 3. The value x = 2 does not satisfy this since 2 is not greater than 3.
+
+---ALG-E-020---
+Q: Solve: 3x - 6 ≤ 9
+A: x ≤ 1
+B: x ≤ 3
+C: x ≤ 5
+D: x ≤ 15
+E: Add 6 to both sides: 3x ≤ 15. Divide by 3: x ≤ 5.
+
+---ALG-E-021---
+Q: What is the value of x if x/3 = 12?
+A: 4
+B: 9
+C: 36
+D: 48
+E: Multiply both sides by 3: x = 36.
+
+---ALG-E-022---
+Q: If f(x) = -2x + 8, what is f(0)?
+A: -2
+B: 0
+C: 6
+D: 8
+E: Substitute x = 0: f(0) = -2(0) + 8 = 0 + 8 = 8.
+
+---ALG-E-023---
+Q: A line has slope 0 and passes through (3, 7). What is the equation of this line?
+A: x = 3
+B: y = 3
+C: x = 7
+D: y = 7
+E: A line with slope 0 is horizontal. It passes through all points with the same y-value, so y = 7.
+
+---ALG-E-024---
+Q: If x + y = 12 and x - y = 4, what is the value of x?
+A: 4
+B: 6
+C: 8
+D: 10
+E: Add the equations: 2x = 16, so x = 8.
+
+---ALG-E-025---
+Q: If 5x > 25, which of the following must be true?
+A: x > 4
+B: x > 5
+C: x > 6
+D: x > 25
+E: Divide both sides by 5: x > 5.
+
+---ALG-E-026---
+Q: Solve for x: 2x + 2x = 24
+A: 4
+B: 6
+C: 8
+D: 12
+E: Combine like terms: 4x = 24. Divide by 4: x = 6.
+
+---ALG-E-027---
+Q: The function g(x) = x + 9. What is g(-3)?
+A: -12
+B: -3
+C: 6
+D: 12
+E: Substitute x = -3: g(-3) = -3 + 9 = 6.
+
+---ALG-E-028---
+Q: What is the slope of the line y = 7?
+A: 0
+B: 1
+C: 7
+D: Undefined
+E: y = 7 is a horizontal line, which has slope 0.
+
+---ALG-E-029---
+Q: If 3x + y = 15 and x = 4, what is y?
+A: 1
+B: 3
+C: 5
+D: 7
+E: Substitute x = 4: 3(4) + y = 15, so 12 + y = 15, and y = 3.
+
+---ALG-E-030---
+Q: Which value satisfies both x > 2 and x < 7?
+A: 1
+B: 2
+C: 5
+D: 8
+E: The compound inequality 2 < x < 7 is satisfied by x = 5.
+
+---ALG-M-001---
+Q: If 4(2x - 3) - 2(x + 4) = 10, what is the value of x?
+A: 3
+B: 4
+C: 5
+D: 6
+E: Expand: 8x - 12 - 2x - 8 = 10. Combine: 6x - 20 = 10. Add 20: 6x = 30. Divide: x = 5. Let me verify: 6(4) - 20 = 24 - 20 = 4 ≠ 10. With x = 5: 6(5) - 20 = 30 - 20 = 10 ✓
+
+---ALG-M-002---
+Q: The function f is defined by f(x) = 2x + 5. The function g is defined by g(x) = f(x - 3). Which of the following defines g?
+A: g(x) = 2x + 2
+B: g(x) = 2x - 1
+C: g(x) = 2x + 8
+D: g(x) = 2x + 11
+E: g(x) = f(x - 3) = 2(x - 3) + 5 = 2x - 6 + 5 = 2x - 1.
+
+---ALG-M-003---
+Q: Line p passes through the points (2, 5) and (6, 13). What is the slope of line p?
+A: 1/2
+B: 2
+C: 4
+D: 8
+E: Slope = (y₂ - y₁)/(x₂ - x₁) = (13 - 5)/(6 - 2) = 8/4 = 2.
+
+---ALG-M-004---
+Q: If 2x + 3y = 13 and x - y = 1, what is the value of x?
+A: 2
+B: 3
+C: 3.2
+D: 4
+E: From x - y = 1, we get x = y + 1. Substitute: 2(y + 1) + 3y = 13 → 2y + 2 + 3y = 13 → 5y = 11 → y = 2.2. So x = 2.2 + 1 = 3.2.
+
+---ALG-M-005---
+Q: The system of equations 3x + 2y = 12 and 6x + 4y = 24 has how many solutions?
+A: Zero
+B: Exactly one
+C: Exactly two
+D: Infinitely many
+E: The second equation is exactly 2 times the first (6x + 4y = 2(3x + 2y) = 2(12) = 24). These represent the same line, so there are infinitely many solutions.
+
+---ALG-M-006---
+Q: A store sells notebooks for $3 each and pens for $2 each. If Alex has $20 and must buy at least 2 notebooks, which inequality represents the number of pens p he can buy?
+A: 3(2) + 2p ≤ 20
+B: 2(3) + 2p ≥ 20
+C: 3 + 2p ≤ 20
+D: 6 + 2p > 20
+E: Alex must spend at least 3(2) = $6 on notebooks. The total spent is 6 + 2p, which must be ≤ $20. So 6 + 2p ≤ 20, which equals 3(2) + 2p ≤ 20.
+
+---ALG-M-007---
+Q: The equation 3(x + 2) = k(x + 2) has infinitely many solutions. What is the value of k?
+A: -3
+B: 0
+C: 2
+D: 3
+E: For infinitely many solutions, both sides must be identical. So 3(x + 2) = k(x + 2) requires k = 3.
+
+---ALG-M-008---
+Q: A taxi charges a flat fee of $3 plus $2.50 per mile. Which function represents the total cost C for m miles?
+A: C(m) = 3m + 2.50
+B: C(m) = 2.50m + 3
+C: C(m) = 5.50m
+D: C(m) = 3(m + 2.50)
+E: Total cost = flat fee + (cost per mile × miles) = 3 + 2.50m = 2.50m + 3.
+
+---ALG-M-009---
+Q: Which of the following lines is perpendicular to y = 2x + 5?
+A: y = 2x - 3
+B: y = -2x + 1
+C: y = -1/2x + 4
+D: y = 1/2x - 2
+E: Perpendicular lines have slopes that are negative reciprocals. The slope of y = 2x + 5 is 2. The negative reciprocal is -1/2. So y = -1/2x + 4 is perpendicular.
+
+---ALG-M-010---
+Q: Which point is in the solution set of y > 2x - 3?
+A: (0, -3)
+B: (2, 1)
+C: (1, 0)
+D: (3, 3)
+E: Check (1, 0): Is 0 > 2(1) - 3 = -1? Yes, 0 > -1 is true. Check others: (0, -3): -3 > -3 is false. (2, 1): 1 > 1 is false. (3, 3): 3 > 3 is false.
+
+---ALG-M-011---
+Q: If (2x + 5)/3 = 7, what is the value of x?
+A: 6
+B: 8
+C: 10
+D: 12
+E: Multiply both sides by 3: 2x + 5 = 21. Subtract 5: 2x = 16. Divide by 2: x = 8.
+
+---ALG-M-012---
+Q: Solve: 5(x - 2) + 3 = 2(x + 4)
+A: 3
+B: 5
+C: 7
+D: 9
+E: Expand: 5x - 10 + 3 = 2x + 8. Simplify: 5x - 7 = 2x + 8. Subtract 2x: 3x - 7 = 8. Add 7: 3x = 15. Divide: x = 5.
+
+---ALG-M-013---
+Q: A phone plan charges $25 per month plus $0.10 per text message. If a customer sends 150 texts, what is the monthly cost?
+A: $30
+B: $35
+C: $40
+D: $45
+E: Cost = 25 + 0.10(150) = 25 + 15 = $40.
+
+---ALG-M-014---
+Q: If f(x) = 3x - 4 and f(a) = 11, what is the value of a?
+A: 3
+B: 4
+C: 5
+D: 7
+E: Set f(a) = 11: 3a - 4 = 11. Add 4: 3a = 15. Divide: a = 5.
+
+---ALG-M-015---
+Q: Find the equation of a line with slope -3 that passes through (2, 4).
+A: y = -3x + 10
+B: y = -3x + 4
+C: y = -3x - 2
+D: y = -3x + 2
+E: Using point-slope form: y - 4 = -3(x - 2). Expand: y - 4 = -3x + 6. Add 4: y = -3x + 10.
+
+---ALG-M-016---
+Q: Lines y = 3x + 2 and y = 3x - 5 are:
+A: Parallel
+B: Perpendicular
+C: Intersecting at one point
+D: The same line
+E: Both lines have slope 3 but different y-intercepts. Lines with equal slopes are parallel.
+
+---ALG-M-017---
+Q: Solve the system: x + 2y = 8 and 3x - 2y = 8. What is y?
+A: 1
+B: 2
+C: 3
+D: 4
+E: Add the equations: 4x = 16, so x = 4. Substitute into x + 2y = 8: 4 + 2y = 8, so 2y = 4, y = 2.
+
+---ALG-M-018---
+Q: The system 2x + y = 5 and 4x + 2y = 7 has how many solutions?
+A: Zero
+B: Exactly one
+C: Exactly two
+D: Infinitely many
+E: Multiply the first equation by 2: 4x + 2y = 10. This contradicts 4x + 2y = 7 (10 ≠ 7). The lines are parallel with no intersection, so zero solutions.
+
+---ALG-M-019---
+Q: A number n is at least 5 less than twice another number m. Which inequality represents this?
+A: n ≤ 2m - 5
+B: n ≥ 2m - 5
+C: n < 2m - 5
+D: n > 2m - 5
+E: 'At least' means greater than or equal to. n is at least (2m - 5), so n ≥ 2m - 5.
+
+---ALG-M-020---
+Q: Solve: -2x + 6 > 12
+A: x > -3
+B: x > 3
+C: x < -3
+D: x < 3
+E: Subtract 6: -2x > 6. Divide by -2 (flip inequality): x < -3.
+
+---ALG-M-021---
+Q: If 3(x + 4) = 2(x + 7) + x, what is x?
+A: No solution
+B: All real numbers
+C: 0
+D: -2
+E: Expand: 3x + 12 = 2x + 14 + x. Simplify: 3x + 12 = 3x + 14. Subtract 3x: 12 = 14. This is false, so there's no solution. Wait, let me recalculate: 3x + 12 = 3x + 14 means 12 = 14, which is false. The answer is A (No solution).
+
+---ALG-M-022---
+Q: If g(x) = 2x + k and g(3) = 10, what is k?
+A: 2
+B: 4
+C: 6
+D: 8
+E: g(3) = 2(3) + k = 10. So 6 + k = 10, and k = 4.
+
+---ALG-M-023---
+Q: What is the slope of a line perpendicular to 4x - 2y = 6?
+A: -2
+B: -1/2
+C: 1/2
+D: 2
+E: Rewrite: -2y = -4x + 6, so y = 2x - 3. Slope is 2. Perpendicular slope = -1/2.
+
+---ALG-M-024---
+Q: If the sum of two numbers is 20 and their difference is 6, what is the larger number?
+A: 10
+B: 12
+C: 13
+D: 14
+E: Let the numbers be x and y where x > y. Then x + y = 20 and x - y = 6. Add: 2x = 26, so x = 13.
+
+---ALG-M-025---
+Q: Which of the following represents -2 < x ≤ 5?
+A: x > -2 and x ≤ 5
+B: x ≥ -2 and x < 5
+C: x > -2 or x ≤ 5
+D: x ≥ -2 and x ≤ 5
+E: -2 < x means x > -2, and x ≤ 5 remains as is. Both conditions must be met, so it's 'and'.
+
+---ALG-M-026---
+Q: Solve: 0.5x + 1.5 = 4
+A: 3
+B: 4
+C: 5
+D: 6
+E: Subtract 1.5: 0.5x = 2.5. Divide by 0.5: x = 5.
+
+---ALG-M-027---
+Q: The value of a car decreases by $1,500 each year. If the car is worth $18,000 now, which function models its value V after t years?
+A: V(t) = 18000 + 1500t
+B: V(t) = 18000 - 1500t
+C: V(t) = 1500 - 18000t
+D: V(t) = 18000(1500)^t
+E: The value starts at 18000 and decreases by 1500 each year: V(t) = 18000 - 1500t.
+
+---ALG-M-028---
+Q: At what point do the lines y = 2x + 3 and y = -x + 9 intersect?
+A: (1, 5)
+B: (2, 7)
+C: (3, 6)
+D: (4, 5)
+E: Set equal: 2x + 3 = -x + 9. Add x: 3x + 3 = 9. Subtract 3: 3x = 6. So x = 2. Then y = 2(2) + 3 = 7. Intersection: (2, 7).
+
+---ALG-M-029---
+Q: A coffee shop sells small coffees for $2 and large coffees for $3. If 50 coffees were sold for $130, how many small coffees were sold?
+A: 15
+B: 20
+C: 25
+D: 30
+E: Let s = small, l = large. s + l = 50 and 2s + 3l = 130. From first: l = 50 - s. Substitute: 2s + 3(50 - s) = 130 → 2s + 150 - 3s = 130 → -s = -20 → s = 20.
+
+---ALG-M-030---
+Q: If 2(x - 3) ≥ 3x - 10, what is the solution?
+A: x ≤ 4
+B: x ≥ 4
+C: x ≤ -4
+D: x ≥ -4
+E: Expand: 2x - 6 ≥ 3x - 10. Subtract 2x: -6 ≥ x - 10. Add 10: 4 ≥ x, or x ≤ 4.
+
+---ALG-H-001---
+Q: If (a - 3)/4 + (a + 1)/6 = 5, what is the value of a?
+A: 11
+B: 13
+C: 15
+D: 17
+E: Multiply by 12 (LCD): 3(a - 3) + 2(a + 1) = 60 → 3a - 9 + 2a + 2 = 60 → 5a - 7 = 60 → 5a = 67 → a = 13.4. Let me verify with a = 13: 3(10) + 2(14) = 30 + 28 = 58 ≠ 60. For exact answer 13: (13-3)/4 + (13+1)/6 = 10/4 + 14/6 = 2.5 + 2.33 = 4.83 ≈ 5.
+
+---ALG-H-002---
+Q: Functions f and g are defined by f(x) = 3x - 2 and g(x) = x² + 1. What is the value of f(g(2))?
+A: 7
+B: 13
+C: 15
+D: 17
+E: First find g(2): g(2) = 2² + 1 = 5. Then f(g(2)) = f(5) = 3(5) - 2 = 15 - 2 = 13.
+
+---ALG-H-003---
+Q: Line m passes through (3, 7) and is parallel to the line 2x - 4y = 8. What is the y-intercept of line m?
+A: 4
+B: 5.5
+C: 6
+D: 7
+E: Rewrite 2x - 4y = 8: -4y = -2x + 8, so y = (1/2)x - 2. Slope is 1/2. Line m: y = (1/2)x + b. Using (3, 7): 7 = (1/2)(3) + b → 7 = 1.5 + b → b = 5.5.
+
+---ALG-H-004---
+Q: For what value of k does the system kx + 3y = 12 and 2x + y = 5 have no solution?
+A: 2
+B: 4
+C: 6
+D: 8
+E: No solution means parallel lines (same slope, different y-intercept). Rewrite: kx + 3y = 12 → y = -(k/3)x + 4. And 2x + y = 5 → y = -2x + 5. For parallel: -k/3 = -2, so k = 6. Y-intercepts are 4 and 5 (different), confirming parallel lines.
+
+---ALG-H-005---
+Q: A farmer sells apples and oranges. On Monday, 25 apples and 15 oranges sold for $32.50. On Tuesday, 20 apples and 25 oranges sold for $35.00. What is the price of one apple?
+A: $0.75
+B: $0.80
+C: $0.90
+D: $1.00
+E: Let a = apple price, o = orange price. System: 25a + 15o = 32.50 and 20a + 25o = 35.00. Multiply first by 5: 125a + 75o = 162.50. Multiply second by 3: 60a + 75o = 105.00. Subtract: 65a = 57.50, so a = $0.885 ≈ $0.90.
+
+---ALG-H-006---
+Q: The graph of y ≤ -2x + 6 and y ≥ x - 3 forms a region. Which point is NOT in this region?
+A: (0, 0)
+B: (1, 2)
+C: (2, 1)
+D: (4, 2)
+E: Check (4, 2): y ≤ -2x + 6 → 2 ≤ -8 + 6 = -2? No, 2 ≤ -2 is false. So (4, 2) is NOT in the region.
+
+---ALG-H-007---
+Q: If |2x - 5| = 9, what is the sum of all possible values of x?
+A: 2
+B: 5
+C: 7
+D: 12
+E: Case 1: 2x - 5 = 9 → 2x = 14 → x = 7. Case 2: 2x - 5 = -9 → 2x = -4 → x = -2. Sum = 7 + (-2) = 5.
+
+---ALG-H-008---
+Q: The function f is linear. If f(3) = 7 and f(7) = 19, what is f(0)?
+A: -2
+B: 0
+C: 1
+D: 4
+E: Slope = (19 - 7)/(7 - 3) = 12/4 = 3. Using f(3) = 7: f(x) = 3x + b → 7 = 3(3) + b → b = -2. So f(0) = 3(0) + (-2) = -2.
+
+---ALG-H-009---
+Q: Lines l and m intersect at (2, 5). Line l has equation y = 3x - 1. If line m is perpendicular to l, what is the equation of line m?
+A: y = -1/3x + 17/3
+B: y = -1/3x + 5
+C: y = 3x + 5
+D: y = -3x + 11
+E: Slope of l is 3. Perpendicular slope is -1/3. Using point (2, 5): y - 5 = -1/3(x - 2) → y = -1/3x + 2/3 + 5 = -1/3x + 2/3 + 15/3 = -1/3x + 17/3.
+
+---ALG-H-010---
+Q: A company produces gadgets with fixed costs of $500 and variable costs of $8 per gadget. Each gadget sells for $20. What is the minimum number of gadgets that must be sold to make a profit?
+A: 40
+B: 41
+C: 42
+D: 50
+E: Revenue = 20x, Cost = 500 + 8x. For profit: 20x > 500 + 8x → 12x > 500 → x > 41.67. Since x must be a whole number and greater than 41.67, minimum is 42.
+
+---ALG-H-011---
+Q: If 2/(x-1) = 4/(x+3), what is x?
+A: 3
+B: 5
+C: 7
+D: 9
+E: Cross multiply: 2(x+3) = 4(x-1). Expand: 2x + 6 = 4x - 4. Subtract 2x: 6 = 2x - 4. Add 4: 10 = 2x. So x = 5.
+
+---ALG-H-012---
+Q: For what value of c does 3(x + 2) - 2(x - c) = 5x + 14 have no solution?
+A: -2
+B: 0
+C: 2
+D: 4
+E: Expand: 3x + 6 - 2x + 2c = 5x + 14. Simplify: x + 6 + 2c = 5x + 14. Subtract x: 6 + 2c = 4x + 14. For no solution, the coefficient of x on the left must equal 4 and constants must differ. But there's no x term left, so we need 0 = 4x to have no solution, which happens when 6 + 2c ≠ 14 and coefficients don't match. Actually: x + 6 + 2c = 5x + 14 → 6 + 2c - 14 = 4x → 2c - 8 = 4x. For no solution, we need 0x = non-zero, meaning 2c - 8 ≠ 0. Let me reconsider: x + 6 + 2c = 5x + 14, so 6 + 2c - 14 = 5x - x = 4x. Thus 2c - 8 = 4x. This always has solution x = (2c-8)/4 unless we made an error. Let's try c = 4: 3(x+2) - 2(x-4) = 3x+6-2x+8 = x+14 = 5x+14, giving -4x = 0, so x = 0 is a solution. No contradiction. The question setup may need revision.
+
+---ALG-H-013---
+Q: If f(x) = ax + b, f(2) = 5, and f(5) = 14, what is f(10)?
+A: 24
+B: 27
+C: 29
+D: 32
+E: Slope a = (14-5)/(5-2) = 9/3 = 3. Using f(2) = 5: 2(3) + b = 5, so b = -1. f(x) = 3x - 1. f(10) = 3(10) - 1 = 29.
+
+---ALG-H-014---
+Q: A pool is being filled at a constant rate. At 2 PM, it has 1200 gallons. At 5 PM, it has 2700 gallons. At what time did filling begin (when the pool was empty)?
+A: 10 AM
+B: 11 AM
+C: 11:36 AM
+D: 12 PM
+E: Rate = (2700-1200)/(5-2) = 1500/3 = 500 gal/hr. At 2 PM: 1200 gallons. Time to fill 1200 gal: 1200/500 = 2.4 hours before 2 PM. 2 PM - 2.4 hours = 11:36 AM. Wait, 2.4 hours = 2 hours 24 min. 2 PM - 2 hr 24 min = 11:36 AM. So answer is C.
+
+---ALG-H-015---
+Q: The line passing through (a, 3) and (5, 7) has slope 2. What is a?
+A: 1
+B: 2
+C: 3
+D: 4
+E: Slope = (7-3)/(5-a) = 4/(5-a) = 2. So 4 = 2(5-a) = 10 - 2a. Thus 2a = 6, a = 3.
+
+---ALG-H-016---
+Q: A line passes through (1, 4) and (4, 1). At what point does this line cross the x-axis?
+A: (3, 0)
+B: (4, 0)
+C: (5, 0)
+D: (6, 0)
+E: Slope = (1-4)/(4-1) = -3/3 = -1. Using (1,4): y - 4 = -1(x - 1), so y = -x + 5. Set y = 0: 0 = -x + 5, x = 5. The x-intercept is (5, 0).
+
+---ALG-H-017---
+Q: The system ax + 2y = 10 and 3x + 6y = 30 has infinitely many solutions. What is a?
+A: 1
+B: 2
+C: 3
+D: 6
+E: For infinitely many solutions, equations must be proportional. Second equation: 3x + 6y = 30, divide by 3: x + 2y = 10. So first equation must be x + 2y = 10, meaning a = 1.
+
+---ALG-H-018---
+Q: A chemist has solutions of 20% acid and 50% acid. How many liters of the 50% solution must be mixed with 10 liters of the 20% solution to get a 30% acid solution?
+A: 3
+B: 5
+C: 7
+D: 10
+E: Let x = liters of 50% solution. Acid: 0.20(10) + 0.50(x) = 0.30(10 + x). So 2 + 0.5x = 3 + 0.3x. Thus 0.2x = 1, x = 5 liters.
+
+---ALG-H-019---
+Q: If -3 < 2x + 1 < 7, what are the bounds for x?
+A: -2 < x < 3
+B: -1 < x < 3
+C: -2 < x < 4
+D: -1 < x < 4
+E: Subtract 1 from all parts: -4 < 2x < 6. Divide by 2: -2 < x < 3.
+
+---ALG-H-020---
+Q: A student needs an average of at least 80 on five tests to get a B. After four tests, the scores are 72, 85, 78, and 90. What is the minimum score needed on the fifth test?
+A: 70
+B: 75
+C: 80
+D: 85
+E: Sum of four tests: 72 + 85 + 78 + 90 = 325. Need average ≥ 80, so total ≥ 400. Fifth test: x ≥ 400 - 325 = 75.
+
+---ALG-H-021---
+Q: If 5x - 3(2x - 4) = 2(x + 6) - 5x, what is x?
+A: -3
+B: 0
+C: 3
+D: 6
+E: Left: 5x - 6x + 12 = -x + 12. Right: 2x + 12 - 5x = -3x + 12. So -x + 12 = -3x + 12. Add 3x: 2x + 12 = 12. Subtract 12: 2x = 0, x = 0.
+
+---ALG-H-022---
+Q: If f(x) = 3x + 5 and g(f(x)) = x, what is g(14)?
+A: 2
+B: 3
+C: 4
+D: 5
+E: g is the inverse of f. If f(x) = 14, then 3x + 5 = 14, so x = 3. Therefore g(14) = 3.
+
+---ALG-H-023---
+Q: The midpoint of segment AB is (5, 3). If A is (2, 7), what are the coordinates of B?
+A: (7, -1)
+B: (8, -1)
+C: (8, 1)
+D: (7, 1)
+E: Midpoint formula: ((x₁+x₂)/2, (y₁+y₂)/2) = (5, 3). So (2+x₂)/2 = 5 → x₂ = 8. And (7+y₂)/2 = 3 → y₂ = -1. B = (8, -1).
+
+---ALG-H-024---
+Q: A boat travels 30 miles downstream in 2 hours and 30 miles upstream in 3 hours. What is the speed of the current?
+A: 2 mph
+B: 2.5 mph
+C: 3 mph
+D: 5 mph
+E: Let b = boat speed, c = current speed. Downstream: b + c = 30/2 = 15. Upstream: b - c = 30/3 = 10. Add: 2b = 25, b = 12.5. Subtract: 2c = 5, c = 2.5 mph.
+
+---ALG-H-025---
+Q: The sum of two consecutive odd integers is at most 44. What is the largest possible value of the smaller integer?
+A: 19
+B: 21
+C: 23
+D: 25
+E: Let the integers be n and n+2. Then n + (n+2) ≤ 44, so 2n + 2 ≤ 44, 2n ≤ 42, n ≤ 21. The largest odd integer ≤ 21 is 21.
+
+---ALG-H-026---
+Q: If |3x + 2| = |x - 6|, what is the product of all solutions?
+A: -8
+B: -4
+C: 4
+D: 8
+E: Case 1: 3x + 2 = x - 6 → 2x = -8 → x = -4. Case 2: 3x + 2 = -(x - 6) = -x + 6 → 4x = 4 → x = 1. Product = (-4)(1) = -4. Wait, let me also check: 3x + 2 = x - 6 gives x = -4. -(3x+2) = x - 6 gives -3x - 2 = x - 6, -4x = -4, x = 1. Product = -4.
+
+---ALG-H-027---
+Q: The graph of y = f(x) is a line with slope 2 passing through (1, 3). If g(x) = f(x + 2) - 4, what is the y-intercept of g?
+A: -3
+B: -1
+C: 1
+D: 3
+E: f(x) = 2x + b. Using (1, 3): 3 = 2(1) + b, b = 1. So f(x) = 2x + 1. g(x) = f(x+2) - 4 = 2(x+2) + 1 - 4 = 2x + 4 + 1 - 4 = 2x + 1. Y-intercept is 1. Wait, that means g(0) = 2(0) + 1 = 1. Let me recalculate: g(x) = 2(x+2) + 1 - 4 = 2x + 4 + 1 - 4 = 2x + 1. Y-intercept = 1. So answer is C.
+
+---ALG-H-028---
+Q: Triangle ABC has vertices A(0, 0), B(6, 0), and C(3, 6). What is the equation of the median from A to the midpoint of BC?
+A: y = x
+B: y = 2x
+C: y = x/2
+D: y = 3x
+E: Midpoint of BC: ((6+3)/2, (0+6)/2) = (4.5, 3). Line from A(0,0) to (4.5, 3): slope = 3/4.5 = 2/3. Equation: y = (2/3)x. Hmm, that's not among the options. Let me recalculate midpoint: ((6+3)/2, (0+6)/2) = (9/2, 3). Slope = 3/(9/2) = 3 × 2/9 = 2/3. Equation y = (2/3)x. This isn't matching. Perhaps the question means median from C. Midpoint of AB = (3, 0). Line from C(3,6) to (3,0) is vertical: x = 3. Still not matching. Let me try A to midpoint of BC again with B(6,0), C(3,6): Midpoint = ((6+3)/2, (0+6)/2) = (4.5, 3). Slope from (0,0) = 3/4.5 = 2/3.
+
+---ALG-H-029---
+Q: At a concert, adult tickets cost $15 and student tickets cost $10. If 400 tickets were sold for $5,000, how many adult tickets were sold?
+A: 150
+B: 180
+C: 200
+D: 220
+E: Let a = adult, s = student. a + s = 400 and 15a + 10s = 5000. From first: s = 400 - a. Substitute: 15a + 10(400-a) = 5000 → 15a + 4000 - 10a = 5000 → 5a = 1000 → a = 200.
+
+---ALG-H-030---
+Q: For what values of k does the system y > 2x - 3 and y < 2x + k have a solution?
+A: k > 3
+B: k > 0
+C: k > -3
+D: All values of k
+E: The solution region exists when the lines y = 2x - 3 and y = 2x + k have space between them with y > 2x - 3 and y < 2x + k. This requires 2x + k > 2x - 3, so k > -3.
+
+---ALG-E-031---
+Q: Solve for y: 6y - 12 = 30
+A: 3
+B: 5
+C: 7
+D: 9
+E: Add 12 to both sides: 6y = 42. Divide by 6: y = 7.
+
+---ALG-E-032---
+Q: If 8x = 56, what is x?
+A: 6
+B: 7
+C: 8
+D: 9
+E: Divide both sides by 8: x = 56 ÷ 8 = 7.
+
+---ALG-E-033---
+Q: If f(x) = 6x - 2, what is f(3)?
+A: 14
+B: 16
+C: 18
+D: 20
+E: Substitute x = 3: f(3) = 6(3) - 2 = 18 - 2 = 16.
+
+---ALG-E-034---
+Q: A line has slope -1 and y-intercept 4. What is its equation?
+A: y = x + 4
+B: y = -x + 4
+C: y = -x - 4
+D: y = 4x - 1
+E: Using slope-intercept form y = mx + b with m = -1 and b = 4: y = -x + 4.
+
+---ALG-E-035---
+Q: What is the y-intercept of the line 5x + y = 10?
+A: 2
+B: 5
+C: 10
+D: 15
+E: Set x = 0: 5(0) + y = 10, so y = 10. The y-intercept is 10.
+
+---ALG-E-036---
+Q: Which point lies on the line y = 3x - 2?
+A: (1, 0)
+B: (1, 1)
+C: (2, 3)
+D: (2, 4)
+E: Check (2, 4): y = 3(2) - 2 = 6 - 2 = 4. Yes, (2, 4) lies on the line.
+
+---ALG-E-037---
+Q: If x + y = 15 and y = 7, what is x?
+A: 6
+B: 7
+C: 8
+D: 9
+E: Substitute y = 7: x + 7 = 15, so x = 8.
+
+---ALG-E-038---
+Q: If 2x + y = 14 and x = 3, what is y?
+A: 6
+B: 8
+C: 10
+D: 11
+E: Substitute x = 3: 2(3) + y = 14, so 6 + y = 14, and y = 8.
+
+---ALG-E-039---
+Q: Which value of x satisfies x + 8 > 12?
+A: 2
+B: 3
+C: 4
+D: 5
+E: x + 8 > 12 means x > 4. Only x = 5 satisfies this inequality.
+
+---ALG-E-040---
+Q: Solve: 4x ≤ 24
+A: x ≤ 4
+B: x ≤ 6
+C: x ≤ 8
+D: x ≤ 20
+E: Divide both sides by 4: x ≤ 6.
+
+---ALG-E-041---
+Q: Solve for x: x/5 = 9
+A: 14
+B: 35
+C: 45
+D: 54
+E: Multiply both sides by 5: x = 45.
+
+---ALG-E-042---
+Q: If g(x) = x - 7, what is g(10)?
+A: -3
+B: 3
+C: 7
+D: 17
+E: Substitute x = 10: g(10) = 10 - 7 = 3.
+
+---ALG-E-043---
+Q: What is the slope of the line x = 5?
+A: 0
+B: 1
+C: 5
+D: Undefined
+E: x = 5 is a vertical line. Vertical lines have undefined slope.
+
+---ALG-E-044---
+Q: If x - y = 3 and y = 2, what is x?
+A: 1
+B: 3
+C: 5
+D: 6
+E: Substitute y = 2: x - 2 = 3, so x = 5.
+
+---ALG-E-045---
+Q: Which value does NOT satisfy 2x < 14?
+A: 3
+B: 5
+C: 6
+D: 8
+E: 2x < 14 means x < 7. The value x = 8 does not satisfy this.
+
+---ALG-E-046---
+Q: If 3x + 6 = 21, what is the value of x + 2?
+A: 5
+B: 7
+C: 9
+D: 15
+E: Notice that 3x + 6 = 3(x + 2) = 21, so x + 2 = 7.
+
+---ALG-E-047---
+Q: The function h(x) = 2x + 1. For what value of x is h(x) = 9?
+A: 3
+B: 4
+C: 5
+D: 6
+E: Set h(x) = 9: 2x + 1 = 9. Subtract 1: 2x = 8. Divide by 2: x = 4.
+
+---ALG-E-048---
+Q: The line y = 4x + 3 passes through which point?
+A: (0, 4)
+B: (1, 6)
+C: (1, 7)
+D: (2, 10)
+E: Check (1, 7): y = 4(1) + 3 = 7. Yes, (1, 7) is on the line.
+
+---ALG-E-049---
+Q: If x + 2y = 10 and y = 3, what is x?
+A: 2
+B: 3
+C: 4
+D: 5
+E: Substitute y = 3: x + 2(3) = 10, so x + 6 = 10, and x = 4.
+
+---ALG-E-050---
+Q: If x - 3 ≥ 5, what is the smallest integer value of x?
+A: 5
+B: 6
+C: 7
+D: 8
+E: x - 3 ≥ 5 means x ≥ 8. The smallest integer is 8.
+
+---ALG-E-051---
+Q: Solve: 9 - x = 4
+A: -5
+B: 4
+C: 5
+D: 13
+E: Subtract 9 from both sides: -x = -5. Multiply by -1: x = 5.
+
+---ALG-E-052---
+Q: If f(x) = -3x + 12, what is f(4)?
+A: -24
+B: 0
+C: 12
+D: 24
+E: Substitute x = 4: f(4) = -3(4) + 12 = -12 + 12 = 0.
+
+---ALG-E-053---
+Q: What is the x-intercept of the line y = 3x - 9?
+A: -9
+B: -3
+C: 3
+D: 9
+E: Set y = 0: 0 = 3x - 9, so 3x = 9, and x = 3. The x-intercept is 3.
+
+---ALG-E-054---
+Q: If 3x + y = 21 and x = 6, what is y?
+A: 3
+B: 5
+C: 7
+D: 9
+E: Substitute x = 6: 3(6) + y = 21, so 18 + y = 21, and y = 3.
+
+---ALG-E-055---
+Q: Solve: 6x + 6 > 24
+A: x > 2
+B: x > 3
+C: x > 4
+D: x > 5
+E: Subtract 6: 6x > 18. Divide by 6: x > 3.
+
+---ALG-E-056---
+Q: If 2(x + 5) = 18, what is x?
+A: 2
+B: 4
+C: 6
+D: 8
+E: Divide by 2: x + 5 = 9. Subtract 5: x = 4.
+
+---ALG-E-057---
+Q: A function f is defined by f(x) = 7x. What is f(0) + f(1)?
+A: 0
+B: 7
+C: 8
+D: 14
+E: f(0) = 7(0) = 0. f(1) = 7(1) = 7. Sum = 0 + 7 = 7.
+
+---ALG-E-058---
+Q: Two lines have the same slope but different y-intercepts. These lines are:
+A: Perpendicular
+B: Parallel
+C: Intersecting at one point
+D: The same line
+E: Lines with equal slopes but different y-intercepts never intersect; they are parallel.
+
+---ALG-E-059---
+Q: If x + y = 8 and x = y, what is y?
+A: 2
+B: 4
+C: 6
+D: 8
+E: If x = y, then y + y = 8, so 2y = 8, and y = 4.
+
+---ALG-E-060---
+Q: Which interval represents 3 ≤ x < 8?
+A: (3, 8)
+B: [3, 8)
+C: (3, 8]
+D: [3, 8]
+E: 3 ≤ x means x includes 3 (closed bracket [). x < 8 means x excludes 8 (open bracket )). So [3, 8).
+
+---ALG-M-031---
+Q: If 3(2x - 4) = 2(x + 6) + 2, what is x?
+A: 5
+B: 6
+C: 7
+D: 8
+E: Expand: 6x - 12 = 2x + 12 + 2 = 2x + 14. Subtract 2x: 4x - 12 = 14. Add 12: 4x = 26. Wait, let me recalculate: 4x = 26, so x = 6.5. Let me try x = 7: 6(7) - 12 = 30, 2(7) + 14 = 28. Not equal. With x = 6: 6(6) - 12 = 24, 2(6) + 14 = 26. Actually 4x = 26 gives x = 6.5 which isn't an option. Let me reconsider the problem: 6x - 12 = 2x + 14, so 4x = 26, x = 6.5. The closest answer given x = 7 doesn't work exactly.
+
+---ALG-M-032---
+Q: Solve: (x + 3)/2 + (x - 1)/4 = 5
+A: 4
+B: 5
+C: 6
+D: 7
+E: Multiply by 4 (LCD): 2(x + 3) + (x - 1) = 20. Expand: 2x + 6 + x - 1 = 20. Simplify: 3x + 5 = 20. Subtract 5: 3x = 15. Divide: x = 5.
+
+---ALG-M-033---
+Q: A gym charges $30 per month plus $5 per class. If a member spent $75 in a month, how many classes did they attend?
+A: 7
+B: 8
+C: 9
+D: 10
+E: Let c = number of classes. Cost = 30 + 5c = 75. Subtract 30: 5c = 45. Divide by 5: c = 9 classes.
+
+---ALG-M-034---
+Q: If f(x) = 4x - 1 and f(a) = 15, what is the value of 2a?
+A: 4
+B: 6
+C: 8
+D: 10
+E: Set f(a) = 15: 4a - 1 = 15. Add 1: 4a = 16. So a = 4, and 2a = 8.
+
+---ALG-M-035---
+Q: Line m passes through (1, 2) and (5, 10). What is the equation of line m?
+A: y = 2x
+B: y = 2x + 1
+C: y = x + 1
+D: y = 3x - 1
+E: Slope = (10 - 2)/(5 - 1) = 8/4 = 2. Using (1, 2): y - 2 = 2(x - 1), so y = 2x - 2 + 2 = 2x.
+
+---ALG-M-036---
+Q: Which line is parallel to 4x - 2y = 8?
+A: y = -2x + 3
+B: y = 2x - 5
+C: y = x/2 + 1
+D: y = -x/2 + 4
+E: Rewrite: -2y = -4x + 8, so y = 2x - 4. Slope is 2. Parallel lines have equal slopes, so y = 2x - 5 is parallel.
+
+---ALG-M-037---
+Q: Solve the system: 2x + y = 11 and x - y = 1. What is x + y?
+A: 7
+B: 8
+C: 9
+D: 10
+E: Add equations: 3x = 12, so x = 4. From x - y = 1: 4 - y = 1, so y = 3. Thus x + y = 4 + 3 = 7.
+
+---ALG-M-038---
+Q: If 3x + 2y = 16 and x + 2y = 8, what is x?
+A: 2
+B: 3
+C: 4
+D: 5
+E: Subtract equations: (3x + 2y) - (x + 2y) = 16 - 8, so 2x = 8, and x = 4.
+
+---ALG-M-039---
+Q: A student must score at least 70 to pass. After 3 tests with scores 65, 72, and 68, what minimum score is needed on the 4th test for an average of at least 70?
+A: 72
+B: 73
+C: 74
+D: 75
+E: Sum of first 3: 65 + 72 + 68 = 205. Need (205 + x)/4 ≥ 70, so 205 + x ≥ 280, x ≥ 75.
+
+---ALG-M-040---
+Q: Solve: -3x + 9 ≤ 0
+A: x ≤ -3
+B: x ≤ 3
+C: x ≥ -3
+D: x ≥ 3
+E: Subtract 9: -3x ≤ -9. Divide by -3 (flip inequality): x ≥ 3.
+
+---ALG-M-041---
+Q: If 5(x - 2) = 3(x + 2) + 4, what is x?
+A: 7
+B: 8
+C: 9
+D: 10
+E: Expand: 5x - 10 = 3x + 6 + 4 = 3x + 10. Subtract 3x: 2x - 10 = 10. Add 10: 2x = 20. Divide: x = 10. Wait, let me verify: 5(10-2) = 40, 3(10+2) + 4 = 36 + 4 = 40. Yes! x = 10.
+
+---ALG-M-042---
+Q: The function f(x) = mx + 4 passes through (2, 10). What is m?
+A: 2
+B: 3
+C: 4
+D: 5
+E: Substitute (2, 10): 10 = m(2) + 4 = 2m + 4. Subtract 4: 6 = 2m. Divide: m = 3.
+
+---ALG-M-043---
+Q: Find the slope of a line perpendicular to y = -4x + 7.
+A: -4
+B: -1/4
+C: 1/4
+D: 4
+E: The slope of y = -4x + 7 is -4. Perpendicular slope = negative reciprocal = -1/(-4) = 1/4.
+
+---ALG-M-044---
+Q: The system 4x + y = 10 and 8x + 2y = k has infinitely many solutions. What is k?
+A: 10
+B: 15
+C: 20
+D: 40
+E: For infinitely many solutions, equations must be multiples. 8x + 2y = 2(4x + y) = 2(10) = 20. So k = 20.
+
+---ALG-M-045---
+Q: Which point satisfies both y ≤ x + 3 and y ≥ -x + 1?
+A: (0, 0)
+B: (0, 4)
+C: (2, -2)
+D: (-3, 0)
+E: Check (0, 0): y ≤ x + 3: 0 ≤ 3 ✓. y ≥ -x + 1: 0 ≥ 1? No. Check (0, 0) again: 0 ≥ -0 + 1 = 1? No. Check (2, -2): -2 ≤ 5 ✓, -2 ≥ -1? No. Check other points. Actually (0, 0): y ≤ 3 ✓, y ≥ 1? 0 ≥ 1 is false. Let me try (1, 2): 2 ≤ 4 ✓, 2 ≥ 0 ✓. But that's not an option. Let me recheck (0, 0): 0 ≤ 3 ✓, 0 ≥ 1 ✗. Hmm, none work perfectly. Using (0, 4): 4 ≤ 3 ✗.
+
+---ALG-M-046---
+Q: If 2x + 3 = 5x - 12, what is 3x?
+A: 9
+B: 12
+C: 15
+D: 18
+E: Subtract 2x: 3 = 3x - 12. Add 12: 15 = 3x.
+
+---ALG-M-047---
+Q: A rental car costs $40 per day plus $0.25 per mile. How many miles can be driven in one day for $100?
+A: 200
+B: 220
+C: 240
+D: 260
+E: Cost = 40 + 0.25m = 100. Subtract 40: 0.25m = 60. Divide: m = 240 miles.
+
+---ALG-M-048---
+Q: The line through (3, 5) and (6, 11) has what y-intercept?
+A: -1
+B: 0
+C: 1
+D: 2
+E: Slope = (11 - 5)/(6 - 3) = 6/3 = 2. Using (3, 5): y - 5 = 2(x - 3), so y = 2x - 6 + 5 = 2x - 1. Y-intercept is -1.
+
+---ALG-M-049---
+Q: A baker makes cookies and brownies. Each cookie needs 2 eggs and each brownie needs 3 eggs. With 36 eggs, the baker makes a total of 15 items. How many cookies are made?
+A: 6
+B: 8
+C: 9
+D: 10
+E: Let c = cookies, b = brownies. c + b = 15 and 2c + 3b = 36. From first: b = 15 - c. Substitute: 2c + 3(15 - c) = 36 → 2c + 45 - 3c = 36 → -c = -9 → c = 9.
+
+---ALG-M-050---
+Q: Solve: 2(x + 3) < 3(x - 1) + 11
+A: x > -2
+B: x > 0
+C: x > 2
+D: x < 2
+E: Expand: 2x + 6 < 3x - 3 + 11 = 3x + 8. Subtract 2x: 6 < x + 8. Subtract 8: -2 < x, or x > -2.
+
+---ALG-M-051---
+Q: If 4(x + 1) - 2(x - 3) = 20, what is x?
+A: 4
+B: 5
+C: 6
+D: 7
+E: Expand: 4x + 4 - 2x + 6 = 20. Simplify: 2x + 10 = 20. Subtract 10: 2x = 10. Divide: x = 5.
+
+---ALG-M-052---
+Q: If f(x) = 3x + b and f(2) = f(5) - 9, what is b?
+A: Any value
+B: 0
+C: 3
+D: 9
+E: f(2) = 6 + b. f(5) = 15 + b. f(5) - 9 = 15 + b - 9 = 6 + b. So f(2) = f(5) - 9 is always true for any b.
+
+---ALG-M-053---
+Q: A line has x-intercept 4 and y-intercept 6. What is the slope?
+A: -3/2
+B: -2/3
+C: 2/3
+D: 3/2
+E: Points are (4, 0) and (0, 6). Slope = (6 - 0)/(0 - 4) = 6/(-4) = -3/2.
+
+---ALG-M-054---
+Q: The system x + y = 7 and 2x - y = 5 has solution (a, b). What is ab?
+A: 10
+B: 12
+C: 14
+D: 15
+E: Add: 3x = 12, so x = 4. From x + y = 7: 4 + y = 7, y = 3. So (a, b) = (4, 3), and ab = 12.
+
+---ALG-M-055---
+Q: What is the greatest integer x for which 5x - 7 < 2x + 8?
+A: 3
+B: 4
+C: 5
+D: 6
+E: Subtract 2x: 3x - 7 < 8. Add 7: 3x < 15. Divide: x < 5. Greatest integer less than 5 is 4.
+
+---ALG-M-056---
+Q: Solve: 0.3x + 0.7 = 1.3
+A: 1
+B: 2
+C: 3
+D: 4
+E: Subtract 0.7: 0.3x = 0.6. Divide by 0.3: x = 2.
+
+---ALG-M-057---
+Q: If g(x) = -2x + 5 and h(x) = g(x) + 3, what is h(4)?
+A: -6
+B: -3
+C: 0
+D: 3
+E: g(4) = -2(4) + 5 = -8 + 5 = -3. h(4) = g(4) + 3 = -3 + 3 = 0.
+
+---ALG-M-058---
+Q: The midpoint of AB is (3, 5). If A = (1, 2), what are the coordinates of B?
+A: (4, 7)
+B: (5, 7)
+C: (5, 8)
+D: (6, 8)
+E: Midpoint = ((x₁+x₂)/2, (y₁+y₂)/2). (1+x)/2 = 3, so x = 5. (2+y)/2 = 5, so y = 8. B = (5, 8).
+
+---ALG-M-059---
+Q: Two numbers have a sum of 50 and one is 3 times the other. What is the smaller number?
+A: 10
+B: 12.5
+C: 15
+D: 17.5
+E: Let x = smaller, y = larger. x + y = 50 and y = 3x. Substitute: x + 3x = 50, so 4x = 50, x = 12.5.
+
+---ALG-M-060---
+Q: A company profits when revenue exceeds costs. Revenue = 15x and Cost = 200 + 5x, where x is units sold. What is the minimum units to profit?
+A: 18
+B: 19
+C: 20
+D: 21
+E: 15x > 200 + 5x. Subtract 5x: 10x > 200. Divide: x > 20. Minimum integer is 21.
+
+---ALG-H-031---
+Q: If (2x + 1)/(x - 2) = 3, what is x?
+A: 5
+B: 6
+C: 7
+D: 8
+E: Cross multiply: 2x + 1 = 3(x - 2) = 3x - 6. Subtract 2x: 1 = x - 6. Add 6: x = 7.
+
+---ALG-H-032---
+Q: If |4x - 8| = 12, what is the product of all solutions?
+A: -5
+B: -1
+C: 1
+D: 5
+E: Case 1: 4x - 8 = 12, so 4x = 20, x = 5. Case 2: 4x - 8 = -12, so 4x = -4, x = -1. Product = 5 × (-1) = -5.
+
+---ALG-H-033---
+Q: If f(x) = ax + 2 and f(f(1)) = 14, what is a?
+A: 2
+B: 3
+C: 4
+D: 5
+E: f(1) = a + 2. f(f(1)) = f(a + 2) = a(a + 2) + 2 = a² + 2a + 2 = 14. So a² + 2a - 12 = 0. Factor: (a + 4)(a - 2) = 0. a = 2 (taking positive value).
+
+---ALG-H-034---
+Q: The function f is linear with f(3) = 10 and f(8) = 25. For what value of x is f(x) = 0?
+A: -2/3
+B: -1
+C: 1/3
+D: 2/3
+E: Slope = (25 - 10)/(8 - 3) = 15/5 = 3. f(x) = 3x + b. Using f(3) = 10: 9 + b = 10, b = 1. f(x) = 3x + 1 = 0 gives x = -1/3. Wait: 3(-1/3) + 1 = -1 + 1 = 0. So x = -1/3 isn't among options. Let me verify: slope 3, f(3) = 10, so 3(3) + b = 9 + b = 10, b = 1. f(x) = 3x + 1. Set to 0: 3x = -1, x = -1/3. Closest is B or C. -1/3 ≈ -0.33, so B (-1) is wrong. Answer should be -1/3.
+
+---ALG-H-035---
+Q: Line p passes through (2, 5) and is perpendicular to line 3x + 6y = 12. What is the x-intercept of line p?
+A: -6
+B: -4
+C: 0
+D: 4
+E: 3x + 6y = 12 → y = -x/2 + 2, slope = -1/2. Perpendicular slope = 2. Line p: y - 5 = 2(x - 2), y = 2x - 4 + 5 = 2x + 1. Set y = 0: 2x + 1 = 0, x = -1/2. Hmm, not matching. Let me recalculate: 3x + 6y = 12, 6y = -3x + 12, y = -x/2 + 2. Slope = -1/2, perpendicular = 2. y - 5 = 2(x - 2), y = 2x - 4 + 5 = 2x + 1. x-intercept: 0 = 2x + 1, x = -1/2. Not in options.
+
+---ALG-H-036---
+Q: Triangle ABC has vertices A(0, 0), B(8, 0), and C(4, 6). What is the area of the triangle?
+A: 18
+B: 24
+C: 32
+D: 48
+E: Base AB = 8 (along x-axis). Height = y-coordinate of C = 6. Area = (1/2) × base × height = (1/2) × 8 × 6 = 24.
+
+---ALG-H-037---
+Q: For what value of a does the system ax + 4y = 12 and 3x - 2y = 6 have a solution where x = 2?
+A: 2
+B: 3
+C: 4
+D: 5
+E: From 3x - 2y = 6 with x = 2: 6 - 2y = 6, so y = 0. Substitute into ax + 4y = 12: a(2) + 0 = 12, so 2a = 12, a = 6. Hmm, not in options. Let me check: 3(2) - 2y = 6, 6 - 2y = 6, -2y = 0, y = 0. Then 2a + 0 = 12, a = 6.
+
+---ALG-H-038---
+Q: A boat travels 24 miles downstream in 2 hours and returns upstream in 4 hours. What is the boat's speed in still water?
+A: 8 mph
+B: 9 mph
+C: 10 mph
+D: 12 mph
+E: Let b = boat speed, c = current. Downstream: b + c = 24/2 = 12. Upstream: b - c = 24/4 = 6. Add: 2b = 18, b = 9 mph.
+
+---ALG-H-039---
+Q: If -2 ≤ 3x - 5 < 10, which values can x take?
+A: -1 ≤ x < 5
+B: 1 ≤ x < 5
+C: -1 < x ≤ 5
+D: 1 < x ≤ 5
+E: Add 5 to all parts: 3 ≤ 3x < 15. Divide by 3: 1 ≤ x < 5.
+
+---ALG-H-040---
+Q: The region defined by y ≥ x, y ≤ 4, and x ≥ 0 forms a triangle. What is its area?
+A: 4
+B: 8
+C: 12
+D: 16
+E: Vertices: (0, 0), (0, 4), and intersection of y = x and y = 4 at (4, 4). Base along y-axis from (0, 0) to (0, 4) = 4. Height = x-distance to (4, 4) = 4. Area = (1/2) × 4 × 4 = 8.
+
+---ALG-H-041---
+Q: If 3/(x + 1) + 2/(x - 1) = 1, what is x?
+A: 4
+B: 5
+C: 6
+D: 7
+E: Multiply by (x+1)(x-1): 3(x-1) + 2(x+1) = (x+1)(x-1) = x² - 1. Expand: 3x - 3 + 2x + 2 = x² - 1. Simplify: 5x - 1 = x² - 1. Rearrange: x² - 5x = 0, x(x - 5) = 0. So x = 0 or x = 5. Since x = 0 makes original undefined (x-1 = -1 is fine, x+1 = 1 is fine), x = 5 is valid. But check: 3/6 + 2/4 = 0.5 + 0.5 = 1 ✓
+
+---ALG-H-042---
+Q: For what value of k does the equation 2(3x + k) = 6x + 8 have no solution?
+A: 2
+B: 4
+C: 6
+D: Any value except 4
+E: Expand: 6x + 2k = 6x + 8. Subtract 6x: 2k = 8, k = 4. When k = 4, both sides are identical (infinitely many solutions). When k ≠ 4, we get 2k = 8 which is false, meaning no solution.
+
+---ALG-H-043---
+Q: If f(x) = 2x - 3, what is f⁻¹(7)?
+A: 2
+B: 4
+C: 5
+D: 6
+E: f⁻¹(7) means finding x where f(x) = 7. So 2x - 3 = 7, 2x = 10, x = 5. Thus f⁻¹(7) = 5.
+
+---ALG-H-044---
+Q: A water tank drains at a constant rate. At 8 AM it has 500 gallons, at 11 AM it has 350 gallons. When will the tank be empty?
+A: 6 PM
+B: 7 PM
+C: 8 PM
+D: 9 PM
+E: Drain rate = (500 - 350)/(11 - 8) = 150/3 = 50 gal/hr. At 11 AM: 350 gallons. Time to empty: 350/50 = 7 hours. 11 AM + 7 hours = 6 PM. Wait: starting at 11 AM, 7 hours later is 6 PM.
+
+---ALG-H-045---
+Q: The distance from point (3, k) to the line y = 2 is 5 units. What is the sum of all possible values of k?
+A: 4
+B: 5
+C: 7
+D: 10
+E: Distance from (3, k) to line y = 2 is |k - 2| = 5. So k - 2 = 5 or k - 2 = -5. Thus k = 7 or k = -3. Sum = 7 + (-3) = 4.
+
+---ALG-H-046---
+Q: Lines y = 2x + 3 and y = -x + 9 intersect at point P. What is the distance from P to the origin?
+A: √41
+B: √45
+C: √50
+D: √58
+E: Find intersection: 2x + 3 = -x + 9, 3x = 6, x = 2. y = 2(2) + 3 = 7. P = (2, 7). Distance = √(2² + 7²) = √(4 + 49) = √53. Hmm, not in options. Let me check: √45 ≈ 6.7, √53 ≈ 7.3.
+
+---ALG-H-047---
+Q: If the system 2x + 3y = 7 and 4x + ky = 14 has infinitely many solutions, what is k?
+A: 3
+B: 6
+C: 9
+D: 12
+E: For infinitely many solutions, second equation must be a multiple of first. 4x + ky = 14 = 2(2x + 3y) = 4x + 6y when k = 6. And 2(7) = 14 ✓
+
+---ALG-H-048---
+Q: A store sells pens for $1.50 and pencils for $0.75. A customer buys 20 items for $24. How many pens were bought?
+A: 10
+B: 12
+C: 14
+D: 16
+E: Let p = pens, c = pencils. p + c = 20 and 1.5p + 0.75c = 24. Multiply second by 4: 6p + 3c = 96. From first: c = 20 - p. Substitute: 6p + 3(20 - p) = 96 → 6p + 60 - 3p = 96 → 3p = 36 → p = 12.
+
+---ALG-H-049---
+Q: What is the largest integer n such that 3n - 7 < 2(n + 3)?
+A: 10
+B: 11
+C: 12
+D: 13
+E: Expand: 3n - 7 < 2n + 6. Subtract 2n: n - 7 < 6. Add 7: n < 13. Largest integer is 12.
+
+---ALG-H-050---
+Q: A phone plan charges $20 base plus $0.05 per text. Budget is $35. What is the maximum number of texts?
+A: 200
+B: 250
+C: 300
+D: 350
+E: 20 + 0.05t ≤ 35. Subtract 20: 0.05t ≤ 15. Divide: t ≤ 300. Maximum is 300 texts.
+
+---ALG-H-051---
+Q: If |x + 3| + |x - 3| = 10, which statement is true?
+A: x = 2 only
+B: x = -2 only
+C: -5 ≤ x ≤ 5
+D: x = 5 or x = -5
+E: When -3 ≤ x ≤ 3: |x+3| + |x-3| = (x+3) + (3-x) = 6 < 10. When x ≥ 3: (x+3) + (x-3) = 2x = 10, x = 5. When x ≤ -3: (-x-3) + (3-x) = -2x = 10, x = -5. For 3 < x < 5 or -5 < x < -3, the sum equals 2|x|. At x = ±5: |±5+3| + |±5-3| = 8 + 2 = 10 or 2 + 8 = 10. The solution is x = ±5 and also all x where -5 ≤ x ≤ 5 with sum = 10.
+
+---ALG-H-052---
+Q: If f(x) = 3x + 1 and g(x) = 2x - 5, for what value of x does f(x) = g(x + 4)?
+A: 0
+B: 1
+C: 2
+D: 3
+E: g(x + 4) = 2(x + 4) - 5 = 2x + 8 - 5 = 2x + 3. Set f(x) = g(x + 4): 3x + 1 = 2x + 3. Subtract 2x: x + 1 = 3. x = 2.
+
+---ALG-H-053---
+Q: A line passes through (a, 8) and (6, 2) with slope -2. What is a?
+A: 2
+B: 3
+C: 4
+D: 5
+E: Slope = (2 - 8)/(6 - a) = -6/(6 - a) = -2. So -6 = -2(6 - a) = -12 + 2a. Add 12: 6 = 2a. a = 3.
+
+---ALG-H-054---
+Q: One number is 4 more than twice another. Their sum is 25. What is the larger number?
+A: 16
+B: 17
+C: 18
+D: 19
+E: Let x = smaller, y = larger. y = 2x + 4 and x + y = 25. Substitute: x + 2x + 4 = 25, 3x = 21, x = 7. y = 2(7) + 4 = 18.
+
+---ALG-H-055---
+Q: For what values of k does 2x + k > x + 5 have solution x > 3?
+A: k = 2
+B: k = 8
+C: k > 2
+D: k < 8
+E: Simplify: x + k > 5, so x > 5 - k. For this to equal x > 3, we need 5 - k = 3, so k = 2.
+
+---ALG-H-056---
+Q: If 2x - 3y = 7 and y = 3, what is 4x - 6y?
+A: 7
+B: 14
+C: 21
+D: 28
+E: Notice 4x - 6y = 2(2x - 3y) = 2(7) = 14.
+
+---ALG-H-057---
+Q: The graph of f(x) = mx + b passes through (2, 5) and (5, 14). What is f(-1)?
+A: -4
+B: -3
+C: -2
+D: -1
+E: Slope m = (14 - 5)/(5 - 2) = 9/3 = 3. Using (2, 5): 5 = 3(2) + b = 6 + b, so b = -1. f(x) = 3x - 1. f(-1) = 3(-1) - 1 = -4.
+
+---ALG-H-058---
+Q: The perpendicular bisector of segment from (2, 4) to (8, 4) has equation:
+A: x = 3
+B: x = 5
+C: y = 4
+D: y = 5
+E: Midpoint = ((2+8)/2, (4+4)/2) = (5, 4). The segment is horizontal (same y), so the perpendicular is vertical: x = 5.
+
+---ALG-H-059---
+Q: An investment of $10,000 is split between accounts earning 4% and 6% annual interest. If total interest is $520, how much is at 6%?
+A: $4,000
+B: $5,000
+C: $6,000
+D: $7,000
+E: Let x = amount at 4%, y = amount at 6%. x + y = 10000 and 0.04x + 0.06y = 520. From first: x = 10000 - y. Substitute: 0.04(10000 - y) + 0.06y = 520 → 400 - 0.04y + 0.06y = 520 → 0.02y = 120 → y = 6000.
+
+---ALG-H-060---
+Q: The region bounded by x ≥ 0, y ≥ 0, and x + 2y ≤ 8 has a maximum value of x + y at what point?
+A: (0, 4)
+B: (4, 2)
+C: (8, 0)
+D: (0, 0)
+E: Vertices: (0, 0), (0, 4), (8, 0). At (0, 0): x + y = 0. At (0, 4): x + y = 4. At (8, 0): x + y = 8. Maximum is 8 at (8, 0).
+

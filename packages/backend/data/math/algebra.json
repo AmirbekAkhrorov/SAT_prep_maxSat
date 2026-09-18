@@ -52,7 +52,45 @@
       "choice_c": "y = 2x - 5",
       "choice_d": "y = -2x + 5",
       "correct_answer": "A",
-      "explanation": "The point (0, 5) is the y-intercept, so b = 5. With slope m = 2, the equation is y = 2x + 5."
+      "explanation": "The point (0, 5) is the y-intercept, so b = 5. With slope m = 2, the equation is y = 2x + 5.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 300,
+          "xRange": [
+            -3,
+            3
+          ],
+          "yRange": [
+            -2,
+            10
+          ],
+          "gridLines": true,
+          "elements": [
+            {
+              "type": "line",
+              "slope": 2,
+              "intercept": 5,
+              "label": "y = 2x + 5",
+              "style": {
+                "stroke": "#2563eb"
+              }
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                5
+              ],
+              "label": "(0, 5)",
+              "style": {
+                "fill": "#dc2626"
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-E-005",
@@ -65,7 +103,40 @@
       "choice_c": "6",
       "choice_d": "12",
       "correct_answer": "C",
-      "explanation": "Set x = 0: 3(0) + 2y = 12, so 2y = 12, and y = 6. The y-intercept is 6."
+      "explanation": "Set x = 0: 3(0) + 2y = 12, so 2y = 12, and y = 6. The y-intercept is 6.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-E-006",
@@ -91,7 +162,45 @@
       "choice_c": "6",
       "choice_d": "8",
       "correct_answer": "B",
-      "explanation": "2x + 3 < 15 means 2x < 12, so x < 6. Among the choices, x = 4 and x = 5 satisfy this. The answer is B (5)."
+      "explanation": "2x + 3 < 15 means 2x < 12, so x < 6. Among the choices, x = 4 and x = 5 satisfy this. The answer is B (5).",
+      "visualization": {
+        "type": "numberLine",
+        "config": {
+          "width": 400,
+          "height": 80,
+          "range": [
+            -2,
+            10
+          ],
+          "tickInterval": 1,
+          "markers": [
+            {
+              "value": 4,
+              "label": "4",
+              "color": "#16a34a"
+            },
+            {
+              "value": 5,
+              "label": "5",
+              "color": "#16a34a"
+            },
+            {
+              "value": 6,
+              "open": true,
+              "color": "#dc2626"
+            }
+          ],
+          "regions": [
+            {
+              "type": "ray",
+              "start": 6,
+              "direction": "left",
+              "open": true,
+              "color": "#2563eb"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-E-008",
@@ -130,7 +239,40 @@
       "choice_c": "8",
       "choice_d": "-8",
       "correct_answer": "A",
-      "explanation": "The equation is in slope-intercept form y = mx + b, where m is the slope. Here, m = -3."
+      "explanation": "The equation is in slope-intercept form y = mx + b, where m is the slope. Here, m = -3.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-E-011",
@@ -182,7 +324,40 @@
       "choice_c": "y = 4x + 4",
       "choice_d": "y = x/4",
       "correct_answer": "A",
-      "explanation": "A line through the origin has y-intercept 0. With slope 4: y = 4x + 0 = 4x."
+      "explanation": "A line through the origin has y-intercept 0. With slope 4: y = 4x + 0 = 4x.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-E-015",
@@ -299,7 +474,40 @@
       "choice_c": "x = 7",
       "choice_d": "y = 7",
       "correct_answer": "D",
-      "explanation": "A line with slope 0 is horizontal. It passes through all points with the same y-value, so y = 7."
+      "explanation": "A line with slope 0 is horizontal. It passes through all points with the same y-value, so y = 7.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-E-024",
@@ -325,7 +533,36 @@
       "choice_c": "x > 6",
       "choice_d": "x > 25",
       "correct_answer": "B",
-      "explanation": "Divide both sides by 5: x > 5."
+      "explanation": "Divide both sides by 5: x > 5.",
+      "visualization": {
+        "type": "numberLine",
+        "config": {
+          "width": 350,
+          "height": 80,
+          "range": [
+            -5,
+            5
+          ],
+          "tickInterval": 1,
+          "markers": [
+            {
+              "value": 2,
+              "open": true,
+              "color": "#e74c3c"
+            }
+          ],
+          "regions": [
+            {
+              "start": 2,
+              "end": 5,
+              "type": "ray",
+              "direction": "right",
+              "open": true,
+              "color": "#3498db"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-E-026",
@@ -364,7 +601,40 @@
       "choice_c": "7",
       "choice_d": "Undefined",
       "correct_answer": "A",
-      "explanation": "y = 7 is a horizontal line, which has slope 0."
+      "explanation": "y = 7 is a horizontal line, which has slope 0.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-E-029",
@@ -390,7 +660,36 @@
       "choice_c": "5",
       "choice_d": "8",
       "correct_answer": "C",
-      "explanation": "The compound inequality 2 < x < 7 is satisfied by x = 5."
+      "explanation": "The compound inequality 2 < x < 7 is satisfied by x = 5.",
+      "visualization": {
+        "type": "numberLine",
+        "config": {
+          "width": 350,
+          "height": 80,
+          "range": [
+            -5,
+            5
+          ],
+          "tickInterval": 1,
+          "markers": [
+            {
+              "value": 2,
+              "open": true,
+              "color": "#e74c3c"
+            }
+          ],
+          "regions": [
+            {
+              "start": 2,
+              "end": 5,
+              "type": "ray",
+              "direction": "right",
+              "open": true,
+              "color": "#3498db"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-M-001",
@@ -429,7 +728,40 @@
       "choice_c": "4",
       "choice_d": "8",
       "correct_answer": "B",
-      "explanation": "Slope = (y₂ - y₁)/(x₂ - x₁) = (13 - 5)/(6 - 2) = 8/4 = 2."
+      "explanation": "Slope = (y₂ - y₁)/(x₂ - x₁) = (13 - 5)/(6 - 2) = 8/4 = 2.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-M-004",
@@ -455,7 +787,46 @@
       "choice_c": "Exactly two",
       "choice_d": "Infinitely many",
       "correct_answer": "D",
-      "explanation": "The second equation is exactly 2 times the first (6x + 4y = 2(3x + 2y) = 2(12) = 24). These represent the same line, so there are infinitely many solutions."
+      "explanation": "The second equation is exactly 2 times the first (6x + 4y = 2(3x + 2y) = 2(12) = 24). These represent the same line, so there are infinitely many solutions.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x + 2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "-x + 4",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                3
+              ],
+              "label": "(1, 3)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-M-006",
@@ -468,7 +839,36 @@
       "choice_c": "3 + 2p ≤ 20",
       "choice_d": "6 + 2p > 20",
       "correct_answer": "A",
-      "explanation": "Alex must spend at least 3(2) = $6 on notebooks. The total spent is 6 + 2p, which must be ≤ $20. So 6 + 2p ≤ 20, which equals 3(2) + 2p ≤ 20."
+      "explanation": "Alex must spend at least 3(2) = $6 on notebooks. The total spent is 6 + 2p, which must be ≤ $20. So 6 + 2p ≤ 20, which equals 3(2) + 2p ≤ 20.",
+      "visualization": {
+        "type": "numberLine",
+        "config": {
+          "width": 350,
+          "height": 80,
+          "range": [
+            -5,
+            5
+          ],
+          "tickInterval": 1,
+          "markers": [
+            {
+              "value": 0,
+              "open": true,
+              "color": "#e74c3c"
+            }
+          ],
+          "regions": [
+            {
+              "start": 0,
+              "end": 5,
+              "type": "ray",
+              "direction": "right",
+              "open": true,
+              "color": "#3498db"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-M-007",
@@ -520,7 +920,36 @@
       "choice_c": "(1, 0)",
       "choice_d": "(3, 3)",
       "correct_answer": "C",
-      "explanation": "Check (1, 0): Is 0 > 2(1) - 3 = -1? Yes, 0 > -1 is true. Check others: (0, -3): -3 > -3 is false. (2, 1): 1 > 1 is false. (3, 3): 3 > 3 is false."
+      "explanation": "Check (1, 0): Is 0 > 2(1) - 3 = -1? Yes, 0 > -1 is true. Check others: (0, -3): -3 > -3 is false. (2, 1): 1 > 1 is false. (3, 3): 3 > 3 is false.",
+      "visualization": {
+        "type": "numberLine",
+        "config": {
+          "width": 350,
+          "height": 80,
+          "range": [
+            -5,
+            5
+          ],
+          "tickInterval": 1,
+          "markers": [
+            {
+              "value": 0,
+              "open": true,
+              "color": "#e74c3c"
+            }
+          ],
+          "regions": [
+            {
+              "start": 0,
+              "end": 5,
+              "type": "ray",
+              "direction": "right",
+              "open": true,
+              "color": "#3498db"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-M-011",
@@ -585,7 +1014,40 @@
       "choice_c": "y = -3x - 2",
       "choice_d": "y = -3x + 2",
       "correct_answer": "A",
-      "explanation": "Using point-slope form: y - 4 = -3(x - 2). Expand: y - 4 = -3x + 6. Add 4: y = -3x + 10."
+      "explanation": "Using point-slope form: y - 4 = -3(x - 2). Expand: y - 4 = -3x + 6. Add 4: y = -3x + 10.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-M-016",
@@ -611,7 +1073,46 @@
       "choice_c": "3",
       "choice_d": "4",
       "correct_answer": "B",
-      "explanation": "Add the equations: 4x = 16, so x = 4. Substitute into x + 2y = 8: 4 + 2y = 8, so 2y = 4, y = 2."
+      "explanation": "Add the equations: 4x = 16, so x = 4. Substitute into x + 2y = 8: 4 + 2y = 8, so 2y = 4, y = 2.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x + 2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "-x + 4",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                3
+              ],
+              "label": "(1, 3)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-M-018",
@@ -624,7 +1125,46 @@
       "choice_c": "Exactly two",
       "choice_d": "Infinitely many",
       "correct_answer": "A",
-      "explanation": "Multiply the first equation by 2: 4x + 2y = 10. This contradicts 4x + 2y = 7 (10 ≠ 7). The lines are parallel with no intersection, so zero solutions."
+      "explanation": "Multiply the first equation by 2: 4x + 2y = 10. This contradicts 4x + 2y = 7 (10 ≠ 7). The lines are parallel with no intersection, so zero solutions.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x + 2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "-x + 4",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                3
+              ],
+              "label": "(1, 3)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-M-019",
@@ -637,7 +1177,36 @@
       "choice_c": "n < 2m - 5",
       "choice_d": "n > 2m - 5",
       "correct_answer": "B",
-      "explanation": "'At least' means greater than or equal to. n is at least (2m - 5), so n ≥ 2m - 5."
+      "explanation": "'At least' means greater than or equal to. n is at least (2m - 5), so n ≥ 2m - 5.",
+      "visualization": {
+        "type": "numberLine",
+        "config": {
+          "width": 350,
+          "height": 80,
+          "range": [
+            -5,
+            5
+          ],
+          "tickInterval": 1,
+          "markers": [
+            {
+              "value": 0,
+              "open": true,
+              "color": "#e74c3c"
+            }
+          ],
+          "regions": [
+            {
+              "start": 0,
+              "end": 5,
+              "type": "ray",
+              "direction": "right",
+              "open": true,
+              "color": "#3498db"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-M-020",
@@ -689,7 +1258,40 @@
       "choice_c": "1/2",
       "choice_d": "2",
       "correct_answer": "B",
-      "explanation": "Rewrite: -2y = -4x + 6, so y = 2x - 3. Slope is 2. Perpendicular slope = -1/2."
+      "explanation": "Rewrite: -2y = -4x + 6, so y = 2x - 3. Slope is 2. Perpendicular slope = -1/2.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-M-024",
@@ -715,7 +1317,36 @@
       "choice_c": "x > -2 or x ≤ 5",
       "choice_d": "x ≥ -2 and x ≤ 5",
       "correct_answer": "A",
-      "explanation": "-2 < x means x > -2, and x ≤ 5 remains as is. Both conditions must be met, so it's 'and'."
+      "explanation": "-2 < x means x > -2, and x ≤ 5 remains as is. Both conditions must be met, so it's 'and'.",
+      "visualization": {
+        "type": "numberLine",
+        "config": {
+          "width": 350,
+          "height": 80,
+          "range": [
+            -5,
+            5
+          ],
+          "tickInterval": 1,
+          "markers": [
+            {
+              "value": 0,
+              "open": true,
+              "color": "#e74c3c"
+            }
+          ],
+          "regions": [
+            {
+              "start": 0,
+              "end": 5,
+              "type": "ray",
+              "direction": "right",
+              "open": true,
+              "color": "#3498db"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-M-026",
@@ -819,7 +1450,40 @@
       "choice_c": "6",
       "choice_d": "7",
       "correct_answer": "B",
-      "explanation": "Rewrite 2x - 4y = 8: -4y = -2x + 8, so y = (1/2)x - 2. Slope is 1/2. Line m: y = (1/2)x + b. Using (3, 7): 7 = (1/2)(3) + b → 7 = 1.5 + b → b = 5.5."
+      "explanation": "Rewrite 2x - 4y = 8: -4y = -2x + 8, so y = (1/2)x - 2. Slope is 1/2. Line m: y = (1/2)x + b. Using (3, 7): 7 = (1/2)(3) + b → 7 = 1.5 + b → b = 5.5.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-H-004",
@@ -832,7 +1496,46 @@
       "choice_c": "6",
       "choice_d": "8",
       "correct_answer": "C",
-      "explanation": "No solution means parallel lines (same slope, different y-intercept). Rewrite: kx + 3y = 12 → y = -(k/3)x + 4. And 2x + y = 5 → y = -2x + 5. For parallel: -k/3 = -2, so k = 6. Y-intercepts are 4 and 5 (different), confirming parallel lines."
+      "explanation": "No solution means parallel lines (same slope, different y-intercept). Rewrite: kx + 3y = 12 → y = -(k/3)x + 4. And 2x + y = 5 → y = -2x + 5. For parallel: -k/3 = -2, so k = 6. Y-intercepts are 4 and 5 (different), confirming parallel lines.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x + 2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "-x + 4",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                3
+              ],
+              "label": "(1, 3)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-H-005",
@@ -975,7 +1678,40 @@
       "choice_c": "3",
       "choice_d": "4",
       "correct_answer": "C",
-      "explanation": "Slope = (7-3)/(5-a) = 4/(5-a) = 2. So 4 = 2(5-a) = 10 - 2a. Thus 2a = 6, a = 3."
+      "explanation": "Slope = (7-3)/(5-a) = 4/(5-a) = 2. So 4 = 2(5-a) = 10 - 2a. Thus 2a = 6, a = 3.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-H-016",
@@ -988,7 +1724,40 @@
       "choice_c": "(5, 0)",
       "choice_d": "(6, 0)",
       "correct_answer": "C",
-      "explanation": "Slope = (1-4)/(4-1) = -3/3 = -1. Using (1,4): y - 4 = -1(x - 1), so y = -x + 5. Set y = 0: 0 = -x + 5, x = 5. The x-intercept is (5, 0)."
+      "explanation": "Slope = (1-4)/(4-1) = -3/3 = -1. Using (1,4): y - 4 = -1(x - 1), so y = -x + 5. Set y = 0: 0 = -x + 5, x = 5. The x-intercept is (5, 0).",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-H-017",
@@ -1001,7 +1770,46 @@
       "choice_c": "3",
       "choice_d": "6",
       "correct_answer": "A",
-      "explanation": "For infinitely many solutions, equations must be proportional. Second equation: 3x + 6y = 30, divide by 3: x + 2y = 10. So first equation must be x + 2y = 10, meaning a = 1."
+      "explanation": "For infinitely many solutions, equations must be proportional. Second equation: 3x + 6y = 30, divide by 3: x + 2y = 10. So first equation must be x + 2y = 10, meaning a = 1.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x + 2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "-x + 4",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                3
+              ],
+              "label": "(1, 3)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-H-018",
@@ -1118,7 +1926,40 @@
       "choice_c": "4",
       "choice_d": "8",
       "correct_answer": "A",
-      "explanation": "Case 1: 3x + 2 = x - 6 → 2x = -8 → x = -4. Case 2: 3x + 2 = -(x - 6) = -x + 6 → 4x = 4 → x = 1. Product = (-4)(1) = -4. Wait, let me also check: 3x + 2 = x - 6 gives x = -4. -(3x+2) = x - 6 gives -3x - 2 = x - 6, -4x = -4, x = 1. Product = -4."
+      "explanation": "Case 1: 3x + 2 = x - 6 → 2x = -8 → x = -4. Case 2: 3x + 2 = -(x - 6) = -x + 6 → 4x = 4 → x = 1. Product = (-4)(1) = -4. Wait, let me also check: 3x + 2 = x - 6 gives x = -4. -(3x+2) = x - 6 gives -3x - 2 = x - 6, -4x = -4, x = 1. Product = -4.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -2,
+            8
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "1*abs(x) + 0",
+              "color": "#9b59b6",
+              "label": "f(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                0
+              ],
+              "label": "vertex",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-H-027",
@@ -1131,7 +1972,40 @@
       "choice_c": "1",
       "choice_d": "3",
       "correct_answer": "A",
-      "explanation": "f(x) = 2x + b. Using (1, 3): 3 = 2(1) + b, b = 1. So f(x) = 2x + 1. g(x) = f(x+2) - 4 = 2(x+2) + 1 - 4 = 2x + 4 + 1 - 4 = 2x + 1. Y-intercept is 1. Wait, that means g(0) = 2(0) + 1 = 1. Let me recalculate: g(x) = 2(x+2) + 1 - 4 = 2x + 4 + 1 - 4 = 2x + 1. Y-intercept = 1. So answer is C."
+      "explanation": "f(x) = 2x + b. Using (1, 3): 3 = 2(1) + b, b = 1. So f(x) = 2x + 1. g(x) = f(x+2) - 4 = 2(x+2) + 1 - 4 = 2x + 4 + 1 - 4 = 2x + 1. Y-intercept is 1. Wait, that means g(0) = 2(0) + 1 = 1. Let me recalculate: g(x) = 2(x+2) + 1 - 4 = 2x + 4 + 1 - 4 = 2x + 1. Y-intercept = 1. So answer is C.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-H-028",
@@ -1170,7 +2044,46 @@
       "choice_c": "k > -3",
       "choice_d": "All values of k",
       "correct_answer": "C",
-      "explanation": "The solution region exists when the lines y = 2x - 3 and y = 2x + k have space between them with y > 2x - 3 and y < 2x + k. This requires 2x + k > 2x - 3, so k > -3."
+      "explanation": "The solution region exists when the lines y = 2x - 3 and y = 2x + k have space between them with y > 2x - 3 and y < 2x + k. This requires 2x + k > 2x - 3, so k > -3.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x + 2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "-x + 4",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                3
+              ],
+              "label": "(1, 3)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-E-031",
@@ -1222,7 +2135,40 @@
       "choice_c": "y = -x - 4",
       "choice_d": "y = 4x - 1",
       "correct_answer": "B",
-      "explanation": "Using slope-intercept form y = mx + b with m = -1 and b = 4: y = -x + 4."
+      "explanation": "Using slope-intercept form y = mx + b with m = -1 and b = 4: y = -x + 4.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-E-035",
@@ -1235,7 +2181,40 @@
       "choice_c": "10",
       "choice_d": "15",
       "correct_answer": "C",
-      "explanation": "Set x = 0: 5(0) + y = 10, so y = 10. The y-intercept is 10."
+      "explanation": "Set x = 0: 5(0) + y = 10, so y = 10. The y-intercept is 10.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-E-036",
@@ -1300,7 +2279,36 @@
       "choice_c": "x ≤ 8",
       "choice_d": "x ≤ 20",
       "correct_answer": "B",
-      "explanation": "Divide both sides by 4: x ≤ 6."
+      "explanation": "Divide both sides by 4: x ≤ 6.",
+      "visualization": {
+        "type": "numberLine",
+        "config": {
+          "width": 350,
+          "height": 80,
+          "range": [
+            -5,
+            5
+          ],
+          "tickInterval": 1,
+          "markers": [
+            {
+              "value": 0,
+              "open": true,
+              "color": "#e74c3c"
+            }
+          ],
+          "regions": [
+            {
+              "start": 0,
+              "end": 5,
+              "type": "ray",
+              "direction": "right",
+              "open": true,
+              "color": "#3498db"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-E-041",
@@ -1339,7 +2347,40 @@
       "choice_c": "5",
       "choice_d": "Undefined",
       "correct_answer": "D",
-      "explanation": "x = 5 is a vertical line. Vertical lines have undefined slope."
+      "explanation": "x = 5 is a vertical line. Vertical lines have undefined slope.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-E-044",
@@ -1365,7 +2406,36 @@
       "choice_c": "6",
       "choice_d": "8",
       "correct_answer": "D",
-      "explanation": "2x < 14 means x < 7. The value x = 8 does not satisfy this."
+      "explanation": "2x < 14 means x < 7. The value x = 8 does not satisfy this.",
+      "visualization": {
+        "type": "numberLine",
+        "config": {
+          "width": 350,
+          "height": 80,
+          "range": [
+            -5,
+            5
+          ],
+          "tickInterval": 1,
+          "markers": [
+            {
+              "value": 0,
+              "open": true,
+              "color": "#e74c3c"
+            }
+          ],
+          "regions": [
+            {
+              "start": 0,
+              "end": 5,
+              "type": "ray",
+              "direction": "right",
+              "open": true,
+              "color": "#3498db"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-E-046",
@@ -1534,7 +2604,40 @@
       "choice_c": "Intersecting at one point",
       "choice_d": "The same line",
       "correct_answer": "B",
-      "explanation": "Lines with equal slopes but different y-intercepts never intersect; they are parallel."
+      "explanation": "Lines with equal slopes but different y-intercepts never intersect; they are parallel.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-E-059",
@@ -1560,7 +2663,36 @@
       "choice_c": "(3, 8]",
       "choice_d": "[3, 8]",
       "correct_answer": "B",
-      "explanation": "3 ≤ x means x includes 3 (closed bracket [). x < 8 means x excludes 8 (open bracket )). So [3, 8)."
+      "explanation": "3 ≤ x means x includes 3 (closed bracket [). x < 8 means x excludes 8 (open bracket )). So [3, 8).",
+      "visualization": {
+        "type": "numberLine",
+        "config": {
+          "width": 350,
+          "height": 80,
+          "range": [
+            -5,
+            5
+          ],
+          "tickInterval": 1,
+          "markers": [
+            {
+              "value": 0,
+              "open": true,
+              "color": "#e74c3c"
+            }
+          ],
+          "regions": [
+            {
+              "start": 0,
+              "end": 5,
+              "type": "ray",
+              "direction": "right",
+              "open": true,
+              "color": "#3498db"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-M-031",
@@ -1651,7 +2783,46 @@
       "choice_c": "9",
       "choice_d": "10",
       "correct_answer": "A",
-      "explanation": "Add equations: 3x = 12, so x = 4. From x - y = 1: 4 - y = 1, so y = 3. Thus x + y = 4 + 3 = 7."
+      "explanation": "Add equations: 3x = 12, so x = 4. From x - y = 1: 4 - y = 1, so y = 3. Thus x + y = 4 + 3 = 7.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x + 2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "-x + 4",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                3
+              ],
+              "label": "(1, 3)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-M-038",
@@ -1729,7 +2900,40 @@
       "choice_c": "1/4",
       "choice_d": "4",
       "correct_answer": "C",
-      "explanation": "The slope of y = -4x + 7 is -4. Perpendicular slope = negative reciprocal = -1/(-4) = 1/4."
+      "explanation": "The slope of y = -4x + 7 is -4. Perpendicular slope = negative reciprocal = -1/(-4) = 1/4.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-M-044",
@@ -1742,7 +2946,46 @@
       "choice_c": "20",
       "choice_d": "40",
       "correct_answer": "C",
-      "explanation": "For infinitely many solutions, equations must be multiples. 8x + 2y = 2(4x + y) = 2(10) = 20. So k = 20."
+      "explanation": "For infinitely many solutions, equations must be multiples. 8x + 2y = 2(4x + y) = 2(10) = 20. So k = 20.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x + 2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "-x + 4",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                3
+              ],
+              "label": "(1, 3)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-M-045",
@@ -1794,7 +3037,40 @@
       "choice_c": "1",
       "choice_d": "2",
       "correct_answer": "A",
-      "explanation": "Slope = (11 - 5)/(6 - 3) = 6/3 = 2. Using (3, 5): y - 5 = 2(x - 3), so y = 2x - 6 + 5 = 2x - 1. Y-intercept is -1."
+      "explanation": "Slope = (11 - 5)/(6 - 3) = 6/3 = 2. Using (3, 5): y - 5 = 2(x - 3), so y = 2x - 6 + 5 = 2x - 1. Y-intercept is -1.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-M-049",
@@ -1859,7 +3135,40 @@
       "choice_c": "2/3",
       "choice_d": "3/2",
       "correct_answer": "A",
-      "explanation": "Points are (4, 0) and (0, 6). Slope = (6 - 0)/(0 - 4) = 6/(-4) = -3/2."
+      "explanation": "Points are (4, 0) and (0, 6). Slope = (6 - 0)/(0 - 4) = 6/(-4) = -3/2.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-M-054",
@@ -1872,7 +3181,46 @@
       "choice_c": "14",
       "choice_d": "15",
       "correct_answer": "B",
-      "explanation": "Add: 3x = 12, so x = 4. From x + y = 7: 4 + y = 7, y = 3. So (a, b) = (4, 3), and ab = 12."
+      "explanation": "Add: 3x = 12, so x = 4. From x + y = 7: 4 + y = 7, y = 3. So (a, b) = (4, 3), and ab = 12.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x + 2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "-x + 4",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                3
+              ],
+              "label": "(1, 3)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-M-055",
@@ -2041,7 +3389,46 @@
       "choice_c": "4",
       "choice_d": "5",
       "correct_answer": "C",
-      "explanation": "From 3x - 2y = 6 with x = 2: 6 - 2y = 6, so y = 0. Substitute into ax + 4y = 12: a(2) + 0 = 12, so 2a = 12, a = 6. Hmm, not in options. Let me check: 3(2) - 2y = 6, 6 - 2y = 6, -2y = 0, y = 0. Then 2a + 0 = 12, a = 6."
+      "explanation": "From 3x - 2y = 6 with x = 2: 6 - 2y = 6, so y = 0. Substitute into ax + 4y = 12: a(2) + 0 = 12, so 2a = 12, a = 6. Hmm, not in options. Let me check: 3(2) - 2y = 6, 6 - 2y = 6, -2y = 0, y = 0. Then 2a + 0 = 12, a = 6.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x + 2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "-x + 4",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                3
+              ],
+              "label": "(1, 3)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-H-038",
@@ -2080,7 +3467,36 @@
       "choice_c": "12",
       "choice_d": "16",
       "correct_answer": "B",
-      "explanation": "Vertices: (0, 0), (0, 4), and intersection of y = x and y = 4 at (4, 4). Base along y-axis from (0, 0) to (0, 4) = 4. Height = x-distance to (4, 4) = 4. Area = (1/2) × 4 × 4 = 8."
+      "explanation": "Vertices: (0, 0), (0, 4), and intersection of y = x and y = 4 at (4, 4). Base along y-axis from (0, 0) to (0, 4) = 4. Height = x-distance to (4, 4) = 4. Area = (1/2) × 4 × 4 = 8.",
+      "visualization": {
+        "type": "numberLine",
+        "config": {
+          "width": 350,
+          "height": 80,
+          "range": [
+            -5,
+            5
+          ],
+          "tickInterval": 1,
+          "markers": [
+            {
+              "value": 0,
+              "open": true,
+              "color": "#e74c3c"
+            }
+          ],
+          "regions": [
+            {
+              "start": 0,
+              "end": 5,
+              "type": "ray",
+              "direction": "right",
+              "open": true,
+              "color": "#3498db"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-H-041",
@@ -2171,7 +3587,46 @@
       "choice_c": "9",
       "choice_d": "12",
       "correct_answer": "B",
-      "explanation": "For infinitely many solutions, second equation must be a multiple of first. 4x + ky = 14 = 2(2x + 3y) = 4x + 6y when k = 6. And 2(7) = 14 ✓"
+      "explanation": "For infinitely many solutions, second equation must be a multiple of first. 4x + ky = 14 = 2(2x + 3y) = 4x + 6y when k = 6. And 2(7) = 14 ✓",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 300,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -6,
+            12
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "x + 2",
+              "color": "#3498db",
+              "label": "f(x)"
+            },
+            {
+              "type": "function",
+              "expression": "-x + 4",
+              "color": "#e74c3c",
+              "label": "g(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                1,
+                3
+              ],
+              "label": "(1, 3)",
+              "color": "#2ecc71",
+              "radius": 5
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-H-048",
@@ -2223,7 +3678,40 @@
       "choice_c": "-5 ≤ x ≤ 5",
       "choice_d": "x = 5 or x = -5",
       "correct_answer": "C",
-      "explanation": "When -3 ≤ x ≤ 3: |x+3| + |x-3| = (x+3) + (3-x) = 6 < 10. When x ≥ 3: (x+3) + (x-3) = 2x = 10, x = 5. When x ≤ -3: (-x-3) + (3-x) = -2x = 10, x = -5. For 3 < x < 5 or -5 < x < -3, the sum equals 2|x|. At x = ±5: |±5+3| + |±5-3| = 8 + 2 = 10 or 2 + 8 = 10. The solution is x = ±5 and also all x where -5 ≤ x ≤ 5 with sum = 10."
+      "explanation": "When -3 ≤ x ≤ 3: |x+3| + |x-3| = (x+3) + (3-x) = 6 < 10. When x ≥ 3: (x+3) + (x-3) = 2x = 10, x = 5. When x ≤ -3: (-x-3) + (3-x) = -2x = 10, x = -5. For 3 < x < 5 or -5 < x < -3, the sum equals 2|x|. At x = ±5: |±5+3| + |±5-3| = 8 + 2 = 10 or 2 + 8 = 10. The solution is x = ±5 and also all x where -5 ≤ x ≤ 5 with sum = 10.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -2,
+            8
+          ],
+          "elements": [
+            {
+              "type": "function",
+              "expression": "1*abs(x - -3) + 0",
+              "color": "#9b59b6",
+              "label": "f(x)"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                -3,
+                0
+              ],
+              "label": "vertex",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-H-052",
@@ -2249,7 +3737,40 @@
       "choice_c": "4",
       "choice_d": "5",
       "correct_answer": "B",
-      "explanation": "Slope = (2 - 8)/(6 - a) = -6/(6 - a) = -2. So -6 = -2(6 - a) = -12 + 2a. Add 12: 6 = 2a. a = 3."
+      "explanation": "Slope = (2 - 8)/(6 - a) = -6/(6 - a) = -2. So -6 = -2(6 - a) = -12 + 2a. Add 12: 6 = 2a. a = 3.",
+      "visualization": {
+        "type": "graph",
+        "config": {
+          "width": 280,
+          "height": 250,
+          "xRange": [
+            -6,
+            6
+          ],
+          "yRange": [
+            -8,
+            8
+          ],
+          "elements": [
+            {
+              "type": "line",
+              "slope": 1,
+              "intercept": 2,
+              "color": "#3498db"
+            },
+            {
+              "type": "point",
+              "coordinates": [
+                0,
+                2
+              ],
+              "label": "(0, 2)",
+              "color": "#e74c3c",
+              "radius": 4
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-H-054",
@@ -2275,7 +3796,36 @@
       "choice_c": "k > 2",
       "choice_d": "k < 8",
       "correct_answer": "A",
-      "explanation": "Simplify: x + k > 5, so x > 5 - k. For this to equal x > 3, we need 5 - k = 3, so k = 2."
+      "explanation": "Simplify: x + k > 5, so x > 5 - k. For this to equal x > 3, we need 5 - k = 3, so k = 2.",
+      "visualization": {
+        "type": "numberLine",
+        "config": {
+          "width": 350,
+          "height": 80,
+          "range": [
+            -5,
+            5
+          ],
+          "tickInterval": 1,
+          "markers": [
+            {
+              "value": 0,
+              "open": true,
+              "color": "#e74c3c"
+            }
+          ],
+          "regions": [
+            {
+              "start": 0,
+              "end": 5,
+              "type": "ray",
+              "direction": "right",
+              "open": true,
+              "color": "#3498db"
+            }
+          ]
+        }
+      }
     },
     {
       "question_id": "ALG-H-056",
@@ -2340,7 +3890,36 @@
       "choice_c": "(8, 0)",
       "choice_d": "(0, 0)",
       "correct_answer": "C",
-      "explanation": "Vertices: (0, 0), (0, 4), (8, 0). At (0, 0): x + y = 0. At (0, 4): x + y = 4. At (8, 0): x + y = 8. Maximum is 8 at (8, 0)."
+      "explanation": "Vertices: (0, 0), (0, 4), (8, 0). At (0, 0): x + y = 0. At (0, 4): x + y = 4. At (8, 0): x + y = 8. Maximum is 8 at (8, 0).",
+      "visualization": {
+        "type": "numberLine",
+        "config": {
+          "width": 350,
+          "height": 80,
+          "range": [
+            -5,
+            5
+          ],
+          "tickInterval": 1,
+          "markers": [
+            {
+              "value": 0,
+              "open": true,
+              "color": "#e74c3c"
+            }
+          ],
+          "regions": [
+            {
+              "start": 0,
+              "end": 5,
+              "type": "ray",
+              "direction": "right",
+              "open": true,
+              "color": "#3498db"
+            }
+          ]
+        }
+      }
     }
   ]
 }
