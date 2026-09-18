@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Clock, ArrowLeft, LogOut, Play, RefreshCw, AlertTriangle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import ThemeToggle from '../components/ThemeToggle';
+import { API_BASE } from '../services/api';
 
 const testTypes = [
   {
@@ -49,7 +50,7 @@ export default function Test() {
   useEffect(() => {
     const checkCurrentSession = async () => {
       try {
-        const res = await fetch('/api/tests/current/', {
+        const res = await fetch(`${API_BASE}/tests/current/`, {
           headers: { Authorization: `Token ${token}` },
         });
 
@@ -83,7 +84,7 @@ export default function Test() {
     setError(null);
 
     try {
-      const res = await fetch('/api/tests/start/', {
+      const res = await fetch(`${API_BASE}/tests/start/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

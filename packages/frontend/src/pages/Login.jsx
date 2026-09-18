@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { GraduationCap, Mail, Lock, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import ThemeToggle from '../components/ThemeToggle';
+import { API_BASE } from '../services/api';
 
 const GOOGLE_CLIENT_ID = '21555557010-1v1skvapn1o9ldhu25tv7t3f5q74dtpm.apps.googleusercontent.com';
 
@@ -48,7 +49,7 @@ export default function Login() {
 
     try {
       // Send the credential token to your backend
-      const res = await fetch('/api/auth/google/', {
+      const res = await fetch(`${API_BASE}/auth/google/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ credential: response.credential }),
@@ -99,7 +100,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const response = await fetch('/api/auth/login/', {
+      const response = await fetch(`${API_BASE}/auth/login/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

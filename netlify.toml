@@ -1,0 +1,39 @@
+# Netlify hosts the Vite frontend only. The Django API deploys to Render
+# (see render.yaml) because Netlify's functions are Node.js-only — there is
+# no Python runtime to run Django on.
+#
+# Build from the repo root, not packages/frontend: this is an npm workspace,
+# and installing from inside the package skips the root lockfile and
+# hoisted dependencies.
+
+[build]
+  command = "npm run build"
+  publish = "packages/frontend/dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Set VITE_API_URL in the Netlify UI (Site configuration > Environment
+  # variables) to the Render API origin plus /api, e.g.
+  #   https://satprep-api.onrender.com/api
+  # It is read at BUILD time, so changing it requires a redeploy.
+
+# react-router owns client-side routing; every unknown path must serve the
+# SPA shell or /login, /cabinet/... 404 on refresh.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# Vite fingerprints these filenames, so they are safe to cache forever.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

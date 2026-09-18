@@ -17,6 +17,7 @@ import QuestionCard from '../components/QuestionCard';
 import ToolsSpeedDial from '../components/ToolsSpeedDial';
 import ThemeToggle from '../components/ThemeToggle';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE } from '../services/api';
 
 export default function Practice() {
   const navigate = useNavigate();
@@ -58,7 +59,7 @@ export default function Practice() {
 
   const fetchQuestions = async () => {
     try {
-      const response = await fetch('/api/questions/?format=json');
+      const response = await fetch(`${API_BASE}/questions/?format=json`);
       const data = await response.json();
       const questionsData = data.results || data;
       setQuestions(questionsData);
@@ -78,7 +79,7 @@ export default function Practice() {
 
   const fetchSkills = async () => {
     try {
-      const response = await fetch('/api/skills/?format=json');
+      const response = await fetch(`${API_BASE}/skills/?format=json`);
       const data = await response.json();
       setSkills(data);
     } catch (error) {
@@ -91,7 +92,7 @@ export default function Practice() {
     if (!token) return;
 
     try {
-      const res = await fetch('/api/attempts/progress/', {
+      const res = await fetch(`${API_BASE}/attempts/progress/`, {
         headers: { Authorization: `Token ${token}` },
       });
       if (res.ok) {
@@ -103,7 +104,7 @@ export default function Practice() {
     }
 
     try {
-      const notesRes = await fetch('/api/notes/', {
+      const notesRes = await fetch(`${API_BASE}/notes/`, {
         headers: { Authorization: `Token ${token}` },
       });
       if (notesRes.ok) {
@@ -120,7 +121,7 @@ export default function Practice() {
 
     // Fetch all attempts to track attempted questions
     try {
-      const attemptsRes = await fetch('/api/attempts/', {
+      const attemptsRes = await fetch(`${API_BASE}/attempts/`, {
         headers: { Authorization: `Token ${token}` },
       });
       if (attemptsRes.ok) {
@@ -179,7 +180,7 @@ export default function Practice() {
     const timeSpent = Math.round((Date.now() - startTime) / 1000);
 
     try {
-      const res = await fetch('/api/check-answer/', {
+      const res = await fetch(`${API_BASE}/check-answer/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -233,7 +234,7 @@ export default function Practice() {
     const existingNote = notes[questionId];
     try {
       if (existingNote) {
-        await fetch(`/api/notes/${existingNote.id}/`, {
+        await fetch(`${API_BASE}/notes/${existingNote.id}/`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -242,7 +243,7 @@ export default function Practice() {
           body: JSON.stringify({ question: questionId, content }),
         });
       } else {
-        await fetch('/api/notes/', {
+        await fetch(`${API_BASE}/notes/`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

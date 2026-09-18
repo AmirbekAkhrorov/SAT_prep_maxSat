@@ -18,6 +18,7 @@ import {
 import { useAuth } from '../context/AuthContext';
 import RankBadge, { RankIcon } from '../components/RankBadge';
 import ThemeToggle from '../components/ThemeToggle';
+import { API_BASE } from '../services/api';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ export default function Dashboard() {
     const fetchData = async () => {
       try {
         // Fetch user stats
-        const statsRes = await fetch('/api/leaderboard/me/', {
+        const statsRes = await fetch(`${API_BASE}/leaderboard/me/`, {
           headers: { Authorization: `Token ${token}` },
         });
         if (statsRes.ok) {
@@ -48,7 +49,7 @@ export default function Dashboard() {
         }
 
         // Fetch recent test history
-        const historyRes = await fetch('/api/tests/history/', {
+        const historyRes = await fetch(`${API_BASE}/tests/history/`, {
           headers: { Authorization: `Token ${token}` },
         });
         if (historyRes.ok) {

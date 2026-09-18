@@ -12,6 +12,7 @@ import TestQuestionCard from '../components/TestQuestionCard';
 import QuestionNavigator from '../components/QuestionNavigator';
 import ThemeToggle from '../components/ThemeToggle';
 import ToolsSpeedDial from '../components/ToolsSpeedDial';
+import { API_BASE } from '../services/api';
 
 export default function TestSession() {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ export default function TestSession() {
       }
 
       try {
-        const res = await fetch(`/api/tests/${sessionId}/`, {
+        const res = await fetch(`${API_BASE}/tests/${sessionId}/`, {
           headers: { Authorization: `Token ${token}` },
         });
 
@@ -92,7 +93,7 @@ export default function TestSession() {
       const pendingAnswers = Object.entries(answers);
       for (const [order, answer] of pendingAnswers) {
         try {
-          await fetch(`/api/tests/${sessionId}/answer/`, {
+          await fetch(`${API_BASE}/tests/${sessionId}/answer/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -136,7 +137,7 @@ export default function TestSession() {
 
     // Save flag to server
     try {
-      await fetch(`/api/tests/${sessionId}/flag/`, {
+      await fetch(`${API_BASE}/tests/${sessionId}/flag/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -181,7 +182,7 @@ export default function TestSession() {
     setShowSubmitModal(false);
 
     try {
-      const res = await fetch(`/api/tests/${sessionId}/submit/`, {
+      const res = await fetch(`${API_BASE}/tests/${sessionId}/submit/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

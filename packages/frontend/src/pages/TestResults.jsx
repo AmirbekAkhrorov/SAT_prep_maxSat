@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import ThemeToggle from '../components/ThemeToggle';
 import ReviewQuestionItem from '../components/ReviewQuestionItem';
+import { API_BASE } from '../services/api';
 
 export default function TestResults() {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ export default function TestResults() {
       }
 
       try {
-        const res = await fetch(`/api/tests/${sessionId}/`, {
+        const res = await fetch(`${API_BASE}/tests/${sessionId}/`, {
           headers: { Authorization: `Token ${token}` },
         });
 

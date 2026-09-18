@@ -1,4 +1,12 @@
-const API_BASE = '/api';
+// In dev this stays '/api' and Vite's proxy forwards to localhost:8000.
+// In production set VITE_API_URL to the deployed API origin + /api, e.g.
+// https://satprep-api.onrender.com/api — the frontend (Netlify) and the API
+// (Render) are on different origins, so the relative path would 404.
+//
+// Calling the API directly rather than proxying through Netlify keeps the
+// real client IP visible to Django; behind a proxy every anonymous user
+// would share one IP and trip the rate limiter as a single bucket.
+export const API_BASE = import.meta.env.VITE_API_URL || '/api';
 
 /**
  * Fetch sample questions for the landing page quiz demo.

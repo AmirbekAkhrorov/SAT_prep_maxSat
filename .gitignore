@@ -61,3 +61,6 @@ htmlcov/
 
 # Local overrides
 *.local
+
+# Django collectstatic output
+staticfiles/

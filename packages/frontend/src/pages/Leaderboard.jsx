@@ -16,6 +16,7 @@ import {
 import { useAuth } from '../context/AuthContext';
 import RankBadge, { RankIcon, RANK_CONFIG } from '../components/RankBadge';
 import ThemeToggle from '../components/ThemeToggle';
+import { API_BASE } from '../services/api';
 
 export default function Leaderboard() {
   const navigate = useNavigate();
@@ -38,13 +39,13 @@ export default function Leaderboard() {
     try {
       // Fetch all-time, weekly, and monthly leaderboards in parallel
       const [allTimeRes, weeklyRes, monthlyRes] = await Promise.all([
-        fetch('/api/leaderboard/', {
+        fetch(`${API_BASE}/leaderboard/`, {
           headers: { Authorization: `Token ${token}` },
         }),
-        fetch('/api/leaderboard/weekly/', {
+        fetch(`${API_BASE}/leaderboard/weekly/`, {
           headers: { Authorization: `Token ${token}` },
         }),
-        fetch('/api/leaderboard/monthly/', {
+        fetch(`${API_BASE}/leaderboard/monthly/`, {
           headers: { Authorization: `Token ${token}` },
         }),
       ]);

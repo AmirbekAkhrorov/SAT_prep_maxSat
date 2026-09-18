@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Upload as UploadIcon, Plus, Trash2, ArrowLeft, ArrowRight, Check, AlertCircle, ChevronDown, FileText, X } from 'lucide-react';
+import { API_BASE } from '../services/api';
 
 const DOMAINS = [
   { value: 'Algebra', label: 'Algebra' },
@@ -104,7 +105,7 @@ export default function UploadPage() {
       const formData = new FormData();
       formData.append('file', pdfFile);
 
-      const res = await fetch('/api/questions/upload-pdf/', {
+      const res = await fetch(`${API_BASE}/questions/upload-pdf/`, {
         method: 'POST',
         headers: { Authorization: `Token ${token}` },
         body: formData,
@@ -197,7 +198,7 @@ export default function UploadPage() {
     setError('');
 
     try {
-      const res = await fetch('/api/questions/upload/', {
+      const res = await fetch(`${API_BASE}/questions/upload/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
