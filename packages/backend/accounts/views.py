@@ -14,6 +14,7 @@ class RegisterView(APIView):
     """Create a new user account."""
 
     permission_classes = [AllowAny]
+    throttle_scope = "auth"  # credential endpoint: rate limit brute force
 
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
@@ -34,15 +35,22 @@ class LoginView(APIView):
     """Authenticate user and return token."""
 
     permission_classes = [AllowAny]
+    throttle_scope = "auth"  # credential endpoint: rate limit brute force
 
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         if serializer.is_valid():
-            user = authenticate(
-                request,
-                username=serializer.validated_data["email"],
-                password=serializer.validated_data["password"],
-            )
+            login_id = serializer.validated_data["email"]
+            password = serializer.validated_data["password"]
+            # Try authenticating by username first, then by email
+            user = authenticate(request, username=login_id, password=password)
+            if user is None:
+                # Lookup username by email and retry
+                try:
+                    email_user = User.objects.get(email=login_id)
+                    user = authenticate(request, username=email_user.username, password=password)
+                except User.DoesNotExist:
+                    pass
             if user:
                 token, _ = Token.objects.get_or_create(user=user)
                 return Response(
@@ -88,6 +96,7 @@ class GoogleLogin(APIView):
     """Authenticate user via Google ID token."""
 
     permission_classes = [AllowAny]
+    throttle_scope = "auth"  # credential endpoint: rate limit brute force
 
     def post(self, request):
         credential = request.data.get("access_token") or request.data.get("credential")

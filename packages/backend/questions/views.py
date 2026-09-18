@@ -1,3 +1,4 @@
+from django.db import transaction
 from django.db.models import Count
 from django.utils import timezone
 from rest_framework import status, viewsets
@@ -69,13 +70,22 @@ class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all()
 
     def get_permissions(self):
-        """Allow public read access, require auth for modifications."""
-        if self.action in ["list", "retrieve", "random", "stats", "sample"]:
+        """Allow public read access, require auth for modifications.
+
+        `retrieve` is deliberately NOT public: it serves QuestionDetailSerializer,
+        which carries correct_answer/explanation, so anonymous access would let
+        anyone walk the ids and scrape the entire answer key.
+        """
+        if self.action in ["list", "random", "stats", "sample"]:
             return [AllowAny()]
         return [IsAuthenticated()]
 
     def get_serializer_class(self):
-        if self.action in ["list", "random", "sample"]:
+        if self.action in ["list", "random"]:
+            return QuestionListSerializer
+        # `sample` feeds the public landing-page demo, so it must not ship the
+        # answer key with the questions; the demo grades via /api/check-answer/.
+        if self.action == "sample":
             return QuestionListSerializer
         if self.action == "retrieve":
             return QuestionDetailSerializer
@@ -142,6 +152,160 @@ class QuestionViewSet(viewsets.ModelViewSet):
         }
 
         return Response(stats)
+
+    @action(detail=False, methods=["post"])
+    def upload(self, request):
+        """Upload a batch of questions (teacher only)."""
+        if getattr(request.user, "role", None) != "teacher":
+            return Response(
+                {"error": "Only teachers can upload questions"},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+        questions_data = request.data.get("questions", [])
+        if not questions_data:
+            return Response(
+                {"error": "No questions provided"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # Domain prefix map
+        DOMAIN_PREFIX = {
+            "Algebra": "ALG",
+            "Advanced Math": "ADV",
+            "Geometry and Trigonometry": "GEO",
+            "Problem-Solving and Data Analysis": "PDA",
+        }
+
+        # Difficulty code map
+        DIFF_CODE = {"easy": "E", "medium": "M", "hard": "H"}
+
+        created_questions = []
+        errors = []
+
+        with transaction.atomic():
+            # Clear is_new from all previous questions
+            Question.objects.filter(is_new=True).update(is_new=False)
+
+            for idx, q in enumerate(questions_data):
+                domain = q.get("domain", "")
+                difficulty = q.get("difficulty", "")
+                prefix = DOMAIN_PREFIX.get(domain)
+                diff_code = DIFF_CODE.get(difficulty)
+
+                if not prefix or not diff_code:
+                    errors.append({"index": idx, "error": f"Invalid domain or difficulty"})
+                    continue
+
+                # Find next available ID for this domain-difficulty combo
+                id_prefix = f"{prefix}-{diff_code}-"
+                last_q = (
+                    Question.objects.filter(question_id__startswith=id_prefix)
+                    .order_by("-question_id")
+                    .first()
+                )
+
+                if last_q:
+                    last_num = int(last_q.question_id.split("-")[-1])
+                    next_num = last_num + 1
+                else:
+                    next_num = 1
+
+                question_id = f"{id_prefix}{next_num:03d}"
+
+                try:
+                    question = Question.objects.create(
+                        question_id=question_id,
+                        assessment="SAT",
+                        test="Math",
+                        domain=domain,
+                        skill_name=q.get("skill_name", domain),
+                        difficulty=difficulty,
+                        question_type="multiple_choice",
+                        question_text=q.get("question_text", ""),
+                        choice_a=q.get("choice_a", ""),
+                        choice_b=q.get("choice_b", ""),
+                        choice_c=q.get("choice_c", ""),
+                        choice_d=q.get("choice_d", ""),
+                        correct_answer=q.get("correct_answer", ""),
+                        explanation=q.get("explanation", ""),
+                        source="custom",
+                        is_new=True,
+                    )
+                    created_questions.append(question_id)
+                except Exception as e:
+                    errors.append({"index": idx, "error": str(e)})
+
+        return Response(
+            {
+                "created": len(created_questions),
+                "question_ids": created_questions,
+                "errors": errors,
+            },
+            status=status.HTTP_201_CREATED if created_questions else status.HTTP_400_BAD_REQUEST,
+        )
+
+    @action(detail=False, methods=["post"], url_path="upload-pdf")
+    def upload_pdf(self, request):
+        """Upload a PDF file for question extraction (teacher only).
+
+        Accepts the PDF, validates it, extracts questions using PyMuPDF,
+        and returns them for the teacher to review before submitting.
+        """
+        if getattr(request.user, "role", None) != "teacher":
+            return Response(
+                {"error": "Only teachers can upload questions"},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+        pdf_file = request.FILES.get("file")
+        if not pdf_file:
+            return Response(
+                {"error": "No file provided"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if not pdf_file.name.lower().endswith(".pdf"):
+            return Response(
+                {"error": "Only PDF files are accepted"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        try:
+            from .pdf_parser import extract_text_from_pdf, parse_questions
+
+            pdf_bytes = pdf_file.read()
+            text = extract_text_from_pdf(pdf_bytes)
+            questions = parse_questions(text)
+
+            if not questions:
+                return Response(
+                    {"error": "No questions could be extracted from this PDF. Please check the format."},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # Separate multiple-choice from free-response
+            mc_questions = []
+            fr_count = 0
+            for q in questions:
+                is_fr = q.pop("is_free_response", True)
+                if is_fr:
+                    fr_count += 1
+                else:
+                    mc_questions.append(q)
+
+            return Response(
+                {
+                    "questions": mc_questions,
+                    "free_response_count": fr_count,
+                    "total_extracted": len(mc_questions) + fr_count,
+                }
+            )
+        except Exception as e:
+            return Response(
+                {"error": f"Failed to parse PDF: {str(e)}"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
     @action(detail=True, methods=["post"])
     def check_answer(self, request, pk=None):
@@ -252,6 +416,9 @@ class CheckAnswerView(APIView):
     """Submit an answer and get instant feedback with explanation."""
 
     permission_classes = [AllowAny]  # Allow practice without login
+    # Public and it returns the correct answer, so it is the remaining scraping
+    # vector for the question bank. Rate limited via DEFAULT_THROTTLE_RATES.
+    throttle_scope = "check_answer"
 
     def post(self, request):
         question_id = request.data.get("question_id")
@@ -375,8 +542,23 @@ class TestSessionViewSet(viewsets.ModelViewSet):
 
         config = self.TEST_CONFIGS[test_type]
 
-        # Get random questions
-        questions = list(Question.objects.order_by("?")[: config["questions"]])
+        # Balance new and existing questions
+        total_needed = config["questions"]
+        new_quota = {"mini": 2, "section": 5, "full": 10}.get(test_type, 2)
+
+        new_questions = list(
+            Question.objects.filter(is_new=True).order_by("?")[:new_quota]
+        )
+        remaining = total_needed - len(new_questions)
+        new_ids = [q.id for q in new_questions]
+
+        existing_questions = list(
+            Question.objects.exclude(id__in=new_ids).order_by("?")[:remaining]
+        )
+
+        import random
+        questions = new_questions + existing_questions
+        random.shuffle(questions)
 
         if len(questions) < config["questions"]:
             return Response(

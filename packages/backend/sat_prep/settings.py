@@ -10,22 +10,43 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv(BASE_DIR / ".env")
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-7vfoe*2-*09!aa0*ux^3+z(b5w05wzho(tp=wa=&(13pmf*hd#"
+def env_bool(name, default=False):
+    return os.environ.get(name, str(default)).strip().lower() in ("1", "true", "yes", "on")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "testserver"]
+def env_list(name, default=""):
+    return [v.strip() for v in os.environ.get(name, default).split(",") if v.strip()]
+
+
+# Secure by default: production must supply these explicitly via the environment.
+# Local development gets them from packages/backend/.env (gitignored).
+DEBUG = env_bool("DJANGO_DEBUG", False)
+
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+if not SECRET_KEY:
+    if DEBUG:
+        SECRET_KEY = "django-insecure-local-only-do-not-use-in-production"
+    else:
+        raise RuntimeError(
+            "DJANGO_SECRET_KEY must be set when DJANGO_DEBUG is off. "
+            "Generate one with: python -c "
+            "'from django.core.management.utils import get_random_secret_key as g; print(g())'"
+        )
+
+ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1,testserver")
+if "*" in ALLOWED_HOSTS:
+    raise RuntimeError("ALLOWED_HOSTS must not contain '*' — list real hostnames.")
 
 
 # Application definition
@@ -92,12 +113,25 @@ WSGI_APPLICATION = "sat_prep.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+# SQLite is fine locally, but on serverless/containerised hosts the filesystem is
+# ephemeral — set DATABASE_URL to a managed Postgres there or data is lost on deploy.
+if os.environ.get("DATABASE_URL"):
+    import dj_database_url
+
+    DATABASES = {
+        "default": dj_database_url.parse(
+            os.environ["DATABASE_URL"],
+            conn_max_age=600,
+            ssl_require=not DEBUG,
+        )
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 
 # Password validation
@@ -150,21 +184,44 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
+    # Without throttles the login endpoint is open to unlimited credential
+    # stuffing and the question bank to unlimited scraping.
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
+        "rest_framework.throttling.ScopedRateThrottle",
+    ],
+    # NOTE: anon throttling keys on client IP. Schools and offices NAT many
+    # students behind one address, so these are deliberately not aggressive —
+    # tightening them risks locking out a whole classroom. Per-account limits
+    # (ACCOUNT_RATE_LIMITS below) are what actually stop credential attacks.
+    "DEFAULT_THROTTLE_RATES": {
+        "anon": os.environ.get("THROTTLE_ANON", "300/hour"),
+        "user": os.environ.get("THROTTLE_USER", "2000/hour"),
+        # Answer checking reveals the key, so it is the scraping vector.
+        # 200/hour still allows ~50 demo runs but makes bulk scraping slow.
+        "check_answer": os.environ.get("THROTTLE_CHECK_ANSWER", "200/hour"),
+        # Credential endpoints.
+        "auth": os.environ.get("THROTTLE_AUTH", "30/hour"),
+    },
 }
 
-# CORS settings
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "http://localhost:5174",
-    "http://127.0.0.1:5174",
-]
+# CORS settings — must list the deployed frontend origin in production.
+# Never enable CORS_ALLOW_ALL_ORIGINS: these endpoints are credentialed.
+CORS_ALLOWED_ORIGINS = env_list(
+    "CORS_ALLOWED_ORIGINS",
+    "http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174",
+)
+CSRF_TRUSTED_ORIGINS = env_list("CSRF_TRUSTED_ORIGINS", "")
 
-# Allauth settings
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_EMAIL_VERIFICATION = "none"  # Set to 'mandatory' in production
+# Allauth settings (modern keys; the ACCOUNT_* ones below were deprecated)
+ACCOUNT_LOGIN_METHODS = {"email"}
+ACCOUNT_SIGNUP_FIELDS = ["email*", "username*", "password1*", "password2*"]
+# Unverified signups let anyone mint accounts and stuff the leaderboard.
+ACCOUNT_EMAIL_VERIFICATION = os.environ.get(
+    "ACCOUNT_EMAIL_VERIFICATION", "none" if DEBUG else "mandatory"
+)
+ACCOUNT_RATE_LIMITS = {"login_failed": "5/5m"}
 
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
@@ -176,3 +233,29 @@ SOCIALACCOUNT_PROVIDERS = {
 
 # Custom social account adapter
 SOCIALACCOUNT_ADAPTER = "accounts.adapters.CustomSocialAccountAdapter"
+
+# ---------------------------------------------------------------------------
+# Production hardening (django's `manage.py check --deploy` checklist)
+# ---------------------------------------------------------------------------
+# Applied only when DEBUG is off so local http://localhost development still
+# works — secure cookies are never sent over plain HTTP.
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = "DENY"
+
+if not DEBUG:
+    # Hosts like Vercel/Render terminate TLS upstream and forward over HTTP;
+    # without this Django sees "http" and SECURE_SSL_REDIRECT loops forever.
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    SECURE_SSL_REDIRECT = env_bool("SECURE_SSL_REDIRECT", True)
+
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = "Lax"
+    CSRF_COOKIE_SAMESITE = "Lax"
+
+    # Start HSTS short (e.g. 3600) and raise it once you are sure every
+    # subdomain serves HTTPS — browsers cache this and it is hard to undo.
+    SECURE_HSTS_SECONDS = int(os.environ.get("SECURE_HSTS_SECONDS", "3600"))
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = env_bool("SECURE_HSTS_INCLUDE_SUBDOMAINS", False)
+    SECURE_HSTS_PRELOAD = env_bool("SECURE_HSTS_PRELOAD", False)

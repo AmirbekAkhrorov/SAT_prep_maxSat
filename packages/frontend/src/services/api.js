@@ -59,6 +59,30 @@ export async function checkAnswer(questionId, answer) {
 }
 
 /**
+ * Check a single answer via the public endpoint used by the landing-page demo.
+ *
+ * The sample/list endpoints deliberately omit correct_answer so the answer key
+ * cannot be scraped, so the demo grades through here once the user finishes.
+ *
+ * @param {string} questionId - The question's public id, e.g. "ADV-E-001"
+ * @param {string} answer - The submitted answer
+ * @returns {Promise<Object>} { is_correct, correct_answer, explanation }
+ */
+export async function checkSampleAnswer(questionId, answer) {
+  const response = await fetch(`${API_BASE}/check-answer/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ question_id: questionId, answer }),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to check answer');
+  }
+  return response.json();
+}
+
+/**
  * Get question statistics.
  * @returns {Promise<Object>} Statistics about available questions
  */
@@ -91,8 +115,10 @@ function transformQuestion(apiQuestion) {
     passage: apiQuestion.passage,
     question: apiQuestion.question_text,
     options: apiQuestion.options || [],
-    // Note: correct_answer and explanation are not included in list view
-    // They come from the check_answer endpoint or detail view
+    // correct_answer/explanation are intentionally absent from the public
+    // sample+list responses (they would expose the answer key). They stay
+    // undefined here and get filled in from checkSampleAnswer() once the user
+    // has actually submitted an answer.
     correctAnswer: apiQuestion.correct_answer,
     explanation: apiQuestion.explanation,
   };
