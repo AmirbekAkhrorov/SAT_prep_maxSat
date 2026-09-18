@@ -12,10 +12,12 @@
 
 [build.environment]
   NODE_VERSION = "22"
-  # Set VITE_API_URL in the Netlify UI (Site configuration > Environment
-  # variables) to the Render API origin plus /api, e.g.
-  #   https://satprep-api.onrender.com/api
-  # It is read at BUILD time, so changing it requires a redeploy.
+  # The Render API origin plus /api. Pinned here rather than in the Netlify UI
+  # so the build is reproducible and reviewable: this is a public URL, not a
+  # secret, and a UI value that silently fails to save bakes in the "/api"
+  # fallback, which makes every API call hit the SPA redirect and return HTML.
+  # Read at BUILD time — changing it requires a redeploy, not just a restart.
+  VITE_API_URL = "https://satprep-api.onrender.com/api"
 
 # react-router owns client-side routing; every unknown path must serve the
 # SPA shell or /login, /cabinet/... 404 on refresh.
