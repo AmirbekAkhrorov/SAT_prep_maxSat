@@ -45,6 +45,15 @@ if not SECRET_KEY:
         )
 
 ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1,testserver")
+# Render sets RENDER_EXTERNAL_HOSTNAME to the public <service>.onrender.com name
+# on every web service. It must be allowed: it is the Host header on every
+# browser request AND on Render's own health probe. DJANGO_ALLOWED_HOSTS in
+# render.yaml (fromService -> host) is only the private-network name, so without
+# this Django rejects everything, the probe included, with 400 DisallowedHost,
+# and Render cancels the deploy as unhealthy after 15 minutes.
+RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 if "*" in ALLOWED_HOSTS:
     raise RuntimeError("ALLOWED_HOSTS must not contain '*' — list real hostnames.")
 

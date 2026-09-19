@@ -38,7 +38,10 @@ services:
         generateValue: true
       - key: DJANGO_DEBUG
         value: "False"
-      # Render injects the service's own hostname here.
+      # This is the PRIVATE-network hostname (Render's spec: "the service's
+      # hostname on the private network"), used for service-to-service calls.
+      # It is NOT the public satprep-api.onrender.com name — settings.py adds
+      # that from RENDER_EXTERNAL_HOSTNAME, which Render sets automatically.
       - key: DJANGO_ALLOWED_HOSTS
         fromService:
           type: web
