@@ -110,6 +110,9 @@ export default function Register() {
           email: formData.email,
           username: formData.username,
           password: formData.password1,
+          // Required by RegisterSerializer, which re-checks the match
+          // server-side. Omitting it made every signup fail with 400.
+          password_confirm: formData.password2,
         }),
       });
 
