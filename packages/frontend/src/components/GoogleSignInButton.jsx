@@ -5,7 +5,7 @@ import { API_BASE } from '../services/api';
 
 // Must match GOOGLE_CLIENT_ID in packages/backend/accounts/views.py: the backend
 // rejects any Google token that was issued to a different client.
-const GOOGLE_CLIENT_ID = '21555557010-1v1skvapn1o9ldhu25tv7t3f5q74dtpm.apps.googleusercontent.com';
+const GOOGLE_CLIENT_ID = '838532854009-0pslmhfl7631dno4c560jmrppcen2ac4.apps.googleusercontent.com';
 
 /**
  * Google's own "Sign in with Google" button, rendered by Google Identity Services.

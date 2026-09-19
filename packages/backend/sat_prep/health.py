@@ -11,6 +11,8 @@ the internal probe arrives over plain HTTP without X-Forwarded-Proto, so
 otherwise Django answers 301 and the host never sees a 2xx.
 """
 
+import os
+
 from django.db import connection
 from django.http import JsonResponse
 from django.views.decorators.cache import never_cache
@@ -29,4 +31,10 @@ def healthz(request):
             {"status": "error", "database": str(exc)[:200]}, status=503
         )
 
-    return JsonResponse({"status": "ok", "database": "ok"})
+    # RENDER_GIT_COMMIT is set by Render on every deploy; it lets anyone confirm
+    # from outside which commit is actually live. Empty when run locally.
+    return JsonResponse({
+        "status": "ok",
+        "database": "ok",
+        "commit": os.environ.get("RENDER_GIT_COMMIT", "")[:7],
+    })

@@ -89,7 +89,9 @@ class MeView(APIView):
 from google.auth.transport import requests as google_requests
 from google.oauth2 import id_token
 
-GOOGLE_CLIENT_ID = "21555557010-1v1skvapn1o9ldhu25tv7t3f5q74dtpm.apps.googleusercontent.com"
+# Must match GOOGLE_CLIENT_ID in packages/frontend/src/components/GoogleSignInButton.jsx:
+# a token issued to any other client fails the audience check.
+GOOGLE_CLIENT_ID = "838532854009-0pslmhfl7631dno4c560jmrppcen2ac4.apps.googleusercontent.com"
 
 
 class GoogleLogin(APIView):
