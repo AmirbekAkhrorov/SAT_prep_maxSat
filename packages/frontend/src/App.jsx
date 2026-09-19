@@ -19,6 +19,7 @@ import TestSession from './pages/TestSession';
 import TestResults from './pages/TestResults';
 import Leaderboard from './pages/Leaderboard';
 import Upload from './pages/Upload';
+import { PrivacyPolicy, TermsOfService } from './pages/Legal';
 
 function LandingPage() {
   return (
@@ -45,6 +46,10 @@ function App() {
         <Routes>
           {/* Landing page - accessible to everyone */}
           <Route path="/" element={<LandingPage />} />
+
+          {/* Legal pages - public: Google's OAuth consent screen links to them */}
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsOfService />} />
 
           {/* Auth pages - redirect to dashboard if logged in */}
           <Route
