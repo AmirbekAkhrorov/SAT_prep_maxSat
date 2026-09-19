@@ -134,9 +134,21 @@ if os.environ.get("DATABASE_URL"):
         "default": dj_database_url.parse(
             os.environ["DATABASE_URL"],
             conn_max_age=600,
+            # Serverless Postgres (Neon) drops connections when it scales to
+            # zero. Without this check, Django reuses a dead persistent
+            # connection and the first request after a quiet spell gets a 500.
+            conn_health_checks=True,
             ssl_require=not DEBUG,
         )
     }
+elif not DEBUG:
+    # Refuse to start instead of silently falling back to SQLite. On a container
+    # host that file sits on an ephemeral disk, so migrations, seeding and even
+    # /healthz/ all look fine while every signup is wiped on the next deploy.
+    raise RuntimeError(
+        "DATABASE_URL must be set when DJANGO_DEBUG is off. On Render, set it in "
+        "the dashboard: satprep-api > Environment."
+    )
 else:
     DATABASES = {
         "default": {
