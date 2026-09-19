@@ -17,3 +17,8 @@ python manage.py migrate --no-input
 # Skills must exist first — questions link to them via skill_ref.
 python manage.py seed_skills
 python manage.py import_math_questions --all
+
+# Create or promote the admin from DJANGO_SUPERUSER_* env vars, which are set in
+# the Render dashboard. The free plan has no shell, so this is the only way to
+# get an admin. Does nothing when the vars are unset, and never fails the build.
+python manage.py ensure_superuser

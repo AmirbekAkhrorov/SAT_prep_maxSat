@@ -65,3 +65,9 @@ services:
       # connection-refused 500 this config exists to avoid. Add them in the
       # dashboard (Environment > Add) only when you have real credentials,
       # and flip ACCOUNT_EMAIL_VERIFICATION to "mandatory" at the same time.
+      #
+      # DJANGO_SUPERUSER_EMAIL and DJANGO_SUPERUSER_PASSWORD (plus the optional
+      # DJANGO_SUPERUSER_USERNAME) are also set only in the dashboard.
+      # render-build.sh runs ensure_superuser, which creates or promotes that
+      # admin on every deploy. Keep the password out of this file: variables
+      # added in the dashboard survive Blueprint syncs.
